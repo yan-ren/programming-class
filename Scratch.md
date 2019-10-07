@@ -4,7 +4,7 @@ Hi, this is probably your first Scratch programming class. I have some materials
 |Topic           |Link                          |Project Templates                        |
 |----------------|-------------------------------|----------------------------|
 |IntroToScratch  |[Slides](https://drive.google.com/open?id=1C7kMckeH4EefjDCtFsNedpjLoL8dVThFK4mEvPKrvuw)|           |
-|MotionAndDrawing  |[Slides](https://drive.google.com/open?id=1iq7QN9iRlcMxJyQK31D91vtemtYOILHW2Qa7JZJLIn0)|           |
+|MotionAndDrawing  |[Slides](https://drive.google.com/open?id=1iq7QN9iRlcMxJyQK31D91vtemtYOILHW2Qa7JZJLIn0)|[Templates](https://drive.google.com/open?id=1TwQu-rxtLPQ-P82QRE8glk9fpSDcz6uu)           |
 |LooksAndSound  |[Slides](https://docs.google.com/presentation/d/1Mys_iqW1BUA-_OFOxhExJOkmvGRtGxfk073z1HsUx4s/edit?usp=sharing)|[Templates](https://drive.google.com/drive/folders/11fRmbOaDIjrDV5ctkhQrNENnjr8GlJI5?usp=sharing)           |
 ### 
 ## External Resources
