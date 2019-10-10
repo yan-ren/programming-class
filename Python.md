@@ -2,7 +2,10 @@
 Welcome to Python programming class. This is probably your first programming class. In this class, we will learn the basic programming knowledge by using the Python programming language. Python is a widely used programming language and it is not hard to learn for beginners. Please remember, the best way of learning programming is by doing practice. I hope you have fun in this class. Happy coding!
 
 I have some materials would like to share with you. We will use them throughout the course.
-
+## Schedule
+|                |Date                           |Topic                                                 |Slides               |                            
+|----------------|-------------------------------|------------------------------------------------------|---------------------|
+|Class 1         |Oct8-9                         |How to setup Python; Purpose of Python and PyCharm; What is programming/programming language; How to use Python shell and PyCharm; First hello world program;       |p1-p34               |
 ## Class Materials
 #### Slides
 |Topic           |Link                           |                            
