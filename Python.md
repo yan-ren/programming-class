@@ -18,6 +18,7 @@ How to access the Google Classroom:
 ## External Resources
 #### Python Books
 How to Think Like a Computer Scientist: Interactive Edition [link](https://runestone.academy/runestone/books/published/thinkcspy/index.html)
+
 Think Python(2nd edition) [link](https://greenteapress.com/wp/think-python-2e/)
 #### How to install Python and PyCharm
 - Guide to install Python and PyCharm to your computer [click here](https://www.guru99.com/how-to-install-python.html)
