@@ -6,6 +6,7 @@ I have some materials would like to share with you. We will use them throughout 
 |                |Date                           |Topic                                                 |Slides               |                            
 |----------------|-------------------------------|------------------------------------------------------|---------------------|
 |Class1          |Oct 8-9                         |How to setup Python; Purpose of Python and PyCharm; What is programming/programming language; How to use Python shell and PyCharm; First hello world program;       |p1-p34               |
+|Class2          |Oct 15-16                       |Comment sign; Variable; Data Type                    |p34-p58              |
 ## Class Materials
 #### Slides
 |Topic           |Link                           |                            
