@@ -7,6 +7,7 @@ I have some materials would like to share with you. We will use them throughout 
 |----------------|-------------------------------|------------------------------------------------------|---------------------|
 |Class1          |Oct 8-9                        |How to setup Python; Purpose of Python and PyCharm; What is programming/programming language; How to use Python shell and PyCharm; First hello world program;       |p1-p34               |
 |Class2          |Oct 15-16                      |Comment sign; Variable; Data Type                     |p34-p58              |
+|Class3          |Oct 22-23                      |Integer, Float Math operation; Console I/O; Boolean   |p58-p77              |
 ## Class Materials
 #### Slides
 |Topic           |Link                           |                            
