@@ -9,6 +9,8 @@ I have some materials would like to share with you. We will use them throughout 
 |Class2          |Oct 15-16                      |Comment sign; Variable; Data Type                     |p34-p58              |
 |Class3          |Oct 22-23                      |Integer, Float Math operation; Console I/O; Boolean   |p58-p77              |
 |Class4          |Oct 29-30                      |Boolean Operator; String                              |p77-p103             |
+|Class5          |Nov 5-6                        |String indexing and slicing                           |p104-p119            |
+|Class6          |Nov 12-13                      |Conditional, Chained conditional                      |p120-p130            |
 ## Class Materials
 #### Slides
 |Topic           |Link                           |                            
