@@ -12,6 +12,7 @@ I have some materials would like to share with you. We will use them throughout 
 |Class5          |Nov 5-6                        |String indexing and slicing                           |p104-p119            |
 |Class6          |Nov 12-13                      |Conditional, Chained conditional                      |p120-p130            |
 |Class7          |Nov 19-20                      |Nested conditional, conditional practice              |p131-p133            |
+|Class9          |Nov 26-27                      |conditional practice                                  |p133-p138            |
 ## Class Materials
 #### Slides
 |Topic           |Link                           |                            
