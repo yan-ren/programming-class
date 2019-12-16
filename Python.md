@@ -13,6 +13,7 @@ I have some materials would like to share with you. We will use them throughout 
 |Class6          |Nov 12-13                      |Conditional, Chained conditional                      |p120-p130            |
 |Class7          |Nov 19-20                      |Nested conditional, conditional practice              |p131-p133            |
 |Class8          |Nov 26-27                      |conditional example                                   |p133-p138            |
+|Class9          |Dec 3-4                        |conditional example, While Loop                       |p139-p143            |
 ## Class Materials
 #### Slides
 |Topic           |Link                           |                            
