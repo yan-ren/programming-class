@@ -5,15 +5,16 @@ I have some materials would like to share with you. We will use them throughout 
 ## Schedule
 |                |Date                           |Topic                                                 |Slides               |                            
 |----------------|-------------------------------|------------------------------------------------------|---------------------|
-|Class1          |Oct 8-9                        |How to setup Python; Purpose of Python and PyCharm; What is programming/programming language; How to use Python shell and PyCharm; First hello world program;       |p1-p34               |
-|Class2          |Oct 15-16                      |Comment sign; Variable; Data Type                     |p34-p58              |
-|Class3          |Oct 22-23                      |Integer, Float Math operation; Console I/O; Boolean   |p58-p77              |
-|Class4          |Oct 29-30                      |Boolean Operator; String                              |p77-p103             |
-|Class5          |Nov 5-6                        |String indexing and slicing                           |p104-p119            |
-|Class6          |Nov 12-13                      |Conditional, Chained conditional                      |p120-p130            |
-|Class7          |Nov 19-20                      |Nested conditional, conditional practice              |p131-p133            |
-|Class8          |Nov 26-27                      |conditional example                                   |p133-p138            |
-|Class9          |Dec 3-4                        |conditional example, While Loop                       |p139-p143            |
+|Class1          |Oct 8-9                        |How to setup Python; Purpose of Python and PyCharm; What is programming/programming language; How to use Python shell and PyCharm; First hello world program;       |p1-p34             |
+|Class2          |Oct 15-16                      |Comment sign; Variable; Data Type                     |p34-p58            |
+|Class3          |Oct 22-23                      |Integer, Float Math operation; Console I/O; Boolean   |p58-p77            |
+|Class4          |Oct 29-30                      |Boolean Operator; String                              |p77-p103           |
+|Class5          |Nov 5-6                        |String indexing and slicing                           |p104-p119          |
+|Class6          |Nov 12-13                      |Conditional, Chained conditional                      |p120-p130          |
+|Class7          |Nov 19-20                      |Nested conditional, conditional practice              |p131-p133          |
+|Class8          |Nov 26-27                      |conditional example                                   |p133-p138          |
+|Class9          |Dec 3-4                        |conditional example, while Loop                       |p139-p143          |
+|Class10         |Dec 17-18                      |while loop examples                                   |p144-p145          |
 ## Class Materials
 #### Slides
 |Topic           |Link                           |                            
