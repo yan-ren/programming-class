@@ -13,6 +13,9 @@ Hi, this is probably your first Scratch programming class. I have some materials
 |------------------|------------------------------|
 |Lost in Space     |                              |
 |Ghost Busters     |                              |
-|Paint Box         |[Link](https://drive.google.com/file/d/1LEGY2Ao9Qekrok2q2j7YmVq-vn3gORTA/view?usp=sharing)|
+|Paint Box         |[Link](https://drive.google.com/open?id=1iqnEQn0ubMpLrXjtQUa4nWPQoFss8h-H)|
+|Boat Race         |[Link](https://drive.google.com/open?id=1iqnEQn0ubMpLrXjtQUa4nWPQoFss8h-H)|
+|Catch the Dots    |[Link](https://drive.google.com/open?id=1iqnEQn0ubMpLrXjtQUa4nWPQoFss8h-H)|
+|Space Maze        |[Link](https://drive.google.com/open?id=15cqN1ebOzTXUpi9LK1WXdJWlSMg7a2yy)|
 ## External Resources
 - Download and install Scratch to your computer [click here](https://scratch.mit.edu/download)
