@@ -15,6 +15,7 @@ I have some materials would like to share with you. We will use them throughout 
 |Class8          |Nov 26-27                      |conditional example                                   |p133-p138          |
 |Class9          |Dec 3-4                        |conditional example, while Loop                       |p139-p143          |
 |Class10         |Dec 17-18                      |while loop examples                                   |p144-p145          |
+|Class11         |Jan 5, 7                       |while loop examples                                   |p145               |
 ## Class Materials
 #### Slides
 |Topic           |Link                           |                            
