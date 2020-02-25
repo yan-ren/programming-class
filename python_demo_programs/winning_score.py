@@ -1,3 +1,7 @@
+"""
+2019 junior1 Winning Score
+https://cemc.uwaterloo.ca/contests/computing/2019/stage%201/juniorEF.pdf
+"""
 input = [10, 3, 9, 8, 9, 9]
 
 a_score = input[0] * 3 + input[1] * 2 + input[2]
