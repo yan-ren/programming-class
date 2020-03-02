@@ -1,5 +1,5 @@
 """
-Google Classroom list Q5
+Google Classroom List Q5
 
 Give a list of string, count how many items of list has length longer than 3
 """
@@ -14,7 +14,9 @@ Give a list of string, count how many items of list has length longer than 3
 # print(counter)
 
 """
-Q3
+Google Classroom List Q3
+
+Find the index of largest elements in the list
 """
 a = [2, 3, 10, 7, 6]
 max = a[0]
@@ -29,4 +31,3 @@ while index < len(a):
 
 print(max)
 print(max_index)
-
