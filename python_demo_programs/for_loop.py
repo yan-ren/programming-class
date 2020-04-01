@@ -29,5 +29,5 @@
 # print(sum)
 
 # sum a list in python
-numbers = [1, 2, 3, 3]
-print(sum(numbers))
+# numbers = [1, 2, 3, 3]
+# print(sum(numbers))
