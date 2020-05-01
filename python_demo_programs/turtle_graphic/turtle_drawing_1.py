@@ -19,6 +19,7 @@ fillcolor
 # (0, 255)
 # Painting Red Yellow Blue
 # wn.colormode(255)
+# alex.color((20, 20, 20))
 # alex.color('#34ebba')
 alex.pensize(5)
 alex.speed(8)
