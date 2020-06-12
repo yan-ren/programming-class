@@ -1,4 +1,5 @@
-import pygame, sys
+import pygame
+import sys
 
 pygame.init()
 width = 800
@@ -11,6 +12,9 @@ clock = pygame.time.Clock()
 
 WHITE = (255, 255, 255)
 cat_img = pygame.image.load('cat.png')
+mouse_img = pygame.image.load('mouse.png')
+mouse_x = 400
+mouse_y = 300
 cat_x = 400
 cat_x_change = 0
 cat_y = 300
@@ -61,6 +65,7 @@ while True:
     # display an image to the screen
     display.fill(WHITE)
     display.blit(cat_img, (cat_x, cat_y))
+    display.blit(mouse_img, (mouse_x, mouse_y))
 
     pygame.display.update()
     clock.tick(FPS)
