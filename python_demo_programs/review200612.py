@@ -50,3 +50,7 @@ def sum_list(list):
 # homework: write a function takes a list, return the average of the list
 # [1, 2, 3]
 # 2
+
+# b, "abaa"
+# write a function count how many ch are in string
+
