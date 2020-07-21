@@ -29,8 +29,8 @@ change_mouse = 0
 
 def mouse_change_position():
     global mouse_x, mouse_y
-    mouse_x = random.randint(0, WIDTH)
-    mouse_y = random.randint(0, HEIGHT)
+    mouse_x = random.randint(0, WIDTH - mouse_img.get_width())
+    mouse_y = random.randint(0, HEIGHT - mouse_img.get_height())
 
 # event
 # events are operations that triggers game state change, such as clicks or keyboard presses
@@ -70,7 +70,10 @@ while True:
     elif cat_y > HEIGHT - cat_img.get_height():
         cat_y = HEIGHT - cat_img.get_height()
 
-    if change_mouse == FPS:
+    # loop will run 60 times per second
+    # mouse_change_position() will be called every 60 times
+    # => mouse will change position every second
+    if change_mouse == FPS * 2:
         mouse_change_position()
         change_mouse = 0
     else:
