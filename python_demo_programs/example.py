@@ -438,19 +438,66 @@ def valid_input():
 # 1 2 3 4
 # 1 2 3 4 5
 
-row = 1
-while row <= 5:
-    column = 1
-    while column <= row:
-        print(column, end=' ')
-        column += 1
-    print()
-    row += 1
+# question 1, write a function takes one input as pattern and print the pattern triangle
+def pattern_print(pattern, line):
+    row = 1
+    while row <= line:
+        column = 1
+        while column <= row:
+            print(pattern, end=' ')
+            column += 1
+        print()
+        row += 1
 
-# try to print the following pattern
-# write as a function takes a symbol as input
-# question2, takes second variable called lines
-def print_pattern(pattern, lines):
-    pass
+pattern_print('@', 3)
 
-print_pattern('?', 3)
+
+# write a function takes a string as input, return a reversed string
+# input: 'abcd'
+# output: 'dcba'
+
+def reverse(string):
+    res = ''
+    index = len(string) - 1
+    while index >= 0:
+        res = res + string[index]
+        index -= 1
+    return res
+
+# write a function to reverse a list in place without creating new list/slicing
+# [1, 2, 3, 4, 5]
+# use switching, e.g. first element switches with last element
+# second element switches with second last element. so on.
+def reverse_list(list):
+    index = 0
+    while index < len(list) / 2:
+        tmp = list[index]
+        list[index] = list[len(list) - 1 - index]
+        list[len(list) - 1 - index] = tmp
+        index += 1
+
+    return list
+# string is immutable - cannot change values after created
+# list is mutable - can change values after created
+
+# write a function takes a list of numbers(positive/negative)
+# if the number is positive, leave it unchanged
+# if the number is negative, reserved it
+# then return the positive sum
+
+# if the number is positvie, reserved it
+# if the number is negative, leave it unchanged
+# def sum(list):
+#     res = 0
+#     for i in list:
+#         if i > 0:
+#             res += i
+#         else:
+#             res += -1 * i
+#     return res
+
+# write a function takes a list of lists, all values in the inner list are number
+# calculate the sum of all numbers
+# [[1, 2, 3], [1, 2]]
+# 9
+
