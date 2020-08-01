@@ -501,3 +501,100 @@ def reverse_list(list):
 # [[1, 2, 3], [1, 2]]
 # 9
 
+# try to loop a list of numbers, positive, negative, return the first negative from the left
+# [1, -2, -3, -4]
+# 1 + 2 + 3 + 4
+
+# [1, 2, 3, 4]
+
+# homework, write the same program again
+# write a function takes a list of numbers, positive and negative, sum all the positive numbers
+# and return the sum
+# [1, 2, -3]
+# 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+# write a function, check if a list has negative number if has, return false, else return true
+# [1, 2, 3]
+def check_positive(list):
+    for i in list:
+        if i < 0:
+            return False
+
+    return True
+
+
+def check_positive(list):
+    result = True
+    for i in list:
+        if i < 0:
+            result = False
+            break
+    return result
+
+# def multiple_return(list):
+#     a = None
+#     b = None
+#     for i in list:
+#         if i > 0 and a is None:
+#             a = i
+#         if i < 0 and b is None:
+#             b = i
+#     return a, b
+
+# [1, 2, 4, 1]
+# return 1, None
+
+# break & continue
+# two keywords used in loop(for loop, while loop)
+# break: breaks the loop
+# continue: stop the current cycle, continue with next cycle
+
+
+# range(10) -> [0, 1, 2, ..., 9]
+
+
+
+# in other programming languages, sometime we can only return one value from function
+# but in python, we can return multiple values at the same time
+def multiple_return():
+    a = 1
+    b = 2
+    return a, b
+
+print(multiple_return())
+a, b = multiple_return()
+print(a)
+print(b)
+
+# if you have a list has positive/negative numbers
+# return the sum of all positives and sum of all negatives
+# [1, 2, -1, -2]
+# return 3, -3
+
+# homework
+# write a function takes a list, all number in list are positive
+# return the sum of all even numbers and all odd numbers
+# [1, 2, 4, 2, 3]
+# return 8, 4
+
+
+
+
+
+
+
+
+
+
