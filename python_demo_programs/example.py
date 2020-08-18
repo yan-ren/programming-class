@@ -449,7 +449,7 @@ def pattern_print(pattern, line):
         print()
         row += 1
 
-pattern_print('@', 3)
+# pattern_print('@', 3)
 
 
 # write a function takes a string as input, return a reversed string
@@ -513,18 +513,6 @@ def reverse_list(list):
 # [1, 2, -3]
 # 3
 
-
-
-
-
-
-
-
-
-
-
-
-
 # write a function, check if a list has negative number if has, return false, else return true
 # [1, 2, 3]
 def check_positive(list):
@@ -568,18 +556,17 @@ def check_positive(list):
 
 # in other programming languages, sometime we can only return one value from function
 # but in python, we can return multiple values at the same time
-def multiple_return():
-    a = 1
-    b = 2
-    return a, b
+# def multiple_return():
+#     a = 1
+#     b = 2
+#     return a, b
+#
+# print(multiple_return())
+# a, b = multiple_return()
+# print(a)
+# print(b)
 
-print(multiple_return())
-a, b = multiple_return()
-print(a)
-print(b)
-
-# if you have a list has positive/negative numbers
-# return the sum of all positives and sum of all negatives
+#return the sum of all positives and sum of all negatives
 # [1, 2, -1, -2]
 # return 3, -3
 
@@ -590,11 +577,36 @@ print(b)
 # return 8, 4
 
 
+# write a function takes two lists as input, return the number of positive numbers and negative number in two lists
+# example: list1=[1, 2, -1], list2=[2, -3]
+# return 3, 2
+# def positive_negative(list1, list2):
+#     n_positive = 0
+#     n_negative = 0
+#     list1.extend(list2)
+#     for i in list1:
+#         if i > 0:
+#             n_positive += 1
+#         else:
+#             n_negative += 1
+#
+#     return n_positive, n_negative
+#
+#
+# a = [1, 2, 3, 3, 3]
+# print(a.count(9))
 
-
-
-
-
-
+# write a function that removes the duplicate in the list
+# def remove_duplicate(list):
+#     index = 0
+#     while index < len(list):
+#         j = index + 1
+#         while j < len(list):
+#             if list[index] == list[j]:
+#                 del list[j]
+#                 j -= 1
+#             j += 1
+#         index += 1
+#     return list
 
 
