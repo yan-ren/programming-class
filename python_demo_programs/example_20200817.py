@@ -18,7 +18,7 @@
 #     return counter
 
 # write a function that takes a list return the element of highest frequency
-# list = [1, 2, 2, 2, 3, 3, 3]
+# list = [1, 2, 2, 2, 3, 3, 3, 3]
 def find_most(list):
     frequency = 0
     value = list[0]
@@ -52,3 +52,12 @@ print(list)
 # write a function that takes a list, find out the most frequent value, and remove it
 # example: list = [1, 2, 3, 3, 3]
 # return: [1, 2]
+
+# list = [1, 2]
+# list[0] = 100
+# print(len(list))
+
+a = 1
+b = 2
+
+a, b = b, a
