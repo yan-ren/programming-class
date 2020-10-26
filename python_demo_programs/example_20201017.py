@@ -27,3 +27,8 @@ def contains2(list1, list2):
 
 # homework:  Write a Python program to find maximum and the minimum value in a set.
 # {1, 2, 3}
+
+#question: Give two dictionaries, find which dictionary contains all the keys from another dictionary
+# {1:1, 2:2} {1:3}
+
+a = {"one": 1, "two": 2, "three": 3}
