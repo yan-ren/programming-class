@@ -39,8 +39,20 @@
 # where the sum of each key and value equals to 10
 # example:
 # d = {0: 10, 1:9, 2: 8, 3: 7, 4: 6, 5:5, 6:4, 7:3, 8:2, 9:1, 10:0}
+# # list cannot be the dictionary key, because dictionary key has to be immutable
+# # tuple can be the dictionary key
+# d = {}
+# # key is not in dictionary, new key/value is added
+# d[1] = 'one'
+# print(d)
+# # key is in the dictionary, value is updated
+# d[1] = 'ONE'
+# print(d)
+d = {}
+for i in range(11):
+    d[i] = 10 - i
 
-d = {"one": 1, "two": 2, "three": 3}
-l = list(d.keys())
-print(type(l))
-print(l)
+print(d)
+
+
+

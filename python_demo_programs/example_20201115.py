@@ -45,7 +45,16 @@ else:
 # homework
 # write a function that can build a histogram from a string
 def histogram(word):
-    pass
+    # loop through the string by character, check if the dictionary contains the character, increase the value by one
+    # if the dictionary doesn't contain the character, add the character, with value 1
+    dic = {}
+    for i in word:
+        if i in dic:
+            dic[i] = dic[i] + 1
+        else:
+            dic[i] = 1
+    return dic
+
 
 # input: "hello"
 # output: {"h": 1, "e": 1, "l": 2, "o": 1}
@@ -57,6 +66,11 @@ def histogram(word):
 # print(d)
 # print(a)
 
-d = {1:1, 2:1, 3:1}
-for key in d.keys():
-    print(key)
+# d = {1:1, 2:1, 3:1}
+# for key in d.keys():
+#     print(key)
+
+dic = {1: 1, 2: 2}
+dic[3] = 3
+dic[1] = dic[1] + 100
+print(dic)
