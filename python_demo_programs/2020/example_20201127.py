@@ -87,3 +87,22 @@ print(empty_set)
 # given a dictionary, create a set with all keys and values from the dictionary
 # dic = {"one": 1, "two": 2}
 # {"one", "two", 1, 2}
+dic = {"one": 1, "two": 2}
+s = set()
+for key, value in dic.items():
+    s.add(key)
+    s.add(value)
+
+# set update
+s1 = {1, 2}
+s2 = {3, 4}
+s1.update(1)
+s1 = s1 | s2
+# equal to
+s1 |= s2
+
+#  check a given set has no elements in common with other given set
+s1 = {1, 2}
+s2 = {3, 4}
+if len(s1 & s2) == 0:
+    print("no common")

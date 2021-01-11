@@ -45,3 +45,9 @@ print(combine_dic2(dic1, dic2))
 # expected output: ["one": 1, "two": 2, "three": 3]
 # notice these two lists have to be in the same length,
 # loop through lists by index, put values from each list as key value pairs
+l1 = [1, 2, 3]
+l2 = [4, 5, 6]
+dic = {}
+index = 0
+while index < len(l1):
+    dic[l1[index]] = l2[index]
