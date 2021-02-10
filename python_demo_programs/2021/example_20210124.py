@@ -43,3 +43,14 @@
 word = 'hello'
 a = [ch for ch in word.lower() if ch not in 'aeiou']
 print(a)
+
+l = []
+for ch in word.lower():
+    if ch not in 'aeiou':
+        l.append(ch)
+
+# [(i,j) for i in range(5) for j in range(i)]
+l = []
+for i in range(5):
+    for j in range(i):
+        l.append((i, j))

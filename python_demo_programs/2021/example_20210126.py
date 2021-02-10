@@ -56,7 +56,53 @@
 # find two numbers from the list such that they add up to target
 # it's guaranteed in the list that such pair exists
 
-# [3, 2, 1, 4, 5, 6] target=7
+# [3, 2, 1, 4, 5, 6] target=6
 # return 1, 6
+l = [3, 2, 1, 4, 5, 6]
+target = 6
+sorted(l)
+left = 0
+right = len(l) - 1
+while left < right:
+    tmp = l[left] + l[right]
+    if tmp == target:
+        print(l[left], l[right])
+    elif tmp < target:
+        left += 1
+    elif tmp > target:
+        right -= 1
 
+
+# index = 0
+# while index < len(l):
+#     print(l[index])
+#     index +=1
+#
 # def sum(list, target):
+#     # for i in list:
+#     #     for j in list:
+#     #         if i + j == target:
+#     #             print(i, j)
+#     i = 0
+#     while i < len(list):
+#         j = i + 1
+#         while j < len(list):
+#             if list[i] + list[j] == target:
+#                 print(list[i], list[j])
+#             j += 1
+#         i += 1
+#
+#
+# def sum(list, target):
+#     targetList = [tuple((i, j)) for i in list for j in list if i + j == target]
+#     finalList = [tuple((sorted(i))) for i in targetList]
+#     return sorted(set(finalList))
+#
+# print(sum([3, 2, 1, 4, 5, 6], 7))
+
+# l = ['apple', 'orange', 'pear']
+# res = []
+# for i in l:
+#     res.append((i, len(i)))
+#
+# res = [(i, len(i)) for i in l]
