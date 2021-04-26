@@ -42,18 +42,50 @@
 # boolean operation: the calculating between boolean
 # we have three boolean operator, just like + -  in math, but + - is for number operation
 # and or not, they are boolean operators and they are python keywords
-a = True
-b = False
-# we define: for "and" operator, as long as one side is False the result is False
-print(a and b)
-print(True and False)
-print(False and True)
-print(False and False)
-# we define: for "or" operator, as long as one side is True then the result is True
-print(a or b)
-print(True or False)
-print(False or True)
-print(False or False)
-# "not" operator is the reverse of value
-print(not a)
-print(not b)
+# a = True
+# b = False
+# # we define: for "and" operator, as long as one side is False the result is False
+# print(a and b)
+# print(True and False)
+# print(False and True)
+# print(False and False)
+# # we define: for "or" operator, as long as one side is True then the result is True
+# print(a or b)
+# print(True or False)
+# print(False or True)
+# print(False or False)
+# # "not" operator is the reverse of value
+# print(not a)
+# print(not b)
+
+# == != > < >= <= comparison operator is comparing the numbers
+# they generate boolean as result
+# print(1 < 10)
+# print(2 >= 0)
+# # equal to
+# print(2 > 0 or 2 == 0)
+# # and or not boolean operator, they are used for boolean operator
+# # the result is still boolean
+# x = True
+# y = False
+# print(x and y)
+
+# x = 1
+# y = '1'
+# print(type(x))
+# print(type(y))
+# # compare equality of x and y, they are not equal
+# # because they are not the same type
+# print(x == y)
+
+# x = 'He said: "The answer is 42"'
+# print(x)
+#
+# print('hello world')
+# a = 'hello'
+# b = 'world'
+#
+# c = a + b
+# print(c)
+# print(a)
+# print(b)
