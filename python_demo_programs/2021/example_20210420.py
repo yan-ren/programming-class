@@ -84,3 +84,42 @@ Write a Python program to print a dictionary where the keys are numbers between 
 and the values are square of keys. Solve this problem using dictionary comprehension
 sample dictionary {1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
 '''
+def strDictConv(string):
+    return {x: string.count(x) for x in string}
+
+
+s = "hello"
+print(s.count("he"))
+
+'''
+Given a list and dictionary, map each element of list with each item of dictionary
+input: dic = {"four": 4, "nine": 9} list = [1, 2]
+output: result = {1: {"four": 4}, 2: {"nine": 9}}
+'''
+dic = {"four": 4, "nine": 9}
+list = [1, 2]
+
+result = {}
+index = 0
+for key, value in dic.items():
+    result[list[index]] = {key: value}
+    index += 1
+
+
+'''
+Given an integer list, 
+find the contiguous sublist (containing at least one number) which has the largest sum and return its sum.
+
+input = [-2,1,-3,4,-1,2,1,-5,4]
+sublist [4,-1,2,1] gives the largest sum 6, return 6
+
+Input: nums = [5,4,-1,7,8]
+output: 23
+'''
+
+dic = {num : num**2 for num in range(1, 11)}
+
+d=dict()
+for lol in range(1,11):
+    d[lol]=lol**2
+print(d)

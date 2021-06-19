@@ -35,3 +35,6 @@ place = "Berlin"
 calculation()
 print(place)
 print(name)
+
+x = 1
+y = 2
