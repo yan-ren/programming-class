@@ -1,7 +1,4 @@
-package playground;
 
-import java.util.Arrays;
-import java.util.Scanner;
 
 public class PigLatin {
 	public static void main(String[] args) {
@@ -9,13 +6,24 @@ public class PigLatin {
 //		System.out.println("Enter a sentence that does not contain punctuation.");
 //		String sentence = sc.nextLine();
 //		String sentenceLowerCase = sentence.toLowerCase();
-		String input = "the quick brown fox jumped over the lazy dog";
-		System.out.println(Arrays.toString(tokenize(input)));
+		// String input = "the quick brown fox jumped over the lazy dog";
+		// System.out.println(Arrays.toString(tokenize(input)));
 		
-		System.out.println(detectPrefix("quick"));
-		System.out.println(detectPrefix("one"));
-		System.out.println(detectPrefix("brown"));
+		// System.out.println(detectPrefix("quick"));
+		// System.out.println(detectPrefix("one"));
+		// System.out.println(detectPrefix("brown"));
 		
+		// System.out.println(pigLatinfy("pig"));
+		// System.out.println(pigLatinfy("this"));
+
+		String test = "the quick brown fox jumped over the lazy dog";
+		String[] tokens = tokenize(test);
+		String result = "";
+		for(int i = 0; i < tokens.length; i++){
+			result = result + pigLatinfy(tokens[i]) + " ";
+		}
+
+		System.out.println(result);
 	}
 
 	public static String[] tokenize(String sentenceLowerCase) {
@@ -61,16 +69,18 @@ public class PigLatin {
 		return prefix;
 	}
 
-	public static void pigLatinfy(String prefix, String[] arr1, int prefixIndex) {
-		for (int i = 0; i < arr1.length; i++) {
-			if (prefix == "") {
-				arr1[i] = arr1[i] + "way";
-			} else {
-				arr1[i] = arr1[i].substring(prefixIndex) + prefix + "ay";
+	public static String pigLatinfy(String input){
+		String result = "";
+		if(input.charAt(0) == 'a' || input.charAt(0) == 'e' || input.charAt(0) == 'i' || input.charAt(0) == 'o' || input.charAt(0) == 'u'){
+			result = input + "w";
+		}else {  
+			String prefix = detectPrefix(input);
+			if(prefix.length() != 0){
+			 	result = input.substring(prefix.length());
+				result += prefix;
 			}
 		}
-		for (int i = 0; i < arr1.length; i++) {
-			System.out.print(arr1[i] + " ");
-		}
+
+		return result + "ay";
 	}
 }

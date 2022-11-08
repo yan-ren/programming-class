@@ -1,108 +1,97 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Arrays;
 
 public class Example {
     public static void main(String[] args) {
-        /*
-         * given a 2-d array e.g. { {1, 2, 3}, {3, 4}, {5, 6, 7, 8} } sum each subarray
-         * to a single value, build the sum into a single array {6, 7, 26}
-         */
-        // int[][] input = { { 1, 2, 3 }, { 3, 4 }, { 5, 6, 7, 8 } };
-        // int[] result = new int[input.length];
-        // for (int level = 0; level < input.length; level++) {
-        // int sum = 0;
-        // for (int i = 0; i < input[level].length; i++) {
-        // sum += input[level][i];
-        // }
-        // result[level] = sum;
-        // }
+        // int[] test = { 5, 4, 3, 2, 1 };
+        // selectionSort(test);
+        // System.out.println(Arrays.toString(test));
 
-        // for (int i = 0; i < result.length; i++) {
-        // System.out.println(result[i]);
-        // }
+        // A a = new A();
+        // a.print();
 
-        // int[] a = { 1, 2, 3, 4 };
-        // int largest = a[0];
-        // int secondLargest = a[1];
-        // for (int i = 0; i < a.length; i++) {
-        // if (a[i] > largest) {
-        // secondLargest = largest;
-        // largest = a[i];
-        // } else if (a[i] > secondLargest) {
-        // secondLargest = a[i];
-        // }
-        // }
-        // System.out.println(secondLargest);
+        // A a = new B();
+        // a.print();
+        // B b = (B) a;
+        // b.print1();
 
-        // int c = power(2, 3);
-        // System.out.println(c);
+        // C c = new D();
+        // c.print();
 
-        // System.out.println(power(2, 4));
-        // int[] a = { 1, 2, 3, 4, 5, 6 };
-        // skipPrint(a, 2);
+        // B b = new A();
+        // b.print1();
 
-        // method overloading: multiple method can have the same name with different
-        // parameters(inputs)
-        // method1();
+        // B b = new B();
+        // A a = (B) b;
 
-        int[] x = { 1 };
-        increment(x);
-        System.out.println(x[0]);
+        // A a = new A();
+        // B b = (B) a;
+        // b.print1();
+
+        int[] myNumbers = { 1, 2, 3 };
+        System.out.println(myNumbers[10]);
+
+        try {
+            FileReader file = new FileReader("C:\\test\\a.txt");
+
+            // Creating object as one of ways of taking input
+            BufferedReader fileInput = new BufferedReader(file);
+
+            // Printing first 3 lines of file "C:\test\a.txt"
+            for (int counter = 0; counter < 3; counter++)
+                System.out.println(fileInput.readLine());
+
+            // Closing file connections
+            // using close() method
+            fileInput.close();
+        } catch (Exception e) {
+
+        }
     }
 
-    public static boolean arrEqual(int[] arr1, int[] arr2) {
-        boolean equal = true;
-        if (arr1.length == arr2.length) {
-            for (int i = 0; i < arr1.length; i++) {
-                if (arr1[i] != arr2[i]) {
-                    equal = false;
+    //
+    public static void selectionSort(int[] arr) {
+        for (int j = 0; j < arr.length - 1; j++) {
+            int smallest = j;
+            int i;
+            for (i = j + 1; i < arr.length; i++) {
+                if (arr[i] < arr[smallest]) {
+                    smallest = i;
                 }
             }
-        } else {
-            equal = false;
-        }
-        return equal;
-    }
 
-    public static void increment(int[] a) {
-        a[0]++;
-        System.out.println(a[0]);
-    }
-
-    public static int method1(int a, int b) {
-        System.out.println(a);
-        return 0;
-    }
-
-    public static void method1(int b, String s) {
-        System.out.println("method1");
-    }
-
-    // a^b: a is integer, b is integer, a^b is integer as well
-    public static int power(int a, int b) {
-        int result = 1;
-        for (int i = 0; i < b; i++) {
-            result = result * a;
-        }
-        return result;
-    }
-
-    public static void skipPrint(int[] arr, int n) {
-        for (int i = n; i < arr.length; i += n) {
-            System.out.println(arr[i]);
+            // swap
+            int tmp = arr[j];
+            arr[j] = arr[smallest];
+            arr[smallest] = tmp;
         }
     }
+}
 
-    /*
-     * given an integer array {1, 2, 3, 4, 5, 6} split the integer into two integer
-     * arrays where one array contains all even numbers and another array contains
-     * all odd numbers
-     */
+interface C {
+    public void print();
+}
 
-    /*
-     * remove array duplicates given an integer array, write a function that returns
-     * a new array with duplicated value removed
-     * 
-     * {1, 2, 2, 3, 4, 5, 5} {1, 2, 3, 4, 5}
-     * 
-     */
+class D implements C {
+    public void print() {
+        System.out.println("this is class D");
+    }
+}
 
+class A {
+
+    public void print() {
+        System.out.println("this is class A");
+    }
+}
+
+class B extends A {
+    public void print() {
+        System.out.println("this is class B");
+    }
+
+    public void print1() {
+        System.out.println("this is class B: print1");
+    }
 }

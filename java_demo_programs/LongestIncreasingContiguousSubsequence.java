@@ -3,7 +3,7 @@ public class LongestIncreasingContiguousSubsequence {
 
 	public static void main(String[] args) {
 
-		int[] arr = { 3, 6, 5, 1, 9, 3, 2, 3, 4, 5, 1 };
+		// int[] arr = { 3, 6, 5, 1, 9, 3, 2, 3, 4, 5, 1 };
 		// longestForward(arr);
 		// longestBackwards(arr);
 

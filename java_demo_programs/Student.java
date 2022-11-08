@@ -1,23 +1,48 @@
-public class Student {
-    // instance variable
-    private int studentID;
-    public String name;
-    private double[] grades;
-    private int gradeIndex;
+public class Student extends Person {
+    // data
+    private int studentId;
+    String name;
+    double[] grades;
+    int gradeIndex = 0;
+    Course[] courses;
 
-    // static variable
-    static int ID = 1;
-
-    // constructor: special function that is called when creating object
-    public Student(int studentID, String name) {
-        this.studentID = studentID;
-        this.name = name;
-        this.grades = new double[5];
-        this.gradeIndex = 0;
+    public Student() {
     }
 
-    // write a function that can be used to add grade to grades array
-    public void addGrade(double grade) {
+    public Student(int studentId) {
+        super(studentId, "", "");
+        this.studentId = studentId;
+    }
+
+    public Student(int studentId, String name) {
+        super(studentId, "", name);
+        this.studentId = studentId;
+        this.name = name;
+        grades = new double[5];
+        courses = new Course[5];
+    }
+
+    // __init__
+    // method overloading
+    public void method1() {
+
+    }
+
+    public void method1(String s) {
+
+    }
+
+    // setter
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    // getter
+    public int getStudentId() {
+        return this.studentId;
+    }
+
+    public void addGrade(int grade) {
         if (gradeIndex == grades.length) {
             return;
         }
@@ -26,30 +51,32 @@ public class Student {
         gradeIndex += 1;
     }
 
-    public int getStudentID() {
-        return studentID;
+    public void addCourse(Course course) {
+
     }
 
-    public void setStudentID(int id) {
-        studentID = id;
-    }
-
-    // write a function that can return the average grade of student
-    public double getAverage() {
-        double sum = 0;
+    public double computeAverageGrade() {
+        double average = 0;
         for (int i = 0; i < gradeIndex; i++) {
-            sum = sum + grades[i];
+            average += grades[i];
         }
-        return sum / gradeIndex;
+
+        return average / gradeIndex;
     }
 
-    // instance function/ non-static function
-    public void printName() {
-        System.out.println(name);
+    // method overwriting
+    public void say() {
+        System.out.println("I am a student");
     }
 
-    // static function, called through class name
-    public static void printMessage() {
-        System.out.println("hello");
+    public void test() {
+        say();
+        super.say();
     }
 }
+
+/*
+ * if superclass has constructor, subcalss has to call
+ * the superclass's contructor in its own constructor
+ * 
+ */
