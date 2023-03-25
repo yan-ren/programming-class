@@ -1,160 +1,171 @@
+import turtle
+import random
+
 '''
-scope: visibility of a variable
+SCREEN_SIZE = 800
+wn = turtle.Screen()
+wn.setup(SCREEN_SIZE, SCREEN_SIZE)
+
+# create turtle object to draw snake
+snake = turtle.Turtle()
+snake.speed(0)
+snake.shape("square")
+snake.penup()
+
+def get_random_value():
+    return random.randint(-SCREEN_SIZE/4, SCREEN_SIZE/4)
+
+
+# create turtle object to draw food
+food = turtle.Turtle()
+food.shape("circle")
+food.speed(0)
+food.color("red")
+food.penup()
+food.goto(get_random_value(), get_random_value())
+
+
+def up():
+    snake.setheading(90)
+
+def down():
+    snake.setheading(-90)
+
+def left():
+    snake.setheading(180)
+
+def right():
+    snake.setheading(0)
+
+
+# add keyboard control to snake object
+turtle.onkeypress(up, "Up")
+turtle.onkeypress(down, "Down")
+turtle.onkeypress(left, "Left")
+turtle.onkeypress(right, "Right")
+turtle.listen()
+
+# turtle object for showing score
+pen = turtle.Turtle()
+pen.hideturtle()
+pen.penup()
+pen.goto(-350, 350)
+score = 0
+
+# main game loop,
+while True:
+    snake.forward(5)
+    snake.stamp()           # draw the snake body
+    snake.clearstamps(1)    # remove the last of snake
+
+    # when snake gets food
+    if snake.distance(food) < 20:
+        score += 1
+        pen.clear()
+        food.goto(get_random_value(), get_random_value())
+        # make addition stamp mark, so snake is longer when gets the food
+        snake.stamp()
+
+    # how to exit when snake touches the edge, hard-code
+    if snake.xcor() >= SCREEN_SIZE/2 or snake.xcor() <= -SCREEN_SIZE/2 or snake.ycor() >= 400 or snake.ycor() <= -400:
+        break
+
+    pen.write("Score:" + str(score), font=("Verdana", 24, "normal"))
+
+
+turtle.exitonclick()
 '''
-# x = 2 # global scope
-# def test():
-#     x = 3
-#     # local scope of function test
+'''
+More ideas:
+
+add second snake to make this as 2 players game
+add more food, or add obstacle
+'''
+
+'''
+two scopes:
+1. scope inside function == local
+2. scope outside of the function == global
+
+but overall Python can have 4 scopes
+'''
+
+
+
+
+# def foo1(y):
+#     a = 1
+#     x = 2
+#     foo2(1)
 #     print(x)
-#     y = 2
-#     print(globals()['x'])
-#     return y
+#
+# def foo2(y):
+#     x = 5
 #
 #
-# t = test()
-# print(x)
-# print(t)
-# def a():
-#     print("a")
-#     a()
-import sys
+# x = 2
+# foo1(x)
+#
+#
+#
+#
+# if x > 2:
+#     y = 1
+#
+# print(y)
+
+
+# def foo():
+#     global s
+#     print(s)
+#     x = 41
+#     z = 5
+#     s = "not true"
+#     print(x, z)
+#
+#
+# s = "Python is great"
+# foo()
+# print(s)
+'''
+Interpreted language: Python
+Compiled language: Java
+'''
+
+# def add(x, y):
+#     add(x, y)
+#     print(x+y)
+#
+#
+# add(1, 2)
 
 '''
-recursion: a function calls itself 
+function calls itself - recursion/recursive function
+
+recursive function:
+1. base case
+write condition when program stops calling itself
+
+2. recursive case
+function calls itself
 '''
+# def count(k):
+#     print(k)
+#     if k == 0:
+#         return
+#
+#     count(k-1)
+#
+#
+# count(10)
+
+def add(n):
+    if n == 0:
+        return n
+
+    return n + add(n-1)
 
 
-# def b():
-#     print("b")
-#
-#
-# a()
-'''
-Write a Python function to reverse a string.
-Sample String : "1234abcd"
-Expected Output : "dcba4321"
-'''
+print(add(5))
 
 
-'''
-delimiter
-'this is a string'
-
-split
- 
-['this', 'is', 'a', 'string']
-'''
-# def reorganize_sentence(string):
-#     # "is2 sentence4 This1 a3"
-#     dic = {}
-#     l = string.split()
-#     # ['is2', 'sentence4', 'This1', 'a3']
-#     for i in l:
-#         dic[int(i[len(i)-1])] = i[:len(i)-1]
-#
-#     # {2: 'is', 4: 'sentence', 1: 'This', 3: 'a'}
-#     # range(1, 5)
-#     # for j in range(1, len(l)+1):
-#     #     l[j-1] = dic.get(j)
-#
-#     # sort the key and use the sorted key
-#     for key in sorted(dic.keys()):
-#         l[key-1] = dic[key]
-#     return " ".join(l)
-#
-#
-# print(reorganize_sentence("is2 sentence4 This1 a3"))
-#
-# def reorganize_sentence_1(s):
-#     l = s.split()
-#     new_l = [''] * len(l)
-#
-#     for i in l:
-#         new_l[int(i[len(i) - 1])-1] = i[:len(i) - 1]
-#
-#     return ' '.join(new_l)
-#
-# print(reorganize_sentence_1('is2 sentence4 This1 a3'))
-
-'''
-if a language supports first-class functions
-- functions can be passed as arguments to other functions
-- functions can be returned as the values from other functions
-- functions can be assigned to variables
-
-objects can do above things
-
-in python functions are objects
-'''
-# def shout(text):
-#     return text.upper()
-#
-#
-# def whisper(text):
-#     return text.lower()
-#
-#
-# def greet(f):
-#     print(f('hello'))
-#
-#
-# greet(shout)
-# greet(whisper)
-#
-#
-# def create_adder(x):
-#     def adder(y):
-#         return x+y
-#
-#     return adder
-#
-#
-# add_15 = create_adder(15)
-# add_20 = create_adder(20)
-# print(add_15(10))
-#
-# g = greet
-
-
-'''
-Exception handling
-
-syntax error
-logical error: errors that happen at runtime, are called exceptions
-built-in exception
-
-'''
-# l = [1, 2, 3]
-# print(l[4])
-# print(1/0)
-# print(dir(locals()['__builtins__']))
-# l = ['a', 0, 2]
-#
-# for value in l:
-#     try:
-#         result = 1 / int(value)
-#         print(result)
-#     except Exception as e:
-#         print(e)
-#         print("have some error")
-#     finally:
-#         print("in finally")
-
-'''
-s = "is2 sentence4 This1 a3"
-
-['is2', 'sentences4', 'This1', 'a3']
-'''
-def reorganize_sentence(sentence):
-    words = sentence.split(" ")
-    result = [''] * len(words)
-
-    for word in words:
-        num = word[len(word)-1:]
-        letter = word[:len(word)-1]
-        result[int(num)-1] = letter
-
-    print(result)
-    " ".join(result)
-
-reorganize_sentence("is2 sentence4 This1 a3")

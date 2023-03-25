@@ -1,97 +1,56 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class Example {
+
     public static void main(String[] args) {
-        // int[] test = { 5, 4, 3, 2, 1 };
-        // selectionSort(test);
-        // System.out.println(Arrays.toString(test));
+        // canFly(new Owl());
+        // canFly(new Eagle());
+        // Owl o = new Owl();
+        // FlyObject f = new Owl();
 
-        // A a = new A();
-        // a.print();
+        Test t = new Test();
+        t.a = 1;
+        t.b = 2;
 
-        // A a = new B();
-        // a.print();
-        // B b = (B) a;
-        // b.print1();
+        Test.b = 2;
 
-        // C c = new D();
-        // c.print();
-
-        // B b = new A();
-        // b.print1();
-
-        // B b = new B();
-        // A a = (B) b;
-
-        // A a = new A();
-        // B b = (B) a;
-        // b.print1();
-
-        int[] myNumbers = { 1, 2, 3 };
-        System.out.println(myNumbers[10]);
-
-        try {
-            FileReader file = new FileReader("C:\\test\\a.txt");
-
-            // Creating object as one of ways of taking input
-            BufferedReader fileInput = new BufferedReader(file);
-
-            // Printing first 3 lines of file "C:\test\a.txt"
-            for (int counter = 0; counter < 3; counter++)
-                System.out.println(fileInput.readLine());
-
-            // Closing file connections
-            // using close() method
-            fileInput.close();
-        } catch (Exception e) {
-
-        }
+        Deque<Integer> queue = new LinkedList<>();
+        queue.addFirst(null);
+        queue.addLast(null);
     }
 
-    //
-    public static void selectionSort(int[] arr) {
-        for (int j = 0; j < arr.length - 1; j++) {
-            int smallest = j;
-            int i;
-            for (i = j + 1; i < arr.length; i++) {
-                if (arr[i] < arr[smallest]) {
-                    smallest = i;
-                }
-            }
+    // public static void canFly(Owl o) {
+    // o.fly();
+    // }
 
-            // swap
-            int tmp = arr[j];
-            arr[j] = arr[smallest];
-            arr[smallest] = tmp;
-        }
+    // public static void canFly(Eagle e) {
+    // e.fly();
+    // }
+
+    public static void canFly(FlyObject f) {
+        f.fly();
     }
 }
 
-interface C {
-    public void print();
+class Test {
+    int a;
+    static int b;
 }
 
-class D implements C {
-    public void print() {
-        System.out.println("this is class D");
+interface FlyObject {
+    public void fly();
+}
+
+class Owl implements FlyObject {
+    public void fly() {
+        System.out.println("owl fly");
     }
 }
 
-class A {
-
-    public void print() {
-        System.out.println("this is class A");
-    }
-}
-
-class B extends A {
-    public void print() {
-        System.out.println("this is class B");
-    }
-
-    public void print1() {
-        System.out.println("this is class B: print1");
+class Eagle implements FlyObject {
+    public void fly() {
+        System.out.println("eagle fly");
     }
 }
