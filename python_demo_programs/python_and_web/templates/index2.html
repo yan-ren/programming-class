@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <script type="text/javascript">
+        function sayHello() {
+            alert("Hello World");
+        }
+    </script>
+    <body>
+        <h1 style="color:green">Welcome to Flask server</h1>
+        <input type="button" onclick="sayHello()" value="say hello">
+        <form action="http://127.0.0.1:5000/result" method="POST">
+            <p>Name <input type="text" name="Name"></p>
+            <p>Age <input type="text" name="Age"></p>
+            <p><input type="submit" value="submit"/></p>
+        </form>
+    </body>
+</html>

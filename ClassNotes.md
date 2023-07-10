@@ -119,6 +119,7 @@ LinkedList
 Tree
 
 General Tree
+
 The elements inside tree are origanized in hierachy
 
 A tree is an ADT that stores elements hierarchically
@@ -129,7 +130,7 @@ define a tree T as a set of nodes storing elements such that the nodes have a pa
 
 The nodes have to satisfy the following properties:
 
-- The top node is call root node, which has no parent
+- The top node is called root node, which has no parent
 - Each node has a unique parent node
 
 Each node
@@ -140,6 +141,51 @@ Properties:
 - each nodes has at most two children
 - each child node is labeled as left child or right child
 
+Height: the height of a tree is the maximum of the depths of its leaf, 
+in other word, height is the number of edges on the longest path from the node to leaf
+
+Depth: the depth of a node is the number of edges from the node to the root node
+
+In terms of a tree: the height of a tree is the height of root node == depth of its deepest node
+
 How to implement Tree
 
 Tree Algorithm
+
+Binary Search Tree
+
+Base on Binary Tree with following properties:
+1. value stored in the left subtree of node are less than the value in the node
+2. value stored in the right subtree of node are bigger than the value in the node
+
+#### Binary Search Tree Insertion:
+
+#### Binary Search Tree Search:
+- value found
+- value not exists
+
+#### Tree Travesal
+
+A traversal of a tree is a systematic way of visiting all nodes in a tree
+
+- depth-first
+  - preorder
+    - the root of tree is visted first and then the left subtree and then the right subtree.
+  - postorder
+    - left, right, root 
+  - inorder
+    - left, root, right
+
+- breadth-first
+  - queue
+
+- Deletion: assume we are deleting node x, node x can have following cases
+  - if at most one of the children of node x is internal
+  - if node x has two children
+
+#### Priority Queue
+- Compare to the Queue: priority queue arranges the elements base on priority. 
+- ADT
+- can be implemented using array, linked list or heap
+- binary heap: ADT, complete binary tree
+  - binary heap is a binary tree, with two properties: 1. The heap has to be complete binary tree. 2. for any node p, the key stored at p is greater than or equal to the key stored at p's parent
