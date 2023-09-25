@@ -47,12 +47,25 @@ class DoublyLinkedList():
                     current.next.prev = current.prev
 
     def insert_before(self, node_data, data):
-        
+        current = self.head
 
-        
+        while current.next != None and current.data != node_data:
+            current = current.next
+
+        if current.data == node_data:
+            # insert before the current
+            new_node = self.Node(data)
+            new_node.next = current
+            new_node.prev = current.prev
+            current.prev.next = new_node
+            current.prev = new_node
+
+
 
 l = DoublyLinkedList()
 l.append(1)
 l.append(2)
 l.prepend(3)
+print(l)
+l.insert_before(2, 4)
 print(l)
