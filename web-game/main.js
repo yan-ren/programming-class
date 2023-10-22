@@ -217,12 +217,11 @@ function addPVPKeyListener() {
     document.addEventListener("keyup", keyUpHandler);
 }
 
-function PVPMove() {
+function PVPModePaddleMove() {
     rightPad.speed = 5;
     leftPad.speed = 5;
     // Move right paddle
     if (downArrowPressed && rightPad.y + rightPad.h < canvas.height) {
-        console.log("move up right")
         rightPad.y += rightPad.speed
     }
     if (upArrowPressed && rightPad.y > 0) {
@@ -293,7 +292,7 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 
     if (gameOption == GAME_OPTION.PVP) {
-        PVPMove();
+        PVPModePaddleMove();
     }
 
     if (gameOption == GAME_OPTION.MEDIUM) {
