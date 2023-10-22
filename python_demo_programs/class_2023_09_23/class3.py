@@ -49,5 +49,13 @@ print(float(x) + 1)
 print(int('1001', 10))
 print(int('1001', 2))
 
-x = 85
-print((x-32)*5/9)
+fah = 85
+print((fah-32)*5/9)
+fah = 90
+
+temperature = 80
+result = (fah-32)*5/9
+print(result)
+
+temperature = 1
+
