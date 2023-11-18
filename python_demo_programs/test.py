@@ -1,27 +1,71 @@
-# Initialize the Pentago board (6x6 grid)
-board = [[' ' for _ in range(6)] for _ in range(6)]
+import turtle
+import math
 
-# Check if a player has won
-def check_winner(player):
-    # Check rows
-    for row in range(6):
-        if all(board[row][col] == player for col in range(6)):
-            return True
 
-    # Check columns
-    for col in range(6):
-        if all(board[row][col] == player for row in range(6)):
-            return True
+# wn = turtle.Screen()
+# t = turtle.Turtle()
+#
+# for i in range(4):
+#     t.forward(100)
+#     t.left(90)
+#
+#
+# wn.exitonclick()
 
-    # Check diagonals (top-left to bottom-right)
-    if all(board[i][i] == player for i in range(6)):
-        return True
+# else:
+#     print('no money receive')
 
-    # Check diagonals (top-right to bottom-left)
-    if all(board[i][5 - i] == player for i in range(6)):
-        return True
+'''
+for
+while
+'''
 
-    return False
+# i = 0
+# while i < 10:
+#     print(i)
+#     i += 1
 
-# Main game loop
-current_player = 'X'
+# print(i)
+
+'''
+list
+'''
+l = [1, 2, 3, 4]
+print(l[0])
+print(l[1])
+
+for i in l:
+    print(i)
+
+
+index = 0
+while index < len(l):
+    print(l[index])
+    index += 1 # index = index + 1
+
+l = [1, 2, 3, 3, 3, 3]
+
+d = {'a': 1, 'b': 1}
+print(d['a'])
+
+def welcome():
+    print('hello')
+    print('welcome to the class')
+
+
+def addition(a, b):
+    return a + b
+
+
+welcome()
+welcome()
+print(addition(1, 2))
+
+
+print(range(10)) # from 0 to 9
+print(range(1, 10)) # from 1 to 9
+
+for r in range(1, 6):
+    for c in range(r):
+        print('*', end=' ')
+    print()
