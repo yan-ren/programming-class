@@ -13,6 +13,7 @@ public class Day {
         }else if (number == 1) {
             return "Tuesday";
         }
+        return null;
     }
 
     public String getDay() {

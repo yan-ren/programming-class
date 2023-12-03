@@ -31,6 +31,7 @@ food.speed(0)
 food.color("green")
 food.goto(get_random_value(), get_random_value())
 
+
 def main_game_loop():
     while True:
         snake.forward(5)

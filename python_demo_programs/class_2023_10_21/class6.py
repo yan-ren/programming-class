@@ -62,3 +62,16 @@ e. 60 to 80 - B
 f. Above 80 - A
 Ask user to enter marks and print the corresponding grade.
 '''
+marks = int(input('Enter your grade:'))
+if marks > 80:
+    print('You get grade A')
+elif 60 < marks <= 80:
+    print('You get grade B')
+elif 50 < marks <= 60:
+    print('You get grade C')
+elif 45 < marks <= 50:
+    print('You get grade D')
+elif 25 < marks <= 45:
+    print('You get grade E')
+else:
+    print('You get grade F')
