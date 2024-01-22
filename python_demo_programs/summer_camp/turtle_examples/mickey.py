@@ -1,7 +1,9 @@
 import turtle
 tina = turtle.Turtle()
+tina.hideturtle()
 
-def _circle(x,y,color,size):
+
+def draw_circle(x, y, color, size):
     tina.up()
     tina.goto(x,y)
     tina.down()
@@ -11,8 +13,8 @@ def _circle(x,y,color,size):
     tina.end_fill()
 
 
-_circle(0,-100,"black",100)
-_circle(100,50,"black",50)
-_circle(-100,50,"black",50)
+draw_circle(0, -100, "black", 100)
+draw_circle(100, 50, "lime", 50)
+draw_circle(-100, 50, "lime", 50)
 
 turtle.done()

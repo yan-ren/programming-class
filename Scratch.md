@@ -23,5 +23,7 @@ Hi, this is probably your first Scratch programming class. I have some materials
 |Balloons          ||
 |Dodgeball         |[Link](https://drive.google.com/open?id=1iqnEQn0ubMpLrXjtQUa4nWPQoFss8h-H)|
 |Flappy Parrot     ||
+|Fish Hunter       |[Link](https://drive.google.com/open?id=1iqnEQn0ubMpLrXjtQUa4nWPQoFss8h-H)|
+|Snake Game        |[Link](https://drive.google.com/open?id=1iqnEQn0ubMpLrXjtQUa4nWPQoFss8h-H)|
 ## External Resources
 - Download and install Scratch to your computer [click here](https://scratch.mit.edu/download)

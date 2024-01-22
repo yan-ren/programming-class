@@ -1,11 +1,11 @@
 import turtle
 import math
 import random
-import pygame.mixer
+# import pygame.mixer
 
-pygame.mixer.init()
-pygame.mixer.music.load('Avengers-Theme-Soundtrack-1.mp3') # You can use any soundtrack & placed it in the same folder
-pygame.mixer.music.play(-1)
+# pygame.mixer.init()
+# pygame.mixer.music.load('Avengers-Theme-Soundtrack-1.mp3') # You can use any soundtrack & placed it in the same folder
+# pygame.mixer.music.play(-1)
 
 
 

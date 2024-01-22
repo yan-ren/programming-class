@@ -1,6 +1,6 @@
 # The Brick Breaker Game
 
-# import liabries
+# import libraries
 import turtle
 import random
 
@@ -8,7 +8,7 @@ screen = turtle.Screen()
 screen.tracer(0)
 screen.bgcolor("black")
 
-# Set up the boundry turtle so there will be a boundry for the game
+# Set up the boundary turtle so there will be a boundary for the game
 boundaryT = turtle.Turtle()
 boundaryT.color("blue")
 boundaryT.speed(0)
