@@ -65,6 +65,12 @@ def draw_firework():
 for i in range(10):
     draw_firework()
 
+t.penup()
+t.goto(0, 100)
+t.color('white')
+t.write('Happy new year!', align='center', font=('Verdana', 24, 'normal'))
+
+
 
 turtle.done()
 

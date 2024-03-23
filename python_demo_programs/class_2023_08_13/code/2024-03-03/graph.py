@@ -8,19 +8,23 @@
 # # check if bc is connected
 # graph[1][2]
 from collections import deque
+import sys
 
 class Graph:
     def __init__(self):
         self.graph = {}
+        self.value = {}
 
     def add_vertex(self, vertex):
         if vertex not in self.graph:
             self.graph[vertex] = []
 
-    def add_edge(self, vertex1, vertex2):
+    def add_edge(self, vertex1, vertex2, weight):
         if vertex1 in self.graph and vertex2 in self.graph:
             self.graph[vertex1].append(vertex2)
             self.graph[vertex2].append(vertex1)
+            self.value[vertex1] = {vertex2: weight}
+            self.value[vertex2] = {vertex1: weight}
 
     def show(self):
         for vertex in self.graph:
@@ -65,6 +69,34 @@ class Graph:
                     dfs_recursive(neighbor)
 
         dfs_recursive(start_vertex)
+
+    def dijkstra(self, start):
+        unvisited_nodes = list(self.graph.keys())
+        shortest_path = {}
+        previous_nodes = {}
+        
+        for node in unvisited_nodes:
+            shortest_path[node] = sys.maxsize
+        shortest_path[start] = 0
+
+        # run dijkstra until all visit all nodes
+        while unvisited_nodes:
+            current = unvisited_nodes[0]
+            # find current nodes from unvisited nodes whose shortest distance is min
+            for node in unvisited_nodes:
+                if shortest_path[node] < shortest_path[current]:
+                    current = node
+
+            # update current node's neighbors shortest path
+            neighbors = self.graph[current]
+            for neighbor in neighbors:
+                weight = self.value[current][neighbor]
+                tmp = weight + shortest_path[current]
+                if tmp < shortest_path[neighbor]:
+                    shortest_path[neighbor] = tmp
+                    previous_nodes[neighbor] = current
+            
+            unvisited_nodes.remove(current)
 
 
 
