@@ -4,6 +4,7 @@
 2: C
 3: D
 '''
+import heapq
 # graph = [[0, 1, 1, 1], [1, 0, 1, 0], [1, 1, 0, 1], [1, 0, 1, 0]]
 # # check if bc is connected
 # graph[1][2]
@@ -98,6 +99,24 @@ class Graph:
             
             unvisited_nodes.remove(current)
 
+    def prim(self, start_vertex):
+        mst = []
+        visited = set()
+        heap = [(0, start_vertex)]
+        total_cost = 0
+
+        while heap:
+            cost, current_vertex = heapq.heappop(heap)
+            if current_vertex not in visited:
+                visited.add(current_vertex)
+                mst.append(self.graph[current_vertex])
+                total_cost += cost
+
+                for neighbor, neighbor_cost in self.graph[current_vertex]:
+                    if neighbor not in visited:
+                        heapq.heappush(heap, (neighbor_cost, neighbor))
+
+        return mst
 
 
 graph = Graph()
