@@ -11,8 +11,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect()
         self.window_width = window_width
         self.window_height = window_height
-        self.move_up_sound = pygame.mixer.Sound('/Users/yan.ren/github.com/yan.ren/programming-class/python_demo_programs/pygame_examples/plane/move_up.ogg')
-        self.move_down_sound = pygame.mixer.Sound('/Users/yan.ren/github.com/yan.ren/programming-class/python_demo_programs/pygame_examples/plane/move_down.ogg')
+        self.move_up_sound = pygame.mixer.Sound('C:\\Users\\github.com\\programming-class\\python_demo_programs\\pygame_examples\\plane\\move_up.ogg')
+        self.move_down_sound = pygame.mixer.Sound('C:\\Users\\github.com\\programming-class\\python_demo_programs\\pygame_examples\\plane\\move_down.ogg')
 
     # Move the sprite based on user key press
     def update(self, pressed_key):

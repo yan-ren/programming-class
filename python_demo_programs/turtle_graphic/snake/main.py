@@ -110,9 +110,6 @@ while True:
         text.clear()
         text.write('Score:0',align='center',font=('courier',25,'bold'))
 
-
-
-
     if head.distance(food)<20:
         x=random.randint(-255,255)
         y=random.randint(-255,255)
@@ -142,12 +139,6 @@ while True:
         x=head.xcor()
         y=head.ycor()
         segments[0].goto(x,y)
-
-
-
-
-
-
 
     move_snake()
 

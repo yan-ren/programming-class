@@ -1,4 +1,6 @@
+import pgzero
 import pgzrun
+screen: pgzero.screen.Screen
 
 
 WIDTH = 800

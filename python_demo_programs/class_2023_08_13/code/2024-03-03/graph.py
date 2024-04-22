@@ -118,6 +118,53 @@ class Graph:
 
         return mst
 
+    # union operation of two sets based on their height
+    # each set contains a tree of vertices
+    def union(self, parent, height, root1, root2):
+        if height[root1] < height[root2]:
+            parent[root1] = root2
+        elif height[root1] > height[root2]:
+            parent[root2] = root1
+        else:
+            parent[root2] = root1
+            height[root1] += 1
+
+    def find_root(self, parent, vertex):
+        if parent[vertex] == vertex:
+            return vertex
+
+        return self.find_root(parent, parent[vertex])
+    
+    def kruskal(self):
+        parent = {}
+        height = {}
+        result = []
+
+        # sorting the edges base on weight
+        # O(ElogE)
+        self.value = sorted(self.value, key=lambda item: item[2])
+
+        # O(V)
+        for vertex in self.graph:
+            parent[vertex[0]] = vertex[0]
+            height[vertex[0]] = 0
+
+        # O(ElogV)
+        for edge in self.value:
+            vertex1, vertex2, weight = edge
+
+            root1 = self.find_root(parent, vertex1)
+            root2 = self.find_root(parent, vertex2)
+
+            # in different set, can pick this edge and merge two set
+            if root1 != root2:
+                result.append((vertex1, vertex2))
+                self.union(height, parent, root1, root2)
+
+        return result
+
+
+
 
 graph = Graph()
 graph.add_vertex('A')

@@ -7,17 +7,14 @@ class Enemy(pygame.sprite.Sprite):
         super(Enemy, self).__init__()
         self.surf = pygame.Surface((20, 10))
         self.surf.fill((255, 255, 255))
+        # setup surf initial position
         self.rect = self.surf.get_rect(
-            center=(
-                random.randint(window_width + 20, window_width + 100),
-                random.randint(0, window_height)
+            center = (
+                random.randint(window_width + 20, window_width + 100), random.randint(0, window_height)
             )
         )
-        self.speed = random.randint(5, 6)
 
-    # Move the sprite based on speed
-    # Remove the sprite when it passes the left edge of the screen
     def update(self):
-        self.rect.move_ip(-self.speed, 0)
+        self.rect.move_ip(-random.randint(5, 10), 0)
         if self.rect.right < 0:
             self.kill()

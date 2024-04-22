@@ -1,15 +1,14 @@
 import pygame
 
-from pygame_examples.plane.enemy import Enemy
-from pygame_examples.plane.missile import Missile
-from pygame_examples.plane.players import Player
+from python_demo_programs.pygame_examples.plane.enemy import Enemy
+from python_demo_programs.pygame_examples.plane.missile import Missile
+from python_demo_programs.pygame_examples.plane.players import Player
 
 # Setup for pygame sound module
 pygame.mixer.init()
 pygame.init()
 
-
-shoot_sound = pygame.mixer.Sound('/Users/yan.ren/github.com/yan.ren/programming-class/python_demo_programs/pygame_examples/plane/shoot.ogg')
+shoot_sound = pygame.mixer.Sound('C:\\Users\\github.com\\programming-class\\python_demo_programs\\pygame_examples\\plane\\shoot.ogg')
 
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 800
@@ -71,7 +70,7 @@ while running:
             enemy.kill()
 
 
-    player.update(pygame.key.get_pressed())
+    player.update(pygame.key.get_enepressed())
     # Update enemy position
     enemies.update()
     # Update missile position
