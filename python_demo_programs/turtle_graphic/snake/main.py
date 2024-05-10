@@ -116,7 +116,6 @@ while True:
         food.goto(x,y)
         execution_delay=execution_delay-0.003
 
-
         body=Turtle()
         body.penup()
         body.shape('body.gif')
@@ -127,7 +126,7 @@ while True:
         text.write(f'Score:{score}',font=('courier',25,'bold'),align='center')
 
 
-#Suppose we have eaten 3 times food so inside the segments list we will have
+    #Suppose we have eaten 3 times food so inside the segments list we will have
     # 3 segments [1st segment,2nd segment,3rd segment]
 
     for i in range(len(segments)-1,0,-1):

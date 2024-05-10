@@ -10,3 +10,4 @@ for letter in s:
         counter += 1
 
 print(counter)
+

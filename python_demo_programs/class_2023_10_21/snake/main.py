@@ -61,6 +61,7 @@ screen.onkeypress(go_up, 'Up')
 screen.onkeypress(go_down, 'Down')
 screen.onkeypress(go_left, 'Left')
 screen.onkeypress(go_right, 'Right')
+segments = []
 
 while True:
     time.sleep(0.01)
@@ -70,7 +71,15 @@ while True:
     # border checking
     if head.xcor() > 260 or head.xcor() < -260 or head.ycor() > 260 or head.ycor() < -260:
         text.clear()
-        text.write('Game Lost',align='center',font=('courier',34,'bold'))
+        text.write('Game Lost', align='center',font=('courier',34,'bold'))
         break
+
+    if head.distance(food) < 20:
+        food.goto(random.randint(-250, 250), random.randint(-250, 250))
+        body = Turtle()
+        body.penup()
+        body.shape('body.gif')
+        segments.append(body)
+
 
 done()
