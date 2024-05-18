@@ -88,13 +88,32 @@ numbers = [2, 1, 4]
 #
 # print('average:'+str(sum/len(numbers)))
 
-numbers = []
-index = 1
-while index <= 100:
-    numbers.append(index)
-    index = index + 1
+# numbers = []
+# index = 1
+# while index <= 100:
+#     numbers.append(index)
+#     index = index + 1
+#
+# print(numbers)
 
-print(numbers)
 # given a list of numbers, find the largest number
 numbers = [2, 1, 5, 3, 4]
 
+index = 0
+max_value = 0
+while index < len(numbers):
+    if numbers[index] > max_value:
+        max_value = numbers[index]
+
+    index = index + 1
+
+print(max_value)
+
+
+
+
+# print(numbers[0])
+# numbers[0] = 20
+# print(numbers)
+#
+# names = ['tom', 'jerry']

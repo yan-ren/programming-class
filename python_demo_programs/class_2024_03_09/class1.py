@@ -39,7 +39,25 @@
 # a = b
 # b = c
 
-age = int(input("how old are you\n"))
-# print(type(age))
-age = age + 1
-print('next year you are ' + str(age))
+# age = int(input("how old are you\n"))
+# # print(type(age))
+# age = age + 1
+# print('next year you are ' + str(age))
+
+import turtle
+
+t = turtle.Turtle()
+t.forward(20)
+t.left(90)
+t.forward(20)
+t.left(90)
+t.forward(20)
+t.left(90)
+t.forward(20)
+t.left(90)
+# i = 0
+#
+# while i < 4:
+#     t.forward(20)
+#     t.left(90)
+#     i = i + 1

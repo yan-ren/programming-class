@@ -27,4 +27,13 @@ def combine(list1, list2):
 # write a function which takes a list of number and return two list
 # first list contains all even number and second list contains all odd number
 def even_odd(numbers):
-    return
+    even = []
+    odd = []
+
+    for value in numbers:
+        if value % 2 == 0:
+            even.append(value)
+        else:
+            odd.append(value)
+
+    return even, odd

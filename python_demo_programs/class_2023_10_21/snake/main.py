@@ -7,6 +7,7 @@ screen = Screen()
 screen.setup(600, 600)
 screen.bgcolor('black')
 screen.bgpic('border.gif')
+screen.tracer(False)
 register_shape('upmouth.gif')
 register_shape('food.gif')
 register_shape('downmouth.gif')
@@ -56,17 +57,17 @@ def move_snake():
     if head.direction == 'left':
         head.setx(head.xcor() - 20)
 
+
 screen.listen()
 screen.onkeypress(go_up, 'Up')
 screen.onkeypress(go_down, 'Down')
 screen.onkeypress(go_left, 'Left')
 screen.onkeypress(go_right, 'Right')
 segments = []
+execution_delay = 0.1
 
 while True:
-    time.sleep(0.01)
     screen.update()
-    move_snake()
 
     # border checking
     if head.xcor() > 260 or head.xcor() < -260 or head.ycor() > 260 or head.ycor() < -260:
@@ -76,10 +77,31 @@ while True:
 
     if head.distance(food) < 20:
         food.goto(random.randint(-250, 250), random.randint(-250, 250))
+
+        execution_delay = execution_delay - 0.003
         body = Turtle()
         body.penup()
         body.shape('body.gif')
         segments.append(body)
 
+    for i in range(len(segments) - 1, 0, -1):
+        x = segments[i-1].xcor()
+        y = segments[i-1].ycor()
+        segments[i].goto(x, y)
+
+    if len(segments) > 0:
+        x = head.xcor()
+        y = head.ycor()
+        segments[0].goto(x, y)
+
+    move_snake()
+
+    # check head runs into the body
+    for body in segments:
+        if body.distance(head) < 20:
+            text.clear()
+            text.write('Game Lost', align='center', font=('courier', 34, 'bold'))
+
+    time.sleep(execution_delay)
 
 done()

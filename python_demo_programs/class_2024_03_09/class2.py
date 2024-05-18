@@ -8,14 +8,14 @@
 # print("program finish")
 import math
 
-# a = int(input('please enter a number:'))
-#
-# if a > 0:
-#     print('number is positive')
-# elif a < 0:
-#     print('number is negative')
-# else:
-#     print('number is zero')
+a = int(input('please enter a number:'))
+
+if a > 0:
+    print('number is positive')
+elif a < 0:
+    print('number is negative')
+else:
+    print('number is zero')
 
 # a = 1
 # b = 2
