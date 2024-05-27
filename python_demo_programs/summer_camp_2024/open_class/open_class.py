@@ -10,17 +10,25 @@ ball = turtle.Turtle()
 ball.penup()
 ball.shape('circle')
 ball.color('green')
-ball.goto(0, 200)
+ball.goto(0, 100)
 ball.dy = 0
 # step 2
 gravity = 0.1
+ball.dx = 2
 
 while True:
     # step 2
     ball.dy -= gravity
     #
     ball.sety(ball.ycor() + ball.dy)
-    if ball.ycor() < -300:
+
+    if ball.ycor() < -200:
         ball.dy *= -1
+
+    ball.setx(ball.xcor() + ball.dx)
+    if ball.xcor() > 300:
+        ball.dx = ball.dx * -1
+    if ball.xcor() < -300:
+        ball.dx = ball.dx * -1
 
 wn.mainloop()

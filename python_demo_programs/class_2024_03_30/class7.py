@@ -51,6 +51,13 @@ food.color('green')
 food.penup()
 food.goto(random.randint(-200, 200), random.randint(-200, 200))
 
+# create turtle object for texting
+text = turtle.Turtle()
+text.speed(0)
+text.hideturtle()
+text.penup()
+text.goto(0, 350)
+
 def move_up():
     snake.setheading(90)
 
@@ -70,6 +77,7 @@ turtle.onkeypress(move_left, 'Left')
 turtle.onkeypress(move_right, 'Right')
 
 score = 0
+text.write('Score: '+str(score), align='center', font=('Courier', 24, 'bold'))
 
 while True:
     snake.forward(5)
@@ -90,6 +98,8 @@ while True:
         food.goto(random.randint(-200, 200), random.randint(-200, 200))
         snake.stamp()
         score += 1
-        print('Score:', score)
+        text.clear()
+        text.write('Score: ' + str(score), align='center', font=('Courier', 24, 'bold'))
+
 
 turtle.done()
