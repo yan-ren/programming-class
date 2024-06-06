@@ -109,7 +109,7 @@ class PriorityQueue:
                 min_index = i
             i += 1
 
-        min_value = self.store[min_index].value
+        min_value = self.store[min_index].num
         del self.store[min_index]
         return min_value
 

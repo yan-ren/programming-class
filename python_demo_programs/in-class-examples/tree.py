@@ -11,7 +11,7 @@ def insert_iterative(root, value):
 
     while (cur != None):
         previous = cur
-        if cur.value > value:
+        if cur.num > value:
             cur = cur.left
         else:
             cur = cur.right
@@ -45,7 +45,7 @@ def inorder(node):
         return
 
     inorder(node.left)
-    print(node.value)
+    print(node.num)
     inorder(node.right)
 
 
@@ -55,7 +55,7 @@ def preorder(node):
     if node == None:
         return
     
-    print(node.value)
+    print(node.num)
     preorder(node.left)
     preorder(node.right)
 
@@ -66,7 +66,7 @@ def postorder(node):
     
     postorder(node.left)
     postorder(node.right)
-    print(node.value)
+    print(node.num)
 '''
 binary search tree traversal
 - depth first search traverse

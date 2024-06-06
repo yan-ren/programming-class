@@ -77,9 +77,16 @@ pen.goto(0, 260)
 pen.write('Player A: 0 Player B: 0', align='center', font=('Courier', 24, 'bold'))
 pen.hideturtle()
 
+def paddle_right_up():
+    paddle_right.sety(paddle_right.ycor() + 20)
+
+def paddle_right_down():
+    paddle_right.sety(paddle_right.ycor() - 20)
+
+
 window.listen()
-window.onkeypress(lambda: paddle_right.sety(paddle_right.ycor() + 20), "Up")
-window.onkeypress(lambda: paddle_right.sety(paddle_right.ycor() - 20),  'Down')
+window.onkeypress(paddle_right_up, "Up")
+window.onkeypress(paddle_right_down,  'Down')
 window.onkeypress(lambda: paddle_left.sety(paddle_left.ycor() + 20), 'w')
 window.onkeypress(lambda: paddle_left.sety(paddle_left.ycor() + 20), 's')
 
@@ -97,11 +104,17 @@ while True:
     if ball.ycor() > 290 or ball.ycor() < -290:
         ball.dy = ball.dy * -1
 
-    if ball.xcor() > 395:
+    if ball.xcor() > 390:
         score_left = score_left + 1
+        text = 'Player A: ' + str(score_left) + ' Player B: ' + str(score_right)
+        pen.clear()
+        pen.write(text, align='center', font=('Courier', 24, 'bold'))
 
-    if ball.xcor() < -395:
+    if ball.xcor() < -390:
         score_right = score_right + 1
+        text = 'Player A: ' + str(score_left) + ' Player B: ' + str(score_right)
+        pen.clear()
+        pen.write(text, align='center', font=('Courier', 24, 'bold'))
 
     # paddle and ball collision
     # right paddle x locates at ~350,
@@ -121,4 +134,5 @@ Homework:
 list = [1, 2, 3, 4, 1]
 number = 1
 '''
+
 

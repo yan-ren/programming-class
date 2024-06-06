@@ -26,9 +26,9 @@ while True:
         ball.dy *= -1
 
     ball.setx(ball.xcor() + ball.dx)
-    if ball.xcor() > 300:
+    if ball.xcor() > 200:
         ball.dx = ball.dx * -1
-    if ball.xcor() < -300:
+    if ball.xcor() < -200:
         ball.dx = ball.dx * -1
 
 wn.mainloop()
