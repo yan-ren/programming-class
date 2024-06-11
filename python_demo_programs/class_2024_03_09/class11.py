@@ -78,7 +78,14 @@ list2: [2, 3, 4]
 print: [1, 2, 3, 2, 3, 4]
 '''
 def merge_list(list1, list2):
-    pass
+    res = []
+    for value in list1:
+        res.append(value)
+
+    for value in list2:
+        res.append(value)
+
+    return res
 
 '''
 Exercise: write a function that takes a string as input, and print the string reversely
@@ -87,5 +94,10 @@ input: 'abc'
 print: 'cba'
 '''
 def reverse_print(text):
-    pass
+    new_text = ''
+    index = len(text) - 1
+    while index >= 0:
+        new_text = new_text + text[index]
+        index -= 1
 
+    return new_text

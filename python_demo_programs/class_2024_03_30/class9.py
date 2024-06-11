@@ -48,22 +48,33 @@ given [1, 2, 3, 1, 4, 5]
 return 1
 '''
 
-d = {}
-d['first_name'] = 'Tom'
-d['last_name'] = 'Smith'
+def find_duplicates(numbers):
+    seen = []
+    for num in numbers:
+        if num in seen:
+            return num
+        else:
+            seen.append(num)
 
-print(d)
-print(d['first_name'])
-d['first_name'] = 'Jerry'
-print(d)
+    return None
 
-numbers = [1, 2, 1, 4, 2, 5, 6]
-count = {}
 
-for num in numbers:
-    if num in count:
-        count[num] = count[num] + 1
-    else:
-        count[num] = 1
-
-print(count)
+# d = {}
+# d['first_name'] = 'Tom'
+# d['last_name'] = 'Smith'
+#
+# print(d)
+# print(d['first_name'])
+# d['first_name'] = 'Jerry'
+# print(d)
+#
+# numbers = [1, 2, 1, 4, 2, 5, 6]
+# count = {}
+#
+# for num in numbers:
+#     if num in count:
+#         count[num] = count[num] + 1
+#     else:
+#         count[num] = 1
+#
+# print(count)
