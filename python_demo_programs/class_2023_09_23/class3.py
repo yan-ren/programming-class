@@ -9,6 +9,7 @@ boolean
 
 python uses dynamic type
 others like Java, C++ using static type
+dynamic type meaning Python assign the variable type base on the value
 '''
 
 a = 1

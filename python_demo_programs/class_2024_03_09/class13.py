@@ -49,7 +49,12 @@ def move_dot(dot):
     wn.ontimer(lambda: move_dot(dot), 3000)
 
 def when_clicked(dot):
+    global current_score
     dot.goto(random.randint(-WIDTH//3, WIDTH//3), random.randint(-HEIGHT//3, HEIGHT//3))
+    current_score += 1
+    score.clear()
+    score.write('Score:' + str(current_score), font=('Courier', 24, 'normal'))
+
 
 def handle_click(dot):
     dot.onclick(lambda x, y: when_clicked(dot))
@@ -65,3 +70,9 @@ for dot in dots:
     handle_click(dot)
 
 turtle.done()
+
+'''
+Exercise: 
+1. Add more dots, each dot represents different score
+2. Some dots may get your score lower, if score is < 0. Game over 
+'''

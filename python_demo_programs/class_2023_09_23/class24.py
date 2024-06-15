@@ -49,12 +49,3 @@ def bubble_sort(list):
 numbers = [1, 2, 5, 4, 3]
 numbers = bubble_sort(numbers)
 print(numbers)
-
-'''
-bubble sort
-insertion sort
-selection sort
-
-merge sort
-quick sort
-'''
