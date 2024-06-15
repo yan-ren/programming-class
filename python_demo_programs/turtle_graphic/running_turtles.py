@@ -1,5 +1,9 @@
+'''
+python dictionary & turtle
+'''
 import turtle
 import random
+
 
 # Setup the screen
 wn = turtle.Screen()

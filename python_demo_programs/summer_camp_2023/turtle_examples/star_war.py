@@ -1,19 +1,12 @@
 import turtle
 import math
 import random
-# import pygame.mixer
 
-# pygame.mixer.init()
-# pygame.mixer.music.load('Avengers-Theme-Soundtrack-1.mp3') # You can use any soundtrack & placed it in the same folder
-# pygame.mixer.music.play(-1)
-
-
-
-
+# TODO: rewrite for class demo
 
 window = turtle.Screen()
 window.setup(width=600, height=600)
-window.title("Star Wars Game by Atharva More")
+window.title("Star Wars Game")
 window.bgcolor("black")
 
 window.tracer(0)
@@ -21,10 +14,21 @@ window.tracer(0)
 vertex = ((0, 15), (-15, 0), (-18, 5), (-18, -5), (0, 0), (18, -5), (18, 5), (15, 0))
 window.register_shape("player", vertex)
 
-asVertex = ((0, 10), (5, 7), (3, 3), (10, 0), (7, 4), (8, -6), (0, -10), (-5, -5), (-7, -7), (-10, 0), (-5, 4), (-1, 8))
+asVertex = (
+    (0, 10),
+    (5, 7),
+    (3, 3),
+    (10, 0),
+    (7, 4),
+    (8, -6),
+    (0, -10),
+    (-5, -5),
+    (-7, -7),
+    (-10, 0),
+    (-5, 4),
+    (-1, 8),
+)
 window.register_shape("chattan", asVertex)
-
-
 
 
 class Atharva(turtle.Turtle):
@@ -54,7 +58,6 @@ player.shape("player")
 player.score = 0
 
 
-
 missiles = []
 for _ in range(3):
     missile = Atharva()
@@ -72,8 +75,6 @@ pen.goto(0, 250)
 pen.write("Score: 0", False, align="center", font=("Arial", 24, "normal"))
 
 
-
-
 chattans = []
 
 for _ in range(5):
@@ -89,10 +90,6 @@ for _ in range(5):
     chattan.fd(distance)
     chattan.setheading(atharva1(player, chattan))
     chattans.append(chattan)
-
-
-
-
 
 
 def baanya():
@@ -119,7 +116,6 @@ window.onkey(daanya, "Right")
 window.onkey(fire_missile, "space")
 
 
-
 sakkyo = False
 while True:
 
@@ -130,7 +126,12 @@ while True:
         if missile.state == "fire":
             missile.fd(missile.speed)
 
-        if missile.xcor() > 300 or missile.xcor() < -300 or missile.ycor() > 300 or missile.ycor() < -300:
+        if (
+            missile.xcor() > 300
+            or missile.xcor() < -300
+            or missile.ycor() > 300
+            or missile.ycor() < -300
+        ):
             missile.hideturtle()
             missile.state = "ready"
 
@@ -152,7 +153,12 @@ while True:
 
                 player.score += 10
                 pen.clear()
-                pen.write("Score: {}".format(player.score), False, align="center", font=("Arial", 24, "normal"))
+                pen.write(
+                    "Score: {}".format(player.score),
+                    False,
+                    align="center",
+                    font=("Arial", 24, "normal"),
+                )
 
         ####################
         # This is the Functioning the Code Part-2
@@ -167,7 +173,12 @@ while True:
             sakkyo = True
             player.score -= 30
             pen.clear()
-            pen.write("Score: {}".format(player.score), False, align="center", font=("Arial", 24, "normal"))
+            pen.write(
+                "Score: {}".format(player.score),
+                False,
+                align="center",
+                font=("Arial", 24, "normal"),
+            )
     if sakkyo == True:
         player.hideturtle()
         missile.hideturtle()

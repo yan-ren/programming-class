@@ -14,7 +14,7 @@ turtle.register_shape("player.gif")
 turtle.register_shape("enemy.gif")
 turtle.register_shape("missile.gif")
 
-#player creation
+# player creation
 player = turtle.Turtle()
 player.color("blue")
 player.speed(0)
@@ -22,23 +22,26 @@ player.shape("player.gif")
 player.setheading(90)
 player.penup()
 player.goto(0, -250)
-#player movement
+# player movement
 
 player_speed = 20
 
+
 def move_left():
     x = player.xcor()
-    x-= player_speed
+    x -= player_speed
     if x < -340:
         x = -340
     player.setx(x)
 
+
 def move_right():
     x = player.xcor()
-    x+= player_speed
+    x += player_speed
     if x > 340:
         x = 340
     player.setx(x)
+
 
 # Enemy spawn
 enemies = []
@@ -53,8 +56,9 @@ for enemy in enemies:
     enemy.penup()
     enemy.setheading(90)
     x = random.randint(-300, 300)
-    y = random.randint(180, 260)  #180.260
+    y = random.randint(180, 260)  # 180.260
     enemy.goto(x, y)
+
 enemyspeed = 1.8
 
 # Bullet creation
@@ -71,63 +75,71 @@ bullet.goto(0, -240)
 bulletspeed = 22
 bulletstate = "Ready"
 
+
 def firebullet():
     global bulletstate
-    if bulletstate == "Ready" :
+    if bulletstate == "Ready":
         bulletstate = "Fire"
-        winsound.PlaySound('laser.wav', winsound.SND_ASYNC)
+        winsound.PlaySound("laser.wav", winsound.SND_ASYNC)
 
         x = player.xcor()
-        y = player.ycor()+20
+        y = player.ycor() + 20
         bullet.goto(x, y)
         bullet.showturtle()
 
 
 Score = 0
-#Draw score
+# Draw score
 scorepen = turtle.Turtle()
 scorepen.pencolor("white")
 scorepen.speed(0)
 scorepen.up()
 scorepen.setposition(-355, 280)
-scorestring = "Score: %s" %Score
-scorepen.write(scorestring, False, align= "left", font=("Arial", 14, "normal"))
+scorestring = "Score: %s" % Score
+scorepen.write(scorestring, False, align="left", font=("Arial", 14, "normal"))
 scorepen.hideturtle()
 
-#collision system
+
+# collision system
 def collisionplay(a, b):
 
-    distance = math.sqrt(abs(math.pow((a.xcor()-b.xcor()), 2) + math.pow((a.ycor()-b.ycor()), 2)))
+    distance = math.sqrt(
+        abs(math.pow((a.xcor() - b.xcor()), 2) + math.pow((a.ycor() - b.ycor()), 2))
+    )
     if distance < 25:
         return True
     else:
         return False
 
+
 def collision(a, b):
 
-    distance = math.sqrt(abs(math.pow((a.xcor()-b.xcor()), 2) + math.pow((a.ycor()-b.ycor()), 2)))
+    distance = math.sqrt(
+        abs(math.pow((a.xcor() - b.xcor()), 2) + math.pow((a.ycor() - b.ycor()), 2))
+    )
     if distance < 20:
         return True
     else:
         return False
 
-#keybindings
+
+# keybindings
 turtle.listen()
 turtle.onkey(move_left, "Left")
 turtle.onkey(move_right, "Right")
 turtle.onkey(firebullet, "space")
-#main loop
+# main loop
 while True:
     time.sleep(0.01)
     screen.update()
     # print(enemy.ycor())
 
     for enemy in enemies:
-        #enemy movement
+        # enemy movement
         x = enemy.xcor()
         x += enemyspeed
         enemy.setx(x)
-        #Move enemy back and down
+        # Move enemy back and down
         if enemy.xcor() > 325:
 
             for j in enemies:
@@ -142,12 +154,10 @@ while True:
                 j.sety(y)
             enemyspeed *= -1
 
-
-
         if collisionplay(bullet, enemy):
             bullet.hideturtle()
             bulletstate = "Ready"
-            winsound.PlaySound('explosion.wav', winsound.SND_ASYNC)
+            winsound.PlaySound("explosion.wav", winsound.SND_ASYNC)
             bullet.setposition(0, -400)
 
             x = random.randint(-300, 300)
@@ -156,7 +166,9 @@ while True:
             Score += 10
             scorestring = "Score: %s" % Score
             scorepen.clear()
-            scorepen.write(scorestring, False, align="left", font=("Arial", 14, "normal"))
+            scorepen.write(
+                scorestring, False, align="left", font=("Arial", 14, "normal")
+            )
 
         if collision(player, enemy):
 
@@ -164,7 +176,7 @@ while True:
                 e.hideturtle()
             player.hideturtle()
 
-            winsound.PlaySound('gameover.wav', winsound.SND_ASYNC)
+            winsound.PlaySound("gameover.wav", winsound.SND_ASYNC)
             print("GAME OVER")
             break
 
@@ -174,10 +186,8 @@ while True:
             player.hideturtle()
 
             print("GAME OVER")
-            winsound.PlaySound('gameover.wav', winsound.SND_ASYNC)
+            winsound.PlaySound("gameover.wav", winsound.SND_ASYNC)
             break
-
-
 
     # bullet movement
     y = bullet.ycor()
@@ -193,4 +203,3 @@ while True:
 
 
 delay = input()
-

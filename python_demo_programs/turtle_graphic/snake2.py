@@ -1,6 +1,7 @@
-'''
+"""
 https://github.com/JonathanKarr33/YouTube/blob/master/Python/Tutorial%2036/snake_game.py
-'''
+"""
+
 import os
 import turtle
 import time
@@ -42,7 +43,9 @@ scoreboard.color("yellow")
 scoreboard.penup()
 scoreboard.hideturtle()
 scoreboard.goto(0, 260)
-scoreboard.write("Score: 0   High Score: 0", align="center", font=("ds-digital", 24, "normal"))
+scoreboard.write(
+    "Score: 0   High Score: 0", align="center", font=("ds-digital", 24, "normal")
+)
 
 
 # Functions
@@ -94,7 +97,12 @@ while True:
     window1.update()
 
     # check collision with boarder
-    if snake.xcor() > 290 or snake.xcor() < -290 or snake.ycor() > 290 or snake.ycor() < -290:
+    if (
+        snake.xcor() > 290
+        or snake.xcor() < -290
+        or snake.ycor() > 290
+        or snake.ycor() < -290
+    ):
         time.sleep(1)
         snake.goto(0, 0)
         snake.direction = "stop"
@@ -108,8 +116,11 @@ while True:
         delay = 0.1
 
         scoreboard.clear()
-        scoreboard.write("Score: {}   High Score:   {}".format(score, high_score), align="center",
-                         font=("ds-digital", 24, "normal"))
+        scoreboard.write(
+            "Score: {}   High Score:   {}".format(score, high_score),
+            align="center",
+            font=("ds-digital", 24, "normal"),
+        )
     if snake.distance(food) < 20:
         x = random.randint(-290, 290)
         y = random.randint(-290, 290)
@@ -129,8 +140,11 @@ while True:
         if score > high_score:
             high_score = score
         scoreboard.clear()
-        scoreboard.write("Score: {}   High Score:   {}".format(score, high_score), align="center",
-                         font=("ds-digital", 24, "normal"))
+        scoreboard.write(
+            "Score: {}   High Score:   {}".format(score, high_score),
+            align="center",
+            font=("ds-digital", 24, "normal"),
+        )
 
     # move segments to reverse order
     for index in range(len(segments) - 1, 0, -1):
@@ -158,7 +172,10 @@ while True:
             score = 0
             delay = 0.1
             scoreboard.clear()
-            scoreboard.write("Score: {}   High Score:   {}".format(score, high_score), align="center",
-                             font=("ds-digital", 24, "normal"))
+            scoreboard.write(
+                "Score: {}   High Score:   {}".format(score, high_score),
+                align="center",
+                font=("ds-digital", 24, "normal"),
+            )
     time.sleep(delay)
 window1.mainloop()

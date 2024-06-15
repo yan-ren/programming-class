@@ -20,7 +20,7 @@ pen.penup()
 pen.hideturtle()
 
 
-class Cannon():
+class Cannon:
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -42,7 +42,7 @@ class Cannon():
         pen.stamp()
 
 
-class Cannonball():
+class Cannonball:
     def __init__(self, x, y):
         self.x = x
         self.y = y

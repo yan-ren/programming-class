@@ -93,12 +93,14 @@ pipe3_bottom.dy = 0
 
 gravity = -0.3
 
+
 # Define function / method
 def go_up():
     player.dy += 8
-    
+
     if player.dy > 8:
         player.dy = 8
+
 
 # Keyboard binding
 wn.listen()
@@ -106,7 +108,11 @@ wn.onkeypress(go_up, "space")
 
 # Initialize game variables
 player.score = 0
-pipes = [(pipe1_top, pipe1_bottom), (pipe2_top, pipe2_bottom), (pipe3_top, pipe3_bottom)]
+pipes = [
+    (pipe1_top, pipe1_bottom),
+    (pipe2_top, pipe2_bottom),
+    (pipe3_top, pipe3_bottom),
+]
 
 # Main Game Loop
 while True:
@@ -114,35 +120,34 @@ while True:
     time.sleep(0.02)
     # Update the screen
     wn.update()
-    
+
     # Add gravity
     player.dy += gravity
-    
+
     # Move player
     y = player.ycor()
     y += player.dy
     player.sety(y)
-    
+
     # Bottom Border
     if player.ycor() < -390:
         player.dy = 0
         player.sety(-390)
 
-
     # Iterate through pipes
     for pipe_pair in pipes:
         pipe_top = pipe_pair[0]
         pipe_bottom = pipe_pair[1]
-        
+
         # Move Pipe 1
         x = pipe_top.xcor()
         x += pipe_top.dx
-        pipe_top.setx(x) 
-        
+        pipe_top.setx(x)
+
         x = pipe_bottom.xcor()
         x += pipe_bottom.dx
         pipe_bottom.setx(x)
-        
+
         # Return pipes to start
         if pipe_top.xcor() < -350:
             pipe_top.setx(600)
@@ -151,10 +156,19 @@ while True:
 
         # Check for collisions with pipes
         # Pipe 1
-        if (player.xcor() + 10 > pipe_top.xcor() - 30) and (player.xcor() - 10 < pipe_top.xcor() + 30):
-            if (player.ycor() + 10 > pipe_top.ycor() - 180) or (player.ycor() - 10 < pipe_bottom.ycor() + 180):
+        if (player.xcor() + 10 > pipe_top.xcor() - 30) and (
+            player.xcor() - 10 < pipe_top.xcor() + 30
+        ):
+            if (player.ycor() + 10 > pipe_top.ycor() - 180) or (
+                player.ycor() - 10 < pipe_bottom.ycor() + 180
+            ):
                 pen.clear()
-                pen.write("Game Over", move=False, align="center", font=("Arial", 16, "normal"))
+                pen.write(
+                    "Game Over",
+                    move=False,
+                    align="center",
+                    font=("Arial", 16, "normal"),
+                )
                 wn.update()
                 time.sleep(3)
                 # Reset score
@@ -168,14 +182,15 @@ while True:
                 # Reset the pen
                 pen.clear()
                 pen.write("0", move=False, align="center", font=("Arial", 16, "normal"))
-                
-        # Check for score        
+
+        # Check for score
         if pipe_top.xcor() + 30 < player.xcor() - 10:
             player.score += pipe_top.value
             pipe_top.value = 0
             pen.clear()
-            pen.write(player.score, move=False, align="center", font=("Arial", 32, "normal"))
+            pen.write(
+                player.score, move=False, align="center", font=("Arial", 32, "normal")
+            )
 
 
 wn.mainloop()
-

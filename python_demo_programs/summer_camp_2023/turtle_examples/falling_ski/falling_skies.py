@@ -1,6 +1,3 @@
-# Falling Skies in Python 3 for Beginners
-# By @TokyoEdTech
-
 import turtle
 import os
 import random
@@ -8,7 +5,6 @@ import time
 
 # Set up the screen
 wn = turtle.Screen()
-wn.title("Falling Down by @TokyoEdTech")
 wn.bgcolor("black")
 wn.bgpic("background.gif")
 wn.setup(width=800, height=600)
@@ -123,7 +119,11 @@ while True:
 
             # Show the score
             pen.clear()
-            pen.write("Score: {}  Lives: {}".format(score, lives), align="center", font=("Courier", 24, "normal"))
+            pen.write(
+                "Score: {}  Lives: {}".format(score, lives),
+                align="center",
+                font=("Courier", 24, "normal"),
+            )
 
             # Move the good thing back to the top
             good_thing.goto(random.randint(-300, 300), random.randint(400, 800))
@@ -142,7 +142,11 @@ while True:
 
             # Show the score
             pen.clear()
-            pen.write("Score: {}  Lives: {}".format(score, lives), align="center", font=("Courier", 24, "normal"))
+            pen.write(
+                "Score: {}  Lives: {}".format(score, lives),
+                align="center",
+                font=("Courier", 24, "normal"),
+            )
 
             time.sleep(1)
             # Move the bad things back to the top
@@ -152,10 +156,18 @@ while True:
     # Check for game over
     if lives == 0:
         pen.clear()
-        pen.write("Game Over! Score: {}".format(score), align="center", font=("Courier", 24, "normal"))
+        pen.write(
+            "Game Over! Score: {}".format(score),
+            align="center",
+            font=("Courier", 24, "normal"),
+        )
         wn.update()
         time.sleep(5)
         score = 0
         lives = 3
         pen.clear()
-        pen.write("Score: {}  Lives: {}".format(score, lives), align="center", font=("Courier", 24, "normal"))
+        pen.write(
+            "Score: {}  Lives: {}".format(score, lives),
+            align="center",
+            font=("Courier", 24, "normal"),
+        )

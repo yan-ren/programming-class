@@ -50,5 +50,4 @@ turtle.done()
 
 '''exercise
 write a function which takes a list of string as input, return the longest string
-
 '''

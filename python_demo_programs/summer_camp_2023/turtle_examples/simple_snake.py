@@ -20,6 +20,7 @@ turtle.onkeypress(lambda: snake.setheading(180), "Left")
 turtle.onkeypress(lambda: snake.setheading(0), "Right")
 turtle.listen()
 
+
 def get_random_value():
     return random.randint(-SCREEN_SIZE / 4, SCREEN_SIZE / 4)
 
