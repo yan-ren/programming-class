@@ -8,7 +8,7 @@ from python_demo_programs.pygame_examples.plane.players import Player
 pygame.mixer.init()
 pygame.init()
 
-shoot_sound = pygame.mixer.Sound('C:\\Users\\github.com\\programming-class\\python_demo_programs\\pygame_examples\\plane\\shoot.ogg')
+# shoot_sound = pygame.mixer.Sound('C:\\Users\\github.com\\programming-class\\python_demo_programs\\pygame_examples\\plane\\shoot.ogg')
 
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 800
@@ -48,7 +48,7 @@ while running:
             new_missile = Missile(SCREEN_WIDTH, player.rect.centerx, player.rect.centery)
             missiles.add(new_missile)
             all_sprites.add(new_missile)
-            shoot_sound.play()
+            # shoot_sound.play()
 
 
     # Fill the background with white
@@ -70,7 +70,7 @@ while running:
             enemy.kill()
 
 
-    player.update(pygame.key.get_enepressed())
+    player.update(pygame.key.get_pressed())
     # Update enemy position
     enemies.update()
     # Update missile position
