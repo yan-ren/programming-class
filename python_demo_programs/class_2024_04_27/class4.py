@@ -83,13 +83,18 @@ using loop to show all even numbers under 100
 '''
 
 import turtle
+import random
+
 
 wn = turtle.Screen()
 t = turtle.Turtle()
 t.speed(0)
 
+colors = ['red', 'yellow', 'blue', 'green']
+
 i = 0
 while i < 36:
+    t.color(colors[i % len(colors)])
     t.forward(100)
     t.backward(100)
     t.left(10)

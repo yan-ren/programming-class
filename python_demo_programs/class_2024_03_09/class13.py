@@ -37,9 +37,10 @@ score.write('Score:' + str(current_score), font=('Courier', 24, 'normal'))
 
 
 def create_dot():
+    color = ['red', 'yellow', 'blue']
     dot = turtle.Turtle()
     dot.shape('circle')
-    dot.color('red')
+    dot.color(random.choice(color))
     dot.penup()
     dot.speed(0)
     return dot
@@ -51,10 +52,20 @@ def move_dot(dot):
 def when_clicked(dot):
     global current_score
     dot.goto(random.randint(-WIDTH//3, WIDTH//3), random.randint(-HEIGHT//3, HEIGHT//3))
-    current_score += 1
+    # current_score += 1
+    if dot.pencolor() == 'red':
+        current_score += 1
+    if dot.pencolor() == 'yellow':
+        current_score += 2
+    if dot.pencolor() == 'blue':
+        current_score -= 1
+
     score.clear()
     score.write('Score:' + str(current_score), font=('Courier', 24, 'normal'))
 
+    if current_score < 0:
+        score.clear()
+        score.write('Game Over', font=('Courier', 24, 'normal'))
 
 def handle_click(dot):
     dot.onclick(lambda x, y: when_clicked(dot))
