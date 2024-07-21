@@ -28,16 +28,29 @@ def vowel_char_counter(s):
 
 
 def calculator():
-    print('Welcome to the calculator program')
-    num1 = float(input('Enter the first number for calculation: '))
-    print('Available operation: + - * /')
-    operation = input('Pick an operation:')
-    num2 = float(input('Enter the second number for calculation: '))
+    running = True
 
-    if operation == '+':
-        print(f'{num1} {operation} {num2} = {num1 + num2}')
-    elif operation == '*':
-        pass
+    while running:
+        print('Welcome to the calculator program')
+        num1 = float(input('Enter the first number for calculation: '))
+        print('Available operation: + - * /')
+        operation = input('Pick an operation:')
+        num2 = float(input('Enter the second number for calculation: '))
+
+        if operation == '+':
+            print(f'{num1} {operation} {num2} = {num1 + num2}')
+        elif operation == '*':
+            print(f'{num1} {operation} {num2} = {num1 * num2}')
+        elif operation == '-':
+            print(f'{num1} {operation} {num2} = {num1 - num2}')
+        elif operation == '/':
+            print(f'{num1} {operation} {num2} = {num1 / num2}')
+
+        choice = input('do you want another calculation? y/n')
+        if choice:
+            running = True
+        else:
+            running = False
 
     # exercise: after done with calculation ask user if wants to do another calculation, if yes, continue with another calculation
     # if no, exit the program
