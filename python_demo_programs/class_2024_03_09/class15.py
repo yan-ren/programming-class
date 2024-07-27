@@ -13,5 +13,11 @@ while running:
     answer = input('Enter h if my guess is too high, l if too low, or c if am correct: ')
     if answer == 'h':
         high = guess
+    elif answer == 'l':
+        low = guess
+    else:
+        print('Game over, your secret number was', guess)
+        running = False
+
 
 
