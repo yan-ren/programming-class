@@ -46,3 +46,7 @@ return how many even number in the list
 #             count += 1
 #     return count
 
+'''
+Exercise: write a function that takes two numbers lists as inputs, 
+compare which list's total sum is bigger
+'''

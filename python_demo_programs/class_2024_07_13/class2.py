@@ -16,9 +16,6 @@ class Car:
         print('test function')
 
 
-
-
-
 c1 = Car('toyota')
 print(c1.brand)
 
