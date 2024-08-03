@@ -50,3 +50,17 @@ return how many even number in the list
 Exercise: write a function that takes two numbers lists as inputs, 
 compare which list's total sum is bigger
 '''
+def sum(list):
+    res = 0
+    for value in list:
+        res += value
+
+    return res
+
+def compare_list_sum(list1, list2):
+    if sum(list1) > sum(list2):
+        return list1
+    else:
+        return list2
+
+
