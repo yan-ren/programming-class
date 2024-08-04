@@ -92,6 +92,51 @@ while True:
     if answer == 'h':
         high = guess
     # continue to finish this exercise
-
+    elif answer == 'l':
+        low = guess
+    else:
+        print('Game Over, your secret number was:', guess)
+        break
 
 # try A1, exercise 2
+# exercise 2
+A_DAYTIME_FREE = 100
+A_DAYTIME_COST = 15
+A_EVENING = 20
+A_WEEKEND = 25
+
+B_DAYTIME_FREE = 200
+B_DAYTIME_COST = 20
+B_EVENING = 25
+B_WEEKEND = 30
+
+C_DAYTIME_FREE = 250
+C_DAYTIME_COST = 30
+C_EVENING = 35
+C_WEEKEND = 40
+
+daytime = int(input('Number of daytime minutes?'))
+evening = int(input('Number of evening minutes?'))
+weekend = int(input('Number of weekend minutes?'))
+
+plan_a = (daytime - A_DAYTIME_FREE) * A_DAYTIME_COST + A_EVENING * evening + A_WEEKEND * weekend
+plan_b = (daytime - B_DAYTIME_FREE) * B_DAYTIME_COST + B_EVENING * evening + B_WEEKEND * weekend
+plan_c = (daytime - C_DAYTIME_FREE) * C_DAYTIME_COST + C_EVENING * evening + C_WEEKEND * weekend
+
+if plan_a <= plan_b and plan_a <= plan_c:
+    print('Choose Plan A')
+elif plan_b <= plan_a and plan_b <= plan_c:
+    print('Choose Plan B')
+else:
+    print('Choose Plan C')
+
+list = [plan_a, plan_b, plan_c]
+min_plan = min(list)
+if min_plan == plan_a:
+    print('Choose Plan A')
+elif min_plan == plan_b:
+    print('Choose Plan B')
+else:
+    print('Choose Plan C')
+
+# assignment 2: https://github.com/loucadufault/420-LCU-05/blob/master/Assignment-2/A-2_instructions.pdf
