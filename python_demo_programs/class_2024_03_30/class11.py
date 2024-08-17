@@ -9,7 +9,8 @@ wn.setup()
 def create_dot():
     dot = turtle.Turtle()
     dot.shape('circle')
-    dot.color('red')
+    colors = ['red', 'yellow', 'green']
+    dot.color(random.choice(colors))
     dot.penup()
     dot.speed(0)
     return dot
@@ -18,8 +19,10 @@ def create_dot():
 def move_dot(d):
     d.goto(random.randint(-390, 390), random.randint(-290, 290))
     # move the dot every 3 seconds
-    wn.ontimer(lambda: move_dot(d), 3000)
-
+    # seconds = [3000, 4000, 5000]
+    # wn.ontimer(lambda: move_dot(d), random.choice(seconds))
+    if d.pencolor() == 'red':
+        wn.ontimer(lambda: move_dot(d), 3000)
 
 score = 0
 
@@ -38,6 +41,7 @@ def draw_score():
 def when_click(dot):
     global score
     score += 1
+    # dot.pencolor()
     # move_dot(dot)
     dot.goto(random.randint(-390, 390), random.randint(-290, 290))
     draw_score()

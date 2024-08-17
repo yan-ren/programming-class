@@ -6,6 +6,8 @@ You may assume that each input would have exactly one solution, and you may not 
 
 assume the list is sorted in accending order
 '''
+from typing import List
+
 
 def two_sum(num, target):
     i = 0
@@ -44,3 +46,23 @@ If the list contains multiple peaks, return the index of any one of them.
 
 list = [1, 2, 3, 1]
 '''
+# def find_peak_element(numbers):
+
+def find_peak_element(numbers: List[int]) -> int:
+    left, right = 0, len(numbers) - 1
+    while left < right:
+        mid = (left + right) // 2
+
+        if numbers[mid] < numbers[mid+1]:
+            # if the middle element is less that the mid + 1
+            # peak element is in the right half
+            left = mid + 1
+        elif numbers[mid] < numbers[mid-1]:
+            right = mid - 1
+        else:
+            return mid
+
+    return left
+
+print(find_peak_element([1, 2, 3, 1]))
+print(find_peak_element([1, 2, 1, 3, 5, 6, 4]))

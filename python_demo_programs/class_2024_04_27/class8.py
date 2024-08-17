@@ -30,8 +30,8 @@ def sum(list):
     for value in list:
         res += value
 
-    print('Sum of list is', res)
-
+    # print('Sum of list is', res)
+    return res
 
 sum([1, 2, 3, 1, 2, 3])
 
@@ -43,6 +43,16 @@ Write a python function which takes two list as input, compare which list has a 
 [1, 2, 3, 4]
 [2, 1, 5, 9]
 '''
+def compare_sum(list1, list2):
+    sum_list1 = sum(list1)
+    sum_list2 = sum(list2)
+    if sum_list1 > sum_list2:
+        print('list 1 is bigger')
+    else:
+        print('list 2 is bigger')
+
+
+compare_sum([1, 2, 3], [2, 3, 4])
 '''
 https://github.com/loucadufault/420-LCU-05/blob/master/Assignment-2/A-2_instructions.pdf
 '''

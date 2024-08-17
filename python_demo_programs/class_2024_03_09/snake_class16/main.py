@@ -1,3 +1,4 @@
+import time
 import turtle
 
 
@@ -43,7 +44,22 @@ wn.onkeypress(go_left, 'Left')
 wn.onkeypress(go_right, 'Right')
 wn.listen()
 
+def move_snake():
+    if head.direction == 'up':
+        head.sety(head.ycor() + 10)
+    if head.direction == 'down':
+        head.sety(head.ycor() - 10)
+    if head.direction == 'right':
+        head.setx(head.xcor() + 10)
+    if head.direction == 'left':
+        head.setx(head.xcor() - 10)
+
+
 while True:
     wn.update()
+    move_snake()
+
+    time.sleep(0.05)
+
 
 turtle.done()
