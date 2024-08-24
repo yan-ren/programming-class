@@ -8,5 +8,20 @@ input: aabcddeeffff
 output: ['a', 'd', 'e', 'f']
 '''
 
-for ascii in range(97, 123):
-    print(ascii)
+def find_duplicated_letters(str):
+    res = []
+    for ascii in range(97, 123):
+        # print(chr(ascii))
+        count = 0
+        for letter in str:
+            if letter == chr(ascii):
+                count += 1
+
+        if count > 1:
+            res.append(chr(ascii))
+
+    return res
+
+
+print(find_duplicated_letters('aabcddeeffff'))
+print(find_duplicated_letters('abcdecae'))

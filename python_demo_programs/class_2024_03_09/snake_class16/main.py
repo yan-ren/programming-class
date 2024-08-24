@@ -31,6 +31,7 @@ text = turtle.Turtle()
 text.color('white')
 text.penup()
 text.hideturtle()
+text.goto(0, 260)
 
 def go_up():
     head.direction = 'up'
@@ -79,12 +80,27 @@ while True:
         text.write('Game Lost', align='center', font=('courier', 34, 'bold'))
         break
 
+    # when snake eats the food
     if head.distance(food) < 20:
         food.goto(random.randint(-250, 250), random.randint(-250, 250))
         score += 1
         text.clear()
         text.write('Score: ' + str(score), font = ('courier', 25, 'bold'), align='center')
+        # create a new body part
+        body = turtle.Turtle()
+        body.penup()
+        body.shape('body.gif')
+        segments.append(body)
 
+    for i in range(len(segments) - 1, 0, -1):
+        x = segments[i-1].xcor()
+        y = segments[i-1].ycor()
+        segments[i].goto(x, y)
+
+    if len(segments) > 0:
+        x = head.xcor()
+        y = head.ycor()
+        segments[0].goto(x, y)
 
     time.sleep(0.05)
 
