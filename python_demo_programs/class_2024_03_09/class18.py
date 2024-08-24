@@ -30,3 +30,26 @@ s = 'madam'
 
 return True
 '''
+
+# e.g. text = 'madam'
+def is_palindrome(text):
+    i = 0
+    j = len(text) - 1
+    while i < j:
+        if text[i] != text[j]:
+            return False
+        i += 1
+        j -= 1
+
+    return True
+
+print(is_palindrome('madam'))
+
+'''
+More thing to think about it:
+
+123321 -> '123321'
+'''
+
+number = 123321
+s = str(number)

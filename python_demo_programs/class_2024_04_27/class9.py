@@ -61,7 +61,7 @@ paddle_right.shape('square')
 paddle_right.shapesize(5, 1)
 paddle_right.color('white')
 paddle_right.penup()
-paddle_right.goto(390, 0)
+paddle_right.goto(380, 0)
 
 # Ball
 ball = turtle.Turtle()
@@ -83,8 +83,9 @@ pen.hideturtle()
 
 def paddle_left_up():
     y = paddle_left.ycor()
-    y += 20
-    paddle_left.sety(y)
+    if y < 300:
+        y += 20
+        paddle_left.sety(y)
 
 def paddle_left_down():
     y = paddle_left.ycor()
@@ -101,5 +102,54 @@ def paddle_right_down():
     y -= 20
     paddle_right.sety(y)
 
+
+wn.listen()
+wn.onkeypress(paddle_right_up, 'Up')
+wn.onkeypress(paddle_right_down, 'Down')
+wn.onkeypress(paddle_left_up, 'w')
+wn.onkeypress(paddle_left_down, 's')
+
+left_score = 0
+right_score = 0
+
 while True:
     wn.update()
+    # moving ball
+    ball.setx(ball.xcor() + ball.xchange)
+    ball.sety(ball.ycor() + ball.ychange)
+
+    # border bouncing check
+    if ball.ycor() > 290 or ball.ycor() < -290:
+        ball.ychange = ball.ychange * -1
+
+    if ball.xcor() < -390:
+        ball.xchange = ball.xchange * -1
+        right_score += 1
+        pen.clear()
+        pen.write("Player A: " + str(left_score) + "  Player B: " + str(right_score), align='center', font=('Courier', 24, 'bold'))
+
+    if ball.xcor() > 390:
+        ball.xchange = ball.xchange * -1
+        left_score += 1
+        pen.clear()
+        pen.write("Player A: " + str(left_score) + "  Player B: " + str(right_score), align='center', font=('Courier', 24, 'bold'))
+
+    # paddle and ball collision
+    if 375 < ball.xcor() < 385 and paddle_right.ycor() - 60 < ball.ycor() < paddle_right.ycor() + 60:
+        ball.xchange = ball.xchange * -1
+
+    if -385 < ball.xcor() < -375 and paddle_left.ycor() - 60 < ball.ycor() < paddle_left.ycor() + 60:
+        ball.xchange = ball.xchange * -1
+
+    # determine whose first get 10 scores
+    if left_score >= 10:
+        pen.clear()
+        pen.write("Player A wins!", align='center', font=('Courier', 24, 'bold'))
+        break
+
+    if right_score >= 10:
+        pen.clear()
+        pen.write('Player B wins!', align='center', font=('Courier', 24, 'bold'))
+        break
+
+turtle.done()

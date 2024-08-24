@@ -1,3 +1,4 @@
+import random
 import time
 import turtle
 
@@ -20,6 +21,16 @@ head.shape('upmouth.gif')
 head.penup()
 head.goto(0, 0)
 head.direction = 'stop'
+
+food = turtle.Turtle()
+food.shape('food.gif')
+food.penup()
+food.goto(0, 100)
+
+text = turtle.Turtle()
+text.color('white')
+text.penup()
+text.hideturtle()
 
 def go_up():
     head.direction = 'up'
@@ -55,9 +66,25 @@ def move_snake():
         head.setx(head.xcor() - 10)
 
 
+segments = []
+score = 0
+
 while True:
     wn.update()
     move_snake()
+
+    # border checking
+    if head.xcor() > 260 or head.xcor() < -260 or head.ycor() > 260 or head.ycor() < -260:
+        text.clear()
+        text.write('Game Lost', align='center', font=('courier', 34, 'bold'))
+        break
+
+    if head.distance(food) < 20:
+        food.goto(random.randint(-250, 250), random.randint(-250, 250))
+        score += 1
+        text.clear()
+        text.write('Score: ' + str(score), font = ('courier', 25, 'bold'), align='center')
+
 
     time.sleep(0.05)
 
