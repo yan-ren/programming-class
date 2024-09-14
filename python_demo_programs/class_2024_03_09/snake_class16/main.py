@@ -69,10 +69,10 @@ def move_snake():
 
 segments = []
 score = 0
+running = True
 
-while True:
+while running:
     wn.update()
-    move_snake()
 
     # border checking
     if head.xcor() > 260 or head.xcor() < -260 or head.ycor() > 260 or head.ycor() < -260:
@@ -102,7 +102,19 @@ while True:
         y = head.ycor()
         segments[0].goto(x, y)
 
+    move_snake()
+    # check head runs in the body list
+    for body in segments:
+        if body.distance(head) < 10:
+            text.clear()
+            text.write('Game Lost', align='center', font=('courier', 34, 'bold'))
+            running = False
+
     time.sleep(0.05)
 
 
 turtle.done()
+
+'''
+feature1: when game lost, press space to restart
+'''
