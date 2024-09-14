@@ -46,14 +46,41 @@ def draw_x(x, y):
     turtle.goto(x - 60, y + 60)
     turtle.pendown()
     turtle.setheading(-45)
-    turtle.forward(120)
+    turtle.forward(160)
     turtle.penup()
     turtle.goto(x + 60, y + 60)
     turtle.pendown()
     turtle.setheading(-135)
-    turtle.forward(120)
+    turtle.forward(160)
 
+
+def draw_o(x, y):
+    turtle.penup()
+    turtle.goto(x, y - 60)
+    turtle.pendown()
+    turtle.circle(60)
+
+
+# covert screen coordinate to grid col/row
+def get_grid_pos(x, y):
+    if -300 < x < -100:
+        col = 0
+    elif -100 < x < 100:
+        col = 1
+    elif 100 < x < 300:
+        col = 2
+
+    if -300 < y < -100:
+        row = 2
+    elif -100 < y < 100:
+        row = 1
+    elif 100 < y < 300:
+        row = 0
+
+    return row, col
 
 draw_grid()
+# draw_x(0, 0)
+draw_o(0, 0)
 screen.update()
 turtle.done()
