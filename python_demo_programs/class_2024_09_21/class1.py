@@ -27,6 +27,9 @@ window.setup(800, 800)
 
 t = turtle.Turtle()
 
+color = input('Enter a color:')
+t.fillcolor(color)
+
 t.fillcolor('red')
 
 t.begin_fill()

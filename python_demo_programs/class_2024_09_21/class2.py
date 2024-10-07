@@ -17,3 +17,37 @@
 #
 # ago = input('How old are you?')
 # print('You are', ago)
+
+# a = True
+# print(type(a))
+#
+# b = False
+# print(type(b))
+
+# a = 1
+# b = 2
+# print(a == b)
+# print(a != b)
+# print(a > b)
+# print(a < b)
+# print(a >= b)
+# print(a <= b)
+
+# a = False
+# print(a)
+# print(not a)
+
+# a = False
+# b = False
+# # and
+# print(a and b)
+#
+# # or
+# print(a or b)
+
+s = "abc123@!#$"
+s = ''
+a = 2
+
+print(type(s))
+print(type(a))
