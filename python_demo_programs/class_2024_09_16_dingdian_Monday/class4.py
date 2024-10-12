@@ -69,3 +69,8 @@ for key in d:
 # loop key, value
 for key, value in d.items():
     print(key, value)
+
+'''
+homework:
+2021 J2
+'''
