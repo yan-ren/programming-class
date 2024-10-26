@@ -29,12 +29,15 @@ result = ['Positive' if x > 0 else 'Negative' if x < 0 else 'Zero' for x in numb
 x = 1
 if x > 0:
     # append(Positive)
+    pass
 else:
     if x < 0:
         # append('Negative')
+        pass
     else:
         # append('zero)
-
+        pass
+    
 # 2021 J2
 number_of_bids = int(input())
 names = []
@@ -45,5 +48,8 @@ for _ in range(number_of_bids):
     bids.append(int(input()))
 
 # hint: max, index
+max_bid = max(bids)
+max_bid_index = bids.index(max_bid)
+print(names[max_bid_index])
 
 # 2020 J2

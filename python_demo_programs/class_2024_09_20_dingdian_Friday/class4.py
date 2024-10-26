@@ -70,7 +70,8 @@ pen.pensize(10)
 if user_input == 'star':
     for i in range(5):
         pen.right(144)
-        pen.forward(100)
+        pen.forward(10)
+elif user_input == 'circle':
+    pen.circle(10)
 
-    turtle.done()
-
+turtle.done()

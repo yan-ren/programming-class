@@ -80,3 +80,6 @@ print(s[0])
 print(len(s))
 print(s[len(s) - 1])
 print(s[5])
+
+print(s[0:2])
+print(s)
