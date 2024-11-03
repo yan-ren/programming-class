@@ -37,17 +37,17 @@ control flow
 
 # exercise: add program that can finish the game if user guesses over 3 times without correct anwser
 
-import turtle
-
-window = turtle.Screen()
-window.setup(600, 800)
-
-t = turtle.Turtle()
-
-i = 0
-while i < 3:
-    t.forward(100)
-    t.left(120)
-    i += 1
-
-turtle.done()
+# import turtle
+#
+# window = turtle.Screen()
+# window.setup(600, 800)
+#
+# t = turtle.Turtle()
+#
+# i = 0
+# while i < 3:
+#     t.forward(100)
+#     t.left(120)
+#     i += 1
+#
+# turtle.done()

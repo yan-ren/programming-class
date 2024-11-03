@@ -62,3 +62,18 @@ turtle.done()
 '''
 ask user for 3 words, find the longest word
 '''
+first = input('Enter the first word:')
+second = input('Enter the second word:')
+third = input('Enter the third word:')
+
+# if first > second and first > third:
+
+# first_len, second_len, third_len = len(first), len(second), len(third)
+#
+# if first_len > second_len and first_len > third_len:
+#     print(first)
+# elif second_len > first_len and second_len > third_len:
+#     print(second)
+# else:
+#     print(third)
+
