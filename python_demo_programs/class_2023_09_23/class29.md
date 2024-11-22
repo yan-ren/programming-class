@@ -10,11 +10,11 @@
 - class 9: more about function, e.g. `return`
 - class 10: `while` loop
 - class 11: more `while` loop examples; nested loop
-- class 12: project
+- class 12: project: turtle geometry pattern
 - class 13: `while` loop and `if` statement inside function; string function, e.g. `.upper()`, `.lower()`, `.count()`
-- class 14: project
+- class 14: project: simple snake game
 - class 15: python `list`; `for` loop
-- class 16: project
+- class 16: project: ping pong
 - class 17&18: more about `list`
 - *class 19: pass function into function
 - class 20: `dictionary`

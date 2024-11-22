@@ -19,6 +19,7 @@
 Ask user to input numbers, if user types 'exit' the program stops and print the sum of all numbers 
 that user has entered so far
 '''
+import sys
 
 # import turtle
 #
@@ -50,26 +51,49 @@ that user has entered so far
 
 # given a number check if it's prime or not
 
-import math
-
-
-number = 1
-
-while number <= 100:
-    i = 2
-    is_prime = True
-
-    while i <= math.sqrt(number):
-        if number % i == 0:
-            is_prime = False
-        i += 1
-
-    if is_prime:
-        print(number)
-
-    number += 1
+# import math
+#
+#
+# number = 1
+#
+# while number <= 100:
+#     i = 2
+#     is_prime = True
+#
+#     while i <= math.sqrt(number):
+#         if number % i == 0:
+#             is_prime = False
+#         i += 1
+#
+#     if is_prime:
+#         print(number)
+#
+#     number += 1
 
 '''
 ask user to enter number until user types 'exit'
 when user types exit, print the largest number that user has typed in
 '''
+
+# running = True
+# max_number = -sys.maxsize - 1
+
+
+# while running:
+#     text = input('Enter a number or type exit:')
+#
+#     if text == 'exit':
+#         running = False
+#         # break # keyword only used in loop
+#
+#     if int(text) > max_number:
+#         max_number = int(text)
+#
+# print('The largest number is', max_number)
+
+# i = 0
+# while i < 10:
+#     if i == 2:
+#         break
+#     print(i)
+#     i += 1
