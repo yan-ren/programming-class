@@ -110,3 +110,11 @@ Takes a string input from the user.
 Checks if the string is a palindrome (reads the same backward as forward).
 Example of a palindrome: "radar", "level".
 '''
+
+# text = input('Enter a string for palindrome checking:')
+# text_rev = text[::-1]
+#
+# if text == text_rev:
+#     print('Palindrome')
+# else:
+#     print('Not palindrome')

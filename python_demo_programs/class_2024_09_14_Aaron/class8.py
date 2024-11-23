@@ -75,3 +75,14 @@ Given a string e.g. s = 'hello'
 create a new string without vowel letters from the original string
 s_new = 'hll'
 '''
+s = 'hello'
+s_vowel = 'aeiou'
+s_new = ''
+
+index = 0
+while index < len(s):
+    if s[index] not in s_vowel:
+        s_new += s[index]
+    index += 1
+
+print(s_new)

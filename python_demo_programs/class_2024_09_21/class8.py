@@ -73,3 +73,12 @@ e.g.
 s = 'hello'
 s_new = 'hll'
 '''
+s = 'hello'
+index = 0
+s_new = ''
+while index < len(s):
+    # if not(s[index] == 'a' or s[index] == 'e' or s[index] == 'i' or s[index] == 'o' or s[index] == 'u'):
+    if s[index] not in 'aeiouAEIOU':
+        s_new += s[index]
+
+    index += 1

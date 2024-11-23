@@ -86,9 +86,10 @@ snake.shape('square')
 snake.speed(0)
 snake.penup()
 
+color = ['red', 'green', 'blue']
 food = turtle.Turtle()
 food.shape('circle')
-food.color('green')
+food.color(random.choice(color))
 food.speed(0)
 food.penup()
 food.goto(random.randint(-350, 350), random.randint(-350, 350))
@@ -101,7 +102,24 @@ turtle.listen()
 
 while True:
     snake.forward(5)
+    snake.stamp()
+    snake.clearstamps(1)
     time.sleep(0.01)
 
+    if snake.distance(food) < 20:
+        food.goto(random.randint(-350, 350), random.randint(-350, 350))
+        snake.stamp()
+        snake.stamp()
+        food.color(random.choice(color))
+
+    if snake.xcor() > 400 or snake.xcor() < -400 or snake.ycor() > 400 or snake.ycor() < -400:
+        break
 
 turtle.done()
+
+'''
+more features:
+1. add border checking
+2. score
+3. add multiple food, giving different score
+'''
