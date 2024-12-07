@@ -94,6 +94,14 @@ food.speed(0)
 food.penup()
 food.goto(random.randint(-350, 350), random.randint(-350, 350))
 
+# turtle object for writing
+score = 0
+writing = turtle.Turtle()
+writing.hideturtle()
+writing.penup()
+writing.goto(-380, 380)
+writing.write('Score: ' + str(score), font=('Arial', 12, 'normal'))
+
 turtle.onkeypress(lambda: snake.setheading(0), 'Right')
 turtle.onkeypress(lambda: snake.setheading(90), 'Up')
 turtle.onkeypress(lambda: snake.setheading(180), 'Left')
@@ -111,8 +119,16 @@ while True:
         snake.stamp()
         snake.stamp()
         food.color(random.choice(color))
+        score += 1
+        snake.color(random.choice(color))
+        writing.clear()
+        writing.write('Score: ' + str(score), font=('Arial', 12, 'normal'))
 
     if snake.xcor() > 400 or snake.xcor() < -400 or snake.ycor() > 400 or snake.ycor() < -400:
+        writing.goto(-200, 0)
+        writing.write('Game Over', font=('Arial', 12, 'normal'))
+        writing.goto(-200, -50)
+        writing.write('Your score:' + str(score), font=('Arial', 12, 'normal'))
         break
 
 turtle.done()

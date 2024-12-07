@@ -65,6 +65,10 @@ while True:
         writing.write('score:' + str(score), font=('Arial', 12, 'normal'))
 
     if snake.xcor() > 400 or snake.xcor() < -400 or snake.ycor() > 400 or snake.ycor() < -400:
+        writing.goto(-200, 0)
+        writing.write('Game Over', font=('Arial', 12, 'normal'))
+        writing.goto(-200, -50)
+        writing.write('Your score:' + str(score), font=('Arial', 12, 'normal'))
         break
 
 turtle.done()
