@@ -67,3 +67,19 @@ Example:
 Given: ["cat", "elephant", "dog", "horse", "ant"]
 New: ["elephant", "horse"]
 '''
+numbers = [1, 2, -1, 4, -3]
+new_numbers = []
+
+for num in numbers:
+    if num > 0:
+        new_numbers.append(num)
+
+
+text = ['cat', 'elephant', 'dog', 'horse', 'ant']
+new_text = []
+
+for s in new_text:
+    if len(s) > 3:
+        new_text.append(s)
+
+

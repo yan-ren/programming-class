@@ -8,7 +8,7 @@
 
 # if delivery > collision:
 #     points = points + 500
-    
+
 # print(points)
 
 import turtle

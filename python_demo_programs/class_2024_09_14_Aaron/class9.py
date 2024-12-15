@@ -1,10 +1,10 @@
 '''
 for: iterable item
 '''
-s = 'abcde'
-
-for letter in s:
-    print(letter)
+# s = 'abcde'
+#
+# for letter in s:
+#     print(letter)
 
 # i = 0
 # while i < 10:
@@ -55,6 +55,11 @@ Use the random module.
 In each simulation, print what's the simulation result
 after all simulation, print how many times get number 6
 '''
-# import random
-#
-# random.randint(1, 6)
+import random
+import time
+
+times = 1
+while times <= 10:
+    print(times, ':',random.randint(1, 6))
+    times += 1
+    time.sleep(1)
