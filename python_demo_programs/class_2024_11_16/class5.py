@@ -81,7 +81,22 @@ def welcome():
 welcome()
 welcome()
 
+def math_operation(a, b):
+    # return a + b, a * b, a - b
+    if b == 0:
+        return
+
+    return a + b, a / b
+
+
+# print(math_operation(1, 2))
+# a = math_operation(1, 2)
+# print(a)
+# print(b)
 '''
 Write a python function that takes two lists as input
 check if they have value in common
 '''
+
+# def find_common(list1, list2):
+
