@@ -9,7 +9,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-car = pygame.image.load('/Users/yan.ren/github.com/yan.ren/programming-class/python_demo_programs/pygame_examples/racing_car/car1.png')
+car = pygame.image.load('C:\\Users\\github.com\\programming-class\\python_demo_programs\\pygame_examples\\racing_car\\car1.png')
 clock = pygame.time.Clock()
 
 
