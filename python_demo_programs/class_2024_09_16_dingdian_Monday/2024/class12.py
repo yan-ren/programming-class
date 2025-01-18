@@ -10,7 +10,7 @@ pre = ''
 
 while True:
     value = input()
-    if value == '99999':
+    if value == '99999':  
         break
 
     # todo
