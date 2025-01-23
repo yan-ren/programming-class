@@ -14,3 +14,4 @@ if stars == N:
     print(str(stars) + "+")
 else:
     print(stars)
+
