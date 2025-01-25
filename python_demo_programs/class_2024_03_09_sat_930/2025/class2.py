@@ -1,4 +1,6 @@
-'''2017 J3'''
+'''
+2018 J3
+'''
 distance = list(map(int, input().split(' ')))
 # print(value)
 
