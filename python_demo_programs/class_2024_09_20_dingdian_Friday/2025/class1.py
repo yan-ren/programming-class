@@ -21,6 +21,25 @@ paddle_right.penup()
 paddle_right.goto(350, 0)
 paddle_right.shapesize(5, 1)
 
+ball = turtle.Turtle()
+ball.shape('circle')
+ball.color('white')
+ball.penup()
+ball.speed(0)
+ball.dx = 0.01
+ball.dy = 0.01
+
+left_score = 0
+right_score = 0
+
+pen = turtle.Turtle()
+pen.hideturtle()
+pen.penup()
+pen.color('white')
+pen.speed(0)
+pen.goto(0, 260)
+pen.write('Player A: {} Player B: {}'.format(left_score, right_score), align='center', font=('Courier', 24, 'bold'))
+
 def paddle_right_up():
     y = paddle_right.ycor()
     y += 20
@@ -51,5 +70,31 @@ wn.onkeypress(paddle_right_down, 'Down')
 while True:
     wn.update()
 
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
 
+    if ball.ycor() > 290 or ball.ycor() < -290:
+        ball.dy = -ball.dy
+
+    if ball.xcor() > 390 or ball.xcor() < -390:
+        ball.dx = -ball.dx
+
+    if ball.xcor() < paddle_left.xcor() + 5 and paddle_left.ycor() - 60 < ball.ycor() < paddle_left.ycor() + 60:
+        ball.dx = -ball.dx
+
+    if ball.xcor() > paddle_right.xcor() + 5 and paddle_right.ycor() - 60 < ball.ycor() < paddle_right.ycor() + 60:
+        ball.dx = -ball.dx
+
+    if ball.xcor() > 390:
+        left_score += 1
+        pen.clear()
+        pen.write('Player A: {} Player B: {}'.format(left_score, right_score), align='center',
+                  font=('Courier', 24, 'bold'))
+
+    if ball.xcor() < -390:
+        right_score += 1
+        pen.clear()
+        pen.write('Player A: {} Player B: {}'.format(left_score, right_score), align='center',
+                  font=('Courier', 24, 'bold'))
+        
 turtle.done()
