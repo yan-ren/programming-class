@@ -1,11 +1,3 @@
-# turtle
-'''
-turtle is a python library
-programming library: pre-implemented code from others, we use programming library to achieve our task
-
-turtle library is built-in
-if a liraray is third-party, we need to install before import it in program
-'''
 import turtle
 import random
 
