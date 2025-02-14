@@ -1,44 +1,67 @@
-# conditional
 '''
-decision game
-
-Guide user by giving them multiple options, and after each option depends on people's choice
-There are other following steps
-
-- input()
-- if elif else
-- nested if statement
+Boolean
 '''
-# import time
+# a = True
+# b = False
+# print(type(a))
+# print(type(b))
+
+# boolean is generated as the result of comparison
+# print(1 == 1)
+# print(1 != 1)
+# print(1 < 10)
+# print(2 >= 10)
+# print(1 < 2 < 3)
+
+# boolean calculation
+# a = False
+# b = False
 #
-# print('You enter a dark room with two doors, do you go through door 1 or door 2')
+# # and: as long as one side is False, overall is False
+# print(a and b)
 #
-# answer = input('Your option:')
+# # or: as long as one side is True, overall is True
+# print(a or b)
 #
-# if answer == '1':
-#     print('There is a bear eating a cake')
-#     time.sleep(1)
-#     print('What do you do?')
-#     print('1. Take the cake')
-#     print('2. Scream at the bear')
+# # not: reverse
+# print(not a)
 #
-#     answer = input('Your option:')
-#
-#     if answer == '1':
-#         print('....')
-#     elif answer == '2':
-#         print('...')
-#     else:
-#         print('...')
-# elif answer == '2':
-#     # continue
+# print((2 * 3.14) < 6 or (17.3 == 14))
+
+# conditional: if statement
+# number = int(input('Enter a number:'))
+
+# if number > 100:
+#     print('This number is bigger than 100')
+# elif number > 10:
+#     print('This number is bigger than 10')
 # else:
+#     print('Whatever')
+
+# Practice: ask people for a number, check if it's even or odd
+# number = int(input('Enter a number:'))
 #
+# if number % 2 == 0:
+#     print('Even')
+# else:
+#     print('Odd')
 
-a = 1
-b = 2
-a = b
-b = a
-print(a, b)
+'''
+Practice:
+Ask user to enter three scores(integer), 
+calculate the average score and tell user if average is above 60 included
+'''
 
-# how to switch value of a and b
+# nested conditional / nested if statement
+# a = 2
+# if a > 0:
+#     if a % 2 == 0:
+#         print('Positive Even')
+#     else:
+#         print('Positive Odd')
+# else:
+#     print('Negative')
+
+'''
+Ask user to type three integers, print the largest integer
+'''
