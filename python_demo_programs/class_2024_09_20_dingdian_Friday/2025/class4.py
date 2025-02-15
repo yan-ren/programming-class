@@ -13,6 +13,10 @@ t = turtle.Turtle()
 t.speed(0)
 colors = ['red', 'green', 'hot pink', 'orange red']
 
+pen = turtle.Turtle()
+pen.penup()
+pen.speed(0)
+
 j = 0
 while j < 10:
     t.color(random.choice(colors))
@@ -33,6 +37,8 @@ while j < 10:
 
     j += 1
 
+
+pen.write('Happy New Year', align='center', font=('Verdana', 24, 'normal'))
 turtle.done()
 
 '''
