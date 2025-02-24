@@ -22,7 +22,7 @@ turtle.listen()
 
 
 def get_random_value():
-    return random.randint(-SCREEN_SIZE / 4, SCREEN_SIZE / 4)
+    return random.randint(-SCREEN_SIZE // 4, SCREEN_SIZE // 4)
 
 
 # turtle object to draw food
