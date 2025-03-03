@@ -1,77 +1,92 @@
-# print(5 + 5)
-# print((9 + 5) % 12 + 1)
+numbers = [2, 1, 3, 5]
+
+# index = 0
+# while index < len(numbers):
+#     print(numbers[index])
+#     index += 1
+print(numbers)
+for index in range(1, len(numbers)):
+    numbers[index] += 1
+    # print(numbers[index])
+print(numbers)
+
+# print(numbers)
+# for num in numbers:
+#     num += 1
 #
-# print((1 - 5) % 12) # 1-5+12
+# print(numbers)
+# index = len(numbers) - 1
+# while index >= 0:
+#     print(numbers[index])
+#     index -= 1
 
-# months = ["Jan", "Feb", "Mar", "Apr", "May",
-#           "Jun", "Jul", "Aug", "Sep", "Oct",
-#           "Nov", "Dec"]
+range(4)    # 0, 1, 2, 3
+range(1, 4) # 1, 2, 3
+range(1, 5, 2) # 1, 3
+
+numbers = [0, 1, 2, 3, 4, 5]
+for i in range(1, len(numbers), 2):
+    print(numbers[i])
+
+
+new_numbers = []
+index = 1
+while index < len(numbers):
+    print(numbers[index])
+    new_numbers.append(numbers[index])
+    index += 2
+
+numbers = [-2, -2, 1, 3, -6]
+# positive = []
+# for num in numbers:
+#     if num > 0:
+#         positive.append(num)
 #
-# start_index = months.index('Feb')
-# next_index = (start_index + 5) % 12
-# print(months[next_index])
+# print(positive)
 
-# month = input('Enter the month:')
-# month = month.lower()
-# str1 = 'abc'
-# str2 = 'aabccd'
-
-# if month.isalpha():
+# max_number = numbers[0]
+# second_max = numbers[0]
 #
-# if month.isdigit():
+# for num in numbers:
+#     if num > max_number:
+#         second_max = max_number
+#         max_number = num
+#     elif num > second_max:
+#         second_max = num
 #
-# if month.startswith('abc'):
-#
-#
-# if month.count('a') > 1:
-# month = 'Feb'
-# day = 12
-# print(f'{month:<15}{day}')
-# month = 'August'
-# print(f'{month:<15}{day}')
+# print(max_number)
 
-# reverse integer
-# number = 123456
-# new_number = 0
-#
-# while number > 0:
-#     last_digit = number % 10
-#     new_number = new_number * 10 + last_digit
-#     number = number // 10
-#
-# print(new_number)
+# for i in range(5):
+#     for j in range(5):
+#         print('*', end='')
+#     print()
 
-# number = 1230
-# str_number = str(number)
-# reversed = ''
-#
-# for digit in str_number:
-#     reversed = digit + reversed
-#
-# print(type(reversed))
-# print(int(reversed))
+matrix = [[1, 1, 1],
+          [-1, 0, 2],
+          [1, 2, 3]]
+# print(len(matrix))
+# print(matrix[0][1])
+# for row in matrix:
+#     row_sum = 0
+#     for col in row:
+#         row_sum += col
+#     print(row_sum)
+row = len(matrix)
+col = len(matrix[0])
 
-max_value = float('-inf')
-second_max_value = float('-inf')
+for i in range(col):
+    col_sum = 0
+    for j in range(row):
+        col_sum += matrix[j][i]
 
-for _ in range(10):
-    value = int(input('Enter a value:'))
-    if value > max_value:
-        second_max_value = max_value
-        max_value = value
-    elif second_max_value < value < max_value:
-        second_max_value = value
+    print('The total in column', i+1, "is", col_sum)
 
-print(max_value)
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+montreal = ['MONTREAL TRUDEAU (AIRPORT)', 'QC', -9.2, -8.0, -2.0, 6.2, 13.9 , 19.0 , 21.7 , 20.6 , 16.0 , 8.9, 2.3, -5.0]
+for index in range(len(months)):
+    # The monthly average temperature in Montreal in Jan was -9.2.
+    print('The monthly average temperature in Montreal in', months[index], 'was', montreal[index + 2])
 
-max_value = float('-inf')
-min_value = float('inf')
-
-for _ in range(10):
-    value = int(input('Enter a value:'))
-    if value > max_value:
-        max_value = value
-    if value < min_value:
-        min_value = value
-
-print(max_value)
+a = 'hello'
+b = 'Hello'
+print(a > b)
