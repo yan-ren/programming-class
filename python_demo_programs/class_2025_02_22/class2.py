@@ -38,5 +38,9 @@ else:
 # exercise: ask user for a number, and determine it's even or odd
 # exercise: turtle+input+if: ask user for a shape, turtle draws the shape according
 
-# shape = input('Enter the shape:')
+import turtle
+
+screen = turtle.Screen()
+
+shape = screen.textinput('Enter the shape:', 'Enter the shape:')
 # if shape == 'circle':

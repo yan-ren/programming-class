@@ -31,11 +31,12 @@
 #
 # print(count_positive([1, 2, -1, -3, 0]))
 import random
-
 import time
 
+emojis = ["🍎", "🍌", "🍇", "🍓", "🍉", "🍒", "🍍", "🥝", "🥭", "🍑"]
+
 def game_start():
-    emojis = ["🍎", "🍌", "🍇", "🍓", "🍉", "🍒", "🍍", "🥝", "🥭", "🍑"]
+    print('Welcome to the memory game, remember following pattern:')
     game_list = random.sample(emojis, 5)
     return game_list
 
@@ -44,6 +45,26 @@ def main(original):
     print(original)
     time.sleep(3)
     print('\n'*100)
+
+    # generate 3 incorrect options and shuffle
+    options = [original]
+    while len(options) < 4:
+        shuffle = random.sample(emojis, 5)
+        if shuffle not in options:
+            options.append(shuffle)
+
+    random.shuffle(options)
+    print('Which one is correct?')
+    id = 0
+    for option in options:
+        print(id, option)
+        id += 1
+
+    choice = int(input('Enter the number of the correct option:'))
+    if options[choice] == original:
+        print('Correct')
+    else:
+        print('Wrong')
 
 
 original = game_start()

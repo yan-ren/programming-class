@@ -21,10 +21,10 @@ import turtle
 
 screen = turtle.Screen()
 screen.setup(600, 600)
-screen.bgcolor('orange')
-
+# screen.bgcolor('orange')
+screen.addshape('bird-wings-flying-feature.gif')
 pen = turtle.Turtle()
-
+pen.shape('bird-wings-flying-feature.gif')
 pen.fillcolor('red')
 pen.begin_fill()
 pen.forward(100)
@@ -39,4 +39,6 @@ pen.penup()
 pen.goto(100, 100)
 pen.pendown()
 pen.circle(10)
+pen.color('red')
+pen.write('Hello', font=('Arial', 48, "bold"))
 turtle.done()

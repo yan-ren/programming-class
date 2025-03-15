@@ -22,7 +22,10 @@ def countdown(timer):
         timer -= 1
         time.sleep(1)
 
+    screen.clear()
+
 def finish():
+    screen.clear()
     # Flashing final message effect
     for _ in range(6):
         screen.bgcolor(random.choice(["red", "orange", "purple", "blue"]))
