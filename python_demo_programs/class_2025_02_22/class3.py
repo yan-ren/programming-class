@@ -15,6 +15,7 @@ decision game: if elif else, input()
 #         print('Bear eats your leg off')
 # elif door == '2':
 
-s = "You're"
-t = 'abc123'
-print(type(t))
+# s = "You're"
+# t = 'abc123'
+# print(type(t))
+

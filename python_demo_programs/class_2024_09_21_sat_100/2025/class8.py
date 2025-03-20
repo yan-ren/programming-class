@@ -62,5 +62,15 @@ def sum(numbers):
     return s
 
 print(sum([1, 2, 3]))
+
 # exercise: write a function which takes a list of numbers,
 # count how many positive number in the list
+def count_positive(numbers):
+    count = 0
+    for num in numbers:
+        if num > 0:
+            count += 1
+
+    return count
+
+print(count_positive([1, 2, -1, -2, 1]))
