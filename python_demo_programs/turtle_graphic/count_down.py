@@ -1,5 +1,5 @@
 '''
-use turtle, create a count down program
+use turtle, create a countdown program
 '''
 import turtle
 import time
@@ -44,7 +44,7 @@ counter = turtle.Turtle()
 counter.hideturtle()
 counter.penup()
 counter.goto(0, 0)
-
+#
 countdown(10)
 finish()
 

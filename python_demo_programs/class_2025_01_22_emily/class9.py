@@ -99,6 +99,7 @@ return True if only contains 2s
 return False otherwise
 '''
 
+
 def tous_deux(liste):
     for nombre in liste:
         if nombre != 2:
@@ -110,6 +111,7 @@ def tous_deux(liste):
 print(tous_deux([1, 2, 2]))
 print(tous_deux([2, 2, 2]))
 print(tous_deux([2, 3, 3]))
+
 
 # write a function take [2, 3, 3] return [True, False, False]
 # def test(numbers):
@@ -135,6 +137,8 @@ def count1(numbers):
             count += 1
 
     return count
+
+
 # q2: given a list of numbers, write a function returns the number of
 # even value in the list
 def count2(numbers):
@@ -144,6 +148,7 @@ def count2(numbers):
             count += 1
 
     return count
+
 
 '''
 Write a program to print multiplication table from 1 to 9

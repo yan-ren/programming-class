@@ -44,27 +44,27 @@ loop - repeat
 #
 #     number += 1
 
-import turtle
-
-screen = turtle.Screen()
-screen.setup(800, 600)
-
-pen = turtle.Turtle()
-
-# draw a square
-# nested loop
-j = 0
-while j < 4:
-    i = 0
-    while i < 4:
-        pen.forward(100)
-        pen.left(90)
-        i += 1
-
-    pen.left(15)
-    j += 1
-
-turtle.done()
+# import turtle
+#
+# screen = turtle.Screen()
+# screen.setup(800, 600)
+#
+# pen = turtle.Turtle()
+#
+# # draw a square
+# # nested loop
+# j = 0
+# while j < 4:
+#     i = 0
+#     while i < 4:
+#         pen.forward(100)
+#         pen.left(90)
+#         i += 1
+#
+#     pen.left(15)
+#     j += 1
+#
+# turtle.done()
 
 '''
 Using while loop and input() function to write a even odd number checker
@@ -79,3 +79,12 @@ Please Enter Number: 7
 2 is a even number
 1 is a odd number
 '''
+
+# number = int(input('Please Enter Number:'))
+# while number > 0:
+#     if number % 2 == 0:
+#         print(number, 'is an even number')
+#     else:
+#         print(number, 'is an odd number')
+#
+#     number -= 1
