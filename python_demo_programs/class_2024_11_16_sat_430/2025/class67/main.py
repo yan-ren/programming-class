@@ -31,8 +31,8 @@ class AttackAnimation(arcade.Sprite):
         self.textures = self.load_textures()
 
         self.scale = self.ATTACK_SCALE
-        self.current_texture = 0
-        self.set_texture(self.current_texture)
+        self.current_texture_index = 0
+        self.set_texture(self.current_texture_index)
 
         self.center_x = x
         self.center_y = y
@@ -40,37 +40,36 @@ class AttackAnimation(arcade.Sprite):
         self.animation_update_time = 1.0 / self.ANIMATION_SPEED
 
     def load_textures(self):
+        """Load the correct textures for each attack type."""
         if self.attack_type == AttackType.ROCK:
-            self.textures = [
+            return [
                 arcade.load_texture("assets/srock.png"),
                 arcade.load_texture("assets/srock-attack.png"),
             ]
         elif self.attack_type == AttackType.PAPER:
-            self.textures = [
+            return [
                 arcade.load_texture("assets/spaper.png"),
                 arcade.load_texture("assets/spaper-attack.png"),
             ]
-        else:
-            self.textures = [
+        else:  # AttackType.SCISSORS
+            return [
                 arcade.load_texture("assets/scissors.png"),
                 arcade.load_texture("assets/scissors-close.png"),
             ]
 
-    def on_update(self, delta_time: float = 1/60):
+    def update_animation(self, delta_time: float = 1 / 60):
         self.time_since_last_swap += delta_time
         if self.time_since_last_swap > self.animation_update_time:
-            self.current_texture += 1
-            if self.current_texture < len(self.textures):
-                self.set_texture(self.current_texture)
-            else:
-                self.current_texture = 0
-                self.set_texture(self.current_texture)
+            self.current_texture_index = (self.current_texture_index + 1) % len(self.textures)
+            self.set_texture(self.current_texture_index)
             self.time_since_last_swap = 0.0
+
 
 class RPSGame(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE)
         arcade.set_background_color(arcade.color.LIGHT_GRAY)
+
         self.game_state = GameState.NOT_STARTED
         self.player_choice = None
         self.computer_choice = None
@@ -78,36 +77,60 @@ class RPSGame(arcade.Window):
         self.player_score = 0
         self.computer_score = 0
 
+        # Initialize the sprite list
+        self.attack_animations = arcade.SpriteList()
+
+        # Load attack animations and add them to the sprite list
+        self.rock = AttackAnimation(AttackType.ROCK, 100, 300)
+        self.paper = AttackAnimation(AttackType.PAPER, 300, 300)
+        self.scissors = AttackAnimation(AttackType.SCISSORS, 500, 300)
+
+        self.attack_animations.append(self.rock)
+        self.attack_animations.append(self.paper)
+        self.attack_animations.append(self.scissors)
+
     def on_draw(self):
+        """Render the game visuals."""
         self.clear()
-        arcade.draw_text('Rock Paper Scissors', SCREEN_WIDTH//2,
-                         SCREEN_HEIGHT // 2, arcade.color.BLACK, 18, anchor_x='center')
+        arcade.draw_text('Rock Paper Scissors', SCREEN_WIDTH // 2,
+                         SCREEN_HEIGHT - 50, arcade.color.BLACK, 18, anchor_x='center')
+
         if self.game_state == GameState.NOT_STARTED:
             arcade.draw_text(self.result, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, arcade.color.BLACK, 18,
                              anchor_x='center')
         else:
-            for i, choice in enumerate(CHOICES):
-                x = 100 + i * 200
-                arcade.draw_lrbt_rectangle_filled(x, x + 120, 50, 150, arcade.color.WHITE)
-                arcade.draw_text(choice, x, 150, arcade.color.BLACK, 16, anchor_x = 'center',
-                                 anchor_y='center')
+            # Display game state text
             arcade.draw_text(f'You: {self.player_choice}', SCREEN_WIDTH // 2, 220, arcade.color.BLUE,
                              16, anchor_x='center')
             arcade.draw_text(f'Computer: {self.computer_choice}', SCREEN_WIDTH // 2, 190,
                              arcade.color.RED, 16, anchor_x='center')
             arcade.draw_text(f'Score: {self.player_score} - {self.computer_score} Computer', SCREEN_WIDTH // 2,
                              50, arcade.color.BLACK, 16, anchor_x='center')
-            arcade.draw_text(self.result, SCREEN_WIDTH // 2, 100, arcade.color.BLACK, 18, anchor_x = 'center')
+            arcade.draw_text(self.result, SCREEN_WIDTH // 2, 100, arcade.color.BLACK, 18, anchor_x='center')
+
+            # Draw animations
+            self.attack_animations.draw()
 
     def on_mouse_press(self, x, y, button, modifiers):
+        """Detects player clicks to choose an attack based on texture."""
         if self.game_state == GameState.ROUND_ACTIVE:
-            for i, choice in enumerate(CHOICES):
-                button_x = 100 + i * 200
-                if button_x - 60 < x < button_x + 60 and 125 < y < 175:
-                    self.play_game(choice)
+            for animation in self.attack_animations:
+                # Check if the click is within the sprite's bounds
+                if animation.left < x < animation.right and animation.bottom < y < animation.top:
+                    # Map the AttackType to the corresponding choice string
+                    if animation.attack_type == AttackType.ROCK:
+                        player_choice = "Rock"
+                    elif animation.attack_type == AttackType.PAPER:
+                        player_choice = "Paper"
+                    elif animation.attack_type == AttackType.SCISSORS:
+                        player_choice = "Scissors"
+
+                    self.play_game(player_choice)
                     break
 
+
     def on_key_press(self, key, modifiers):
+        """Handles keyboard inputs for game state changes."""
         if key == arcade.key.SPACE and self.game_state in [GameState.NOT_STARTED, GameState.ROUND_DONE]:
             self.result = "Choose Rock, Paper, or Scissors!"
             self.game_state = GameState.ROUND_ACTIVE
@@ -120,6 +143,7 @@ class RPSGame(arcade.Window):
             self.result = "Press SPACE to start!"
 
     def play_game(self, player_choice):
+        """Determines round result and updates game state."""
         self.player_choice = player_choice
         self.computer_choice = random.choice(CHOICES)
 
@@ -142,6 +166,11 @@ class RPSGame(arcade.Window):
             self.game_state = GameState.GAME_OVER
         else:
             self.game_state = GameState.ROUND_DONE
+
+    def on_update(self, delta_time):
+        for animation in self.attack_animations:
+            animation.update_animation(delta_time)
+
 
 game = RPSGame()
 arcade.run()
