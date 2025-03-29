@@ -2,8 +2,8 @@ import arcade
 import random
 from enum import Enum
 
-SCREEN_WIDTH = 600
-SCREEN_HEIGHT = 400
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
 TITLE = 'Rock Paper Scissors'
 CHOICES = ['Rock', 'Paper', 'Scissors']
 
@@ -77,13 +77,49 @@ class RPSGame(arcade.Window):
         self.player_score = 0
         self.computer_score = 0
 
-        # Initialize the sprite list
+        # Initialize the sprite lists
         self.attack_animations = arcade.SpriteList()
+        self.face_sprites = arcade.SpriteList()
+        self.choice_sprites = arcade.SpriteList()
+        
+        # Create player and computer face sprites with same width
+        DESIRED_WIDTH = 100
+        
+        # Load player face and calculate scale
+        self.player_face = arcade.Sprite("assets/faceBeard.png")
+        player_scale = DESIRED_WIDTH / self.player_face.width
+        self.player_face.scale = player_scale
+        self.player_face.center_x = 200
+        self.player_face.center_y = 420
+        
+        # Load computer face and calculate scale
+        self.computer_face = arcade.Sprite("assets/compy.png")
+        computer_scale = DESIRED_WIDTH / self.computer_face.width
+        self.computer_face.scale = computer_scale
+        self.computer_face.center_x = 600
+        self.computer_face.center_y = 420
+        
+        # Add faces to the face sprite list
+        self.face_sprites.append(self.player_face)
+        self.face_sprites.append(self.computer_face)
+        
+        # Create choice sprites (initially hidden)
+        self.player_choice_sprite = arcade.Sprite()
+        self.player_choice_sprite.center_x = 200
+        self.player_choice_sprite.center_y = 180
+        
+        self.computer_choice_sprite = arcade.Sprite()
+        self.computer_choice_sprite.center_x = 600
+        self.computer_choice_sprite.center_y = 180
+        
+        # Add choice sprites to the choice sprite list
+        self.choice_sprites.append(self.player_choice_sprite)
+        self.choice_sprites.append(self.computer_choice_sprite)
 
         # Load attack animations and add them to the sprite list
         self.rock = AttackAnimation(AttackType.ROCK, 100, 300)
-        self.paper = AttackAnimation(AttackType.PAPER, 300, 300)
-        self.scissors = AttackAnimation(AttackType.SCISSORS, 500, 300)
+        self.paper = AttackAnimation(AttackType.PAPER, 200, 300)
+        self.scissors = AttackAnimation(AttackType.SCISSORS, 300, 300)
 
         self.attack_animations.append(self.rock)
         self.attack_animations.append(self.paper)
@@ -99,17 +135,22 @@ class RPSGame(arcade.Window):
             arcade.draw_text(self.result, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, arcade.color.BLACK, 18,
                              anchor_x='center')
         else:
-            # Display game state text
-            arcade.draw_text(f'You: {self.player_choice}', SCREEN_WIDTH // 2, 220, arcade.color.BLUE,
-                             16, anchor_x='center')
-            arcade.draw_text(f'Computer: {self.computer_choice}', SCREEN_WIDTH // 2, 190,
-                             arcade.color.RED, 16, anchor_x='center')
+            # Draw faces
+            self.face_sprites.draw()
+
+            # Draw choices if they exist
+            if self.player_choice and self.computer_choice:
+                self.choice_sprites.draw()
+                
             arcade.draw_text(f'Score: {self.player_score} - {self.computer_score} Computer', SCREEN_WIDTH // 2,
                              50, arcade.color.BLACK, 16, anchor_x='center')
             arcade.draw_text(self.result, SCREEN_WIDTH // 2, 100, arcade.color.BLACK, 18, anchor_x='center')
 
             # Draw animations
-            self.attack_animations.draw()
+            if self.game_state == GameState.ROUND_ACTIVE:
+                arcade.draw_text(f'Choose your attack!', 200,
+                             350, arcade.color.BLACK, 16, anchor_x='center')
+                self.attack_animations.draw()
 
     def on_mouse_press(self, x, y, button, modifiers):
         """Detects player clicks to choose an attack based on texture."""
@@ -147,15 +188,31 @@ class RPSGame(arcade.Window):
         self.player_choice = player_choice
         self.computer_choice = random.choice(CHOICES)
 
+        # Update player choice sprite
+        if self.player_choice == "Rock":
+            self.player_choice_sprite.texture = arcade.load_texture("assets/srock.png")
+        elif self.player_choice == "Paper":
+            self.player_choice_sprite.texture = arcade.load_texture("assets/spaper.png")
+        else:  # Scissors
+            self.player_choice_sprite.texture = arcade.load_texture("assets/scissors.png")
+            
+        # Update computer choice sprite
+        if self.computer_choice == "Rock":
+            self.computer_choice_sprite.texture = arcade.load_texture("assets/srock.png")
+        elif self.computer_choice == "Paper":
+            self.computer_choice_sprite.texture = arcade.load_texture("assets/spaper.png")
+        else:  # Scissors
+            self.computer_choice_sprite.texture = arcade.load_texture("assets/scissors.png")
+
         if self.player_choice == self.computer_choice:
-            self.result = "It's a tie!"
+            self.result = "It's a tie! Press SPACE to restart."
         elif (self.player_choice == "Rock" and self.computer_choice == "Scissors") or \
                 (self.player_choice == "Paper" and self.computer_choice == "Rock") or \
                 (self.player_choice == "Scissors" and self.computer_choice == "Paper"):
-            self.result = "You win this round!"
+            self.result = "You win this round! Press SPACE to restart."
             self.player_score += 1
         else:
-            self.result = "You lose this round!"
+            self.result = "You lose this round! Press SPACE to restart."
             self.computer_score += 1
 
         if self.player_score == 3:
