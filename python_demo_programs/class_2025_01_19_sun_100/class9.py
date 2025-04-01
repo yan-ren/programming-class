@@ -41,6 +41,14 @@ food.color('green')
 food.penup()
 food.goto(random.randint(-200, 200), random.randint(-200, 200))
 
+score = 0
+
+pen = turtle.Turtle()
+pen.hideturtle()
+pen.penup()
+pen.goto(0, 360)
+pen.write(f"Score: {score}", align="center", font=("Arial", 24, "bold"))
+
 # keyboard control
 turtle.onkeypress(lambda: snake.setheading(90), 'Up')
 turtle.onkeypress(lambda: snake.setheading(-90), 'Down')
@@ -48,7 +56,6 @@ turtle.onkeypress(lambda: snake.setheading(180), 'Left')
 turtle.onkeypress(lambda: snake.setheading(0), 'Right')
 turtle.listen()
 
-score = 0
 
 while True:
     snake.forward(2)
@@ -60,6 +67,8 @@ while True:
         snake.stamp()
         snake.stamp()
         score += 1
+        pen.clear()
+        pen.write(f"Score: {score}", align="center", font=("Arial", 24, "bold"))
 
     if snake.xcor() > 400 or snake.xcor() < -400:
         break
@@ -68,6 +77,16 @@ while True:
 
     time.sleep(0.01)
 
+
+# Game Over message
+snake.hideturtle()
+food.hideturtle()
+pen.goto(0, 0)
+pen.write(f"Game Over! Final Score: {score}", align="center", font=("Arial", 28, "bold"))
+
 '''
 show the score on the screen, hint: create another turtle object, and use write function
+1. show the score on the screen
+2. when snake runs into the boarder, show Game Finish text and show the score
+3. when game finish, press SPACE key to restart the game
 '''

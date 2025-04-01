@@ -1,7 +1,7 @@
 import turtle
 import random
 import time
-
+import winsound
 
 SCREEN_SIZE = 800
 wn = turtle.Screen()
@@ -32,6 +32,7 @@ while running:
     snake.stamp()
     snake.clearstamps(1)
     if snake.distance(food) < 20:
+        winsound.Beep(600, 500)
         food.goto(random.randint(-200, 200), random.randint(-200, 200))
         snake.stamp()
         snake.stamp()
