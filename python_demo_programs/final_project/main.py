@@ -10,6 +10,7 @@ noise. Your task is to analyze this data and create various visualizations follo
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 math_df = pd.read_csv("mathematics.csv")
 log_noisy_df = pd.read_csv("logarithm_noisy.csv")
@@ -88,4 +89,45 @@ def three_dimension_plot():
     plt.savefig('3d_plot.png')
     plt.show()
 
-three_dimension_plot()
+# three_dimension_plot()
+
+'''
+5. Animation: (20%)
+- Create an animated plot for y = x^2, where the plot progressively adds data points to simulate the
+evolution of the graph over time.
+- The animation should be saved as a GIF.
+'''
+def y_squared_animation():
+    df = pd.read_csv('mathematics.csv')
+    fig, ax = plt.subplots()
+
+    ax.set_xlim(df['x'].min(), df['x'].max())
+    ax.set_ylim(df['y'].min() - 100, df['y'].max())
+    ax.set_xlabel('x')
+    ax.set_ylabel('y = x^2')
+
+    def update(frame):
+        ax.clear()
+        ax.set_xlim(df['x'].min(), df['x'].max())
+        ax.set_ylim(df['y'].min() - 100, df['y'].max())
+        ax.set_xlabel('x')
+        ax.set_ylabel('y = x^2')
+        ax.set_title('Progressive Plot of y = x^2')
+        ax.scatter(df['x'][:frame], df['y'][:frame], color='blue')
+
+    ani = animation.FuncAnimation(fig, update, frames=len(df)+1, interval=100, repeat=False)
+
+    ani.save('animation.gif')
+    plt.close(fig)
+
+y_squared_animation()
+
+
+
+
+
+
+
+
+
+
