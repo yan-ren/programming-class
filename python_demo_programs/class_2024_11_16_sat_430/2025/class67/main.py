@@ -106,20 +106,20 @@ class RPSGame(arcade.Window):
         # Create choice sprites (initially hidden)
         self.player_choice_sprite = arcade.Sprite()
         self.player_choice_sprite.center_x = 200
-        self.player_choice_sprite.center_y = 180
+        self.player_choice_sprite.center_y = 320  # Positioned below the face
         
         self.computer_choice_sprite = arcade.Sprite()
         self.computer_choice_sprite.center_x = 600
-        self.computer_choice_sprite.center_y = 180
+        self.computer_choice_sprite.center_y = 320  # Positioned below the face
         
         # Add choice sprites to the choice sprite list
         self.choice_sprites.append(self.player_choice_sprite)
         self.choice_sprites.append(self.computer_choice_sprite)
 
         # Load attack animations and add them to the sprite list
-        self.rock = AttackAnimation(AttackType.ROCK, 100, 300)
-        self.paper = AttackAnimation(AttackType.PAPER, 200, 300)
-        self.scissors = AttackAnimation(AttackType.SCISSORS, 300, 300)
+        self.rock = AttackAnimation(AttackType.ROCK, 200, 200)
+        self.paper = AttackAnimation(AttackType.PAPER, 400, 200)
+        self.scissors = AttackAnimation(AttackType.SCISSORS, 600, 200)
 
         self.attack_animations.append(self.rock)
         self.attack_animations.append(self.paper)
@@ -137,19 +137,20 @@ class RPSGame(arcade.Window):
         else:
             # Draw faces
             self.face_sprites.draw()
-
+            
             # Draw choices if they exist
             if self.player_choice and self.computer_choice:
                 self.choice_sprites.draw()
                 
+            # Draw score and result
             arcade.draw_text(f'Score: {self.player_score} - {self.computer_score} Computer', SCREEN_WIDTH // 2,
                              50, arcade.color.BLACK, 16, anchor_x='center')
             arcade.draw_text(self.result, SCREEN_WIDTH // 2, 100, arcade.color.BLACK, 18, anchor_x='center')
 
-            # Draw animations
+            # Draw attack options and prompt
             if self.game_state == GameState.ROUND_ACTIVE:
-                arcade.draw_text(f'Choose your attack!', 200,
-                             350, arcade.color.BLACK, 16, anchor_x='center')
+                arcade.draw_text('Choose your attack!', SCREEN_WIDTH // 2,
+                              350, arcade.color.BLACK, 16, anchor_x='center')
                 self.attack_animations.draw()
 
     def on_mouse_press(self, x, y, button, modifiers):
