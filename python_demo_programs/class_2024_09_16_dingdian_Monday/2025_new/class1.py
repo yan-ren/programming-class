@@ -1,28 +1,27 @@
-# a = 1
-# b = 2
+# exercise: write a recursive function that prints from 1 to 10
+
+# def count(n):
+#     if n > 10:
+#         return
+#     print(n)
+#     count(n+1)
 #
-# print(a - b)
-# print(a + b)
-# print(a * b)
-# print(a / b) # float division -> float -> number with decimal points
-# print(a // b) # integer division -> integer -> number without decimal points
-# print(5 % 3) # module -> reste de la division
-# print(2**5)
+# count(1)
 
+# how to calculate 1+2+3+...+n using recursion
+def sum(n):
+    if n == 1000:
+        return 1000
 
-import turtle
+    return n + sum(n-1)
 
-screen = turtle.Screen()
-screen.setup(800, 600)
+print(sum(2000))
 
-pen = turtle.Turtle()
-
-name = screen.textinput('Input', "What's your name:")
-pen.write('Welcome ' + name, align='center', font=('Arial', 24, 'bold'))
-
-num1 = screen.numinput('Input', 'Enter the first number:')
-num2 = screen.numinput('Input', 'Enter the second number:')
-
-pen.clear()
-pen.write(str(num1) + "+" + str(num2) + "=" + str(num1 + num2), align='center', font=('Arial', 24, 'bold'))
-turtle.done()
+'''
+1. Write a for loop that displays the following set of numbers:
+0 10 20 30 40 50 60 70 80 90 100
+'''
+i = 0
+while i <= 100:
+    print(i, end=' ')
+    i += 10
