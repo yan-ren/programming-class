@@ -21,6 +21,11 @@ drop.shape('butterfly.gif')
 drop.penup()
 drop.goto(random.randint(-280, 280), 380)
 
+drop2 = turtle.Turtle()
+drop2.shape('butterfly.gif')
+drop2.penup()
+drop2.goto(random.randint(-280, 280), 380)
+
 score = 0
 pen = turtle.Turtle()
 pen.hideturtle()
@@ -47,9 +52,52 @@ screen.listen()
 screen.onkeypress(go_left, "Left")
 screen.onkeypress(go_right, "Right")
 
+fall_speed = 5
+fall_speed2 = 1
+
 while True:
     screen.update()
     time.sleep(0.03)
+
+    # moving down
+    y = drop.ycor()
+    y -= fall_speed
+    drop.sety(y)
+
+    y2 = drop2.ycor()
+    y2 -= fall_speed2
+    drop2.sety(y2)
+
+    # if drop reaches bottom
+    if drop.ycor() < -350:
+        drop.goto(random.randint(-280, 280), 380)
+
+    if drop2.ycor() < -350:
+        drop2.goto(random.randint(-280, 280), 380)
+
+    # check if collision with basket
+    if drop.distance(basket) < 50 and drop.ycor() > -330:
+        score += 1
+        pen.clear()
+        pen.write(f'Score: {score}', font=('Arial', 16, 'normal'))
+        drop.goto(random.randint(-280, 280), 380)
+
+    if drop2.distance(basket) < 50 and drop2.ycor() > -330:
+        score += 1
+        pen.clear()
+        pen.write(f'Score: {score}', font=('Arial', 16, 'normal'))
+        drop2.goto(random.randint(-280, 280), 380)
+
+
+
+
+
+
+
+
+
+
+
 
 
 '''
@@ -62,6 +110,4 @@ e.g.
 num1 = 20
 num2 = 30
 result = 20 + 21 + 22 + ... + 30
-
-
 '''

@@ -34,8 +34,45 @@ pen.clear()
 problems = int(screen.numinput('Input', 'How many math problems? (1-5)', minval=1, maxval=5))
 
 operations = ['+', '-', '*', '/']
-
+score = 0
 for _ in range(problems):
+    pen.clear()
+    pen.goto(0, 100)
+
+    num1 = random.randint(1, 100)
+    num2 = random.randint(1, 100)
     operation = random.choice(operations)
 
+    if operation == '/':
+        result = num1 / num2
+    elif operation == '+':
+        result = num1 + num2
+    elif operation == '-':
+        result = num1 - num2
+    else:
+        result = num1 * num2
+
+    problem = f'{num1} {operation} {num2}'
+    answer = screen.numinput('Answer', problem)
+
+    if answer is not None and round(answer, 2) == round(result, 2):
+        feedback = 'Correct'
+        score += 1
+    else:
+        feedback = 'Wrong'
+
+    pen.write(feedback, align='center', font=('Arial', 20, 'normal'))
+
+pen.clear()
+pen.write(f'You got {score}!', align='center', font=('Arial', 24, 'normal'))
+
 turtle.done()
+
+'''homework
+draw a 2x2 square using python turtle
+---------
+|   |   |
+---------
+|   |   |
+---------
+'''

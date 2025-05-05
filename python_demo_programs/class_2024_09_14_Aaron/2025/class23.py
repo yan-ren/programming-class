@@ -116,3 +116,18 @@ Result:
 {'a': 1, 'b': 5, 'c': 4}
 '''
 
+dict1 = {"a": 1, "b": 2}
+dict2 = {"b": 3, "c": 4}
+
+merge = {}
+
+for key, value in dict1.items():
+    merge[key] = value
+
+for key, value in dict2.items():
+    if key in merge:
+        merge[key] = merge[key] + dict2[key]
+    else:
+        merge[key] = value
+
+print(merge)
