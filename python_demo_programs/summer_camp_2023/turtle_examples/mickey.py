@@ -14,7 +14,7 @@ def draw_circle(x, y, color, size):
 
 
 draw_circle(0, -100, "black", 100)
-draw_circle(100, 50, "lime", 50)
-draw_circle(-100, 50, "lime", 50)
+draw_circle(100, 50, "black", 50)
+draw_circle(-100, 50, "black", 50)
 
 turtle.done()

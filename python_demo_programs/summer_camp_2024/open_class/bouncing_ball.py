@@ -8,8 +8,10 @@ wn.bgcolor('black')
 
 ball = turtle.Turtle()
 ball.penup()
-shape = input('what is the shape that you like?')
-color = input('which color do you like?')
+# shape = input('what is the shape that you like?')
+# color = input('which color do you like?')
+shape = 'circle'
+color = 'red'
 
 ball.shape(shape)
 ball.color(color)
