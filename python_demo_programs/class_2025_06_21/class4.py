@@ -74,3 +74,7 @@ turtle.done()
 Start with 1. Keep doubling it (multiply by 2) until the value is over 1000. Print all the values.
 1 2 4 8 16 ... 
 '''
+count = 20
+while count >= 0:
+    print(count)
+    count -= 2
