@@ -6,6 +6,7 @@ key cannot be duplicated
 '''
 import sys
 
+from more_itertools.more import outer_product
 
 # d = {'Alice': 90}
 # d['Bob'] = 70
@@ -96,3 +97,21 @@ output_dict = {
     3: ['d']
 }
 '''
+
+input_dict = {
+    'a': 1,
+    'b': 2,
+    'c': 1,
+    'd': 3,
+    'e': 2
+}
+
+output_dict = {}
+
+for k, v in input_dict:
+    if v in output_dict:
+        output_dict[v].append(k)
+    else:
+        output_dict[v] = [k]
+
+print(output_dict)

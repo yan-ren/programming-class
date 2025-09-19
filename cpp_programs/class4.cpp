@@ -66,7 +66,23 @@ int main()
     buzz
     */
 
-    // Keep Asking Until get a positive number
+    // Keep asking until get a positive number
+    // bool running = true;
+    // int number;
+    // while (running)
+    // {
+    //     cin >> number;
+    //     if (number > 0)
+    //     {
+    //         running = false;
+    //     }
+    //     else
+    //     {
+    //         cout << "Enter a positive number";
+    //     }
+    // }
+
+    cout << "*" << endl;
 
     return 0;
 }
