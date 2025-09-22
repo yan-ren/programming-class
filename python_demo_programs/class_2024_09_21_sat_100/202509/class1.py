@@ -55,7 +55,33 @@ def update_timer():
     timer_display.clear()
     timer_display.write(f"Time: {time_left}", align="center", font=("Arial", 16, "normal"))
 
-def move_turtle(x, y):
-
+def move_turtle(x=None, y=None):
+    global score
+    if x is not None and y is not None:
+        score += 1
+        update_score()
+    pos = random.choice(list(positions.values()))
+    t.goto(pos)
 
 def countdown():
+    global time_left
+    if time_left > 0:
+        time_left -= 1
+        update_timer()
+        screen.ontimer(countdown, 1000)
+    else:
+        t.hideturtle()
+        score_display.goto(0, 0)
+        score_display.write(f"Game Over!\nFinal Score: {score}", align="center", font=("Arial", 20, "bold"))
+
+def auto_move():
+    if time_left > 0:
+        move_turtle()
+        screen.ontimer(auto_move, 1000)
+
+
+t.onclick(move_turtle)
+countdown()
+auto_move()
+move_turtle()
+screen.mainloop()

@@ -57,13 +57,37 @@ turtle.onkeypress(lambda: snake.setheading(180), "Left")
 turtle.onkeypress(lambda: snake.setheading(0), "Right")
 turtle.listen()
 
+food = turtle.Turtle()
+food.shape('circle')
+food.penup()
+food.speed(0)
+food.color('green')
 
+food.goto(random.randint(-SCREEN_SIZE // 4, SCREEN_SIZE // 4), random.randint(-SCREEN_SIZE // 4, SCREEN_SIZE // 4))
 
+score = 0
 
+while True:
+    snake.forward(5)
+    snake.stamp()
+    snake.clearstamps(1)
+    if snake.distance(food) < 20:
+        food.goto(random.randint(-SCREEN_SIZE // 4, SCREEN_SIZE // 4), random.randint(-SCREEN_SIZE // 4, SCREEN_SIZE // 4))
+        snake.stamp()
+        snake.stamp()
+        score += 1
+        print('Current score:', score)
 
+    if snake.xcor() >= SCREEN_SIZE // 2 or snake.xcor() <= -SCREEN_SIZE // 2:
+        break
+    if snake.ycor() >= SCREEN_SIZE // 2 or snake.ycor() <= -SCREEN_SIZE // 2:
+        break
 
+    time.sleep(0.01)
 
-
+'''
+add score: add a variable to track score, when snake eats food, score +1
+'''
 
 
 

@@ -41,5 +41,34 @@
 #     i = i + 1
 
 # 10, 9, 8, ..., 1
+i = 10
+while i > 0:
+    print(i)
+    # i = i - 1
+    i -= 1
 
-# how to calculate 1 + 2 + 3 + ... + 20, using while loop
+# how to calculate 1 + 2 + 3 + ... + 100, using while loop
+# i = 1
+# s = 0
+# while i <= 100:
+#     s = s + i
+#     i = i + 1
+#
+# print(s)
+
+i = 2
+s = 0
+while i <= 100:
+    s += i
+    i += 2
+
+print(s)
+
+i = 1
+s = 0
+while i <= 100:
+    if i % 2 == 0:
+        s += i
+    i += 1
+
+print(s)
