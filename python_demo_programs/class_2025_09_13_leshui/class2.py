@@ -55,3 +55,10 @@ print(numbers[3])
 Given a list of numbers, e.g. [1, 2, 4, 3]
 how to find the largest number
 '''
+# numbers = [-1, -2, -4, -3]
+# max = numbers[0]
+# for value in numbers:
+#     if value > max:
+#         max = value
+#
+# print(max)
