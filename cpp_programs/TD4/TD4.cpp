@@ -1,4 +1,4 @@
-﻿////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 /// TD4 Automne 2025, INF1005C.
 /// \file    TD4.cpp
 /// \authors Sofiene Beji et François-R Boyer
@@ -156,14 +156,36 @@ int main()
 	int indiceBlabla = chercherImageParNom(groupe, "Blabla");
 
 	// TODO: 4 Doubler la taille de Image_Verte en hauteur, en ajoutant des pixels bleus.
+	// Double the size of image_verte in height, adding blue pixels
+	if (indiceImageVerte != aucun)
+	{
+		Pixel bleu = creerPixel(0, 0, 255);
+		doublerTaille(groupe.images[indiceImageVerte], dimensionHauteur, bleu);
+	}
 
 	// TODO: 5 Doublee la taille des Image_Rouge en largeur, en ajoutant des pixels rouges.
+	if (indiceImageRouge != aucun)
+	{
+		Pixel rouge = creerPixel(255, 0, 0);
+		doublerTaille(groupe.images[indiceImageRouge], dimensionLargeur, rouge);
+	}
 
 	// TODO: 6 Modifier la couleur du pixel (1,1) de l'Image_Rouge en augmentant la concetration du bleu de 50 unités et en diminuant la concentration du rouge de 255 unités.
+	if (indiceImageRouge != aucun)
+	{
+		Pixel &pixel = groupe.images[indiceImageRouge].pixels[1][1];
+		ajouterCouleurPixel(pixel, creerPixel(-255, 0, 50));
+	}
 
 	// TODO: 7 Modifier la couleur du pixel (2,1) de l'Image_Verte en augementant la concetration du bleu de 100 unités.
+	if (indiceImageVerte != aucun)
+	{
+		Pixel &pixel = groupe.images[indiceImageVerte].pixels[1][2];
+		ajouterCouleurPixel(pixel, creerPixel(0, 0, 100));
+	}
 
 	// TODO: 8 Afficher le groupe d'images.
+	afficherGroupeImages(groupe);
 }
 
 #pragma region "Définitions" //{
@@ -181,17 +203,51 @@ Pixel creerPixel(int tauxRouge, int tauxVert, int tauxBleu)
 
 void ajouterConcentrationCouleurPrimaire(int &concentrationAModifier, int increment)
 {
-	// TODO: Augmenter ou diminuer ( suivant le signe de increment ) la concentration de la couleur primaire passée en paramètre. La concentration finale doit être entre minConcentrationCouleurPrimare et maxConcentrationCouleurPrimare .
+	// TODO: Augmenter ou diminuer ( suivant le signe de increment ) la concentration de la couleur primaire passée en paramètre.
+	// La concentration finale doit être entre minConcentrationCouleurPrimare et maxConcentrationCouleurPrimare .
+	concentrationAModifier += increment;
+	if (concentrationAModifier < minConcentrationCouleurPrimare)
+	{
+		concentrationAModifier = minConcentrationCouleurPrimare;
+	}
+
+	if (concentrationAModifier > maxConcentrationCouleurPrimare)
+	{
+		concentrationAModifier = maxConcentrationCouleurPrimare;
+	}
 }
 
 void ajouterCouleurPixel(Pixel &pixelAModifier, const Pixel &increment)
 {
 	// TODO: Ajoute, composante par composante, l'increment au pixelAModifier, en s'assurant que chaque concentration résultante est dans les bornes.
+	ajouterConcentrationCouleurPrimaire(pixelAModifier.tauxRouge, increment.tauxRouge);
+	ajouterConcentrationCouleurPrimaire(pixelAModifier.tauxVert, increment.tauxVert);
+	ajouterConcentrationCouleurPrimaire(pixelAModifier.tauxBleu, increment.tauxBleu);
 }
 
-char retournerCouleurPixel(const Pixel &pixel){
+char retournerCouleurPixel(const Pixel &pixel)
+{
 	// TODO: Retourner  'R' (respectivement 'V' et 'B') pour un pixel contenant uniquement du rouge (respectivement uniquement du vert et uniquement du bleu); ' ' pour un pixel contenant aucun rouge, ni vert, ni bleu; 'Q' pour tout autre couleur de pixel.
-	JUSTE_POUR_QUE_CA_COMPILE}
+	// JUSTE_POUR_QUE_CA_COMPILE
+
+	if (pixel.tauxRouge == 0 && pixel.tauxVert == 0 && pixel.tauxBleu == 0)
+	{
+		return ' ';
+	}
+	if (pixel.tauxRouge > 0 && pixel.tauxVert == 0 && pixel.tauxBleu == 0)
+	{
+		return 'R';
+	}
+	if (pixel.tauxRouge == 0 && pixel.tauxVert > 0 && pixel.tauxBleu == 0)
+	{
+		return 'V';
+	}
+	if (pixel.tauxRouge == 0 && pixel.tauxVert == 0 && pixel.tauxBleu > 0)
+	{
+		return 'B';
+	}
+	return 'Q';
+}
 
 #pragma endregion //}
 
@@ -212,17 +268,66 @@ Image creerImage(const string &nomImage, unsigned tailleEnLargeur, unsigned tail
 void doublerTaille(Image &image, int doitDoublerQuelleDimension, const Pixel &couleur)
 {
 	// TODO: Doubler la taille de l'image suivant doitDoublerQuelleDimension en paramètre (voir les définitions de constantes pour les valeurs possibles de ce paramètre) en respectant la taille maximale de l'image et en ajoutant des pixels de la couleur spécifiée en paramètre.
+	// double the size of image accourding to doitDoublerQuelleDimension, respecting the maximum image size and adding pixesl of the color specified in parameter
+	if (doitDoublerQuelleDimension == dimensionLargeur)
+	{
+		unsigned nouvelleLargeur = image.taille.largeur * 2;
+		if (nouvelleLargeur > tailleMaxImage)
+		{
+			nouvelleLargeur = tailleMaxImage;
+		}
+
+		for (unsigned y = 0; y < image.taille.hauteur; y++)
+		{
+			for (unsigned x = image.taille.largeur; x < nouvelleLargeur; x++)
+			{
+				image.pixels[y][x] = couleur;
+			}
+		}
+		image.taille.largeur = nouvelleLargeur;
+	}
+	else if (doitDoublerQuelleDimension == dimensionHauteur)
+	{
+		unsigned nouvelleHauteur = image.taille.hauteur * 2;
+		if (nouvelleHauteur > tailleMaxImage)
+		{
+			nouvelleHauteur = tailleMaxImage;
+		}
+
+		for (unsigned y = image.taille.hauteur; y < nouvelleHauteur; y++)
+		{
+			for (unsigned x = 0; x < image.taille.largeur; x++)
+			{
+				image.pixels[y][x] = couleur;
+			}
+		}
+		image.taille.hauteur = nouvelleHauteur;
+	}
 }
 
 void affecterPixel(Image &image, unsigned positionEnLargeur, unsigned positionEnHauteur, const Pixel &pixel)
 {
 	// TODO: Remplacer le pixel de l'image à la position indiquée par positionEnLargeur et positionEnHauteur par la valeur du pixel passé en paramètre.
+	image.pixels[positionEnHauteur][positionEnLargeur] = pixel;
 }
 
 void afficherImage(const Image &image)
 {
 	// TODO: Afficher l'image au complet, avec entête pour son nom, chaque pixel étant représenté par un caractère; le caractère à utiliser est indiqué dans la fonction retournerCouleurPixel.  Vous trouverez un exemple d'affichage dans l'enoncé.
 	// TODO: Cette fonction ne doit avoir aucun ancien "for".
+	cout << string(tailleEntete, caractereEnteteImage) << endl;
+	cout << " Image name: " << image.nomImage << endl;
+	cout << string(tailleEntete, caractereEnteteImage) << endl;
+	for (unsigned y : iter::range(image.taille.hauteur))
+	{
+		cout << "	";
+		for (unsigned x : iter::range(image.taille.largeur))
+		{
+			cout << retournerCouleurPixel(image.pixels[y][x]);
+		}
+		cout << endl;
+	}
+	cout << string(tailleEntete, caractereEnteteImage) << endl;
 }
 
 #pragma endregion //}
@@ -264,6 +369,13 @@ void afficherGroupeImages(const GroupeImages &groupeImages)
 {
 	// TODO: Afficher le groupe d'images, soit l'entête pour le type d'images et toutes les images du groupe. (Vous trouverez dans l'énoncé un exemple)
 	// TODO: Cette fonction ne doit avoir aucun ancien "for".
+	cout << string(tailleEntete, caractereEnteteGroupe) << endl;
+	cout << "	Type of image group: " << groupeImages.type << endl;
+	cout << string(tailleEntete, caractereEnteteGroupe) << endl;
+	for (const Image &image : span(groupeImages.images, groupeImages.nImages))
+	{
+		afficherImage(image);
+	}
 }
 
 GroupeImages lireFichier(const string &nomFichier)
@@ -276,7 +388,7 @@ GroupeImages lireFichier(const string &nomFichier)
 	ifstream fichier(nomFichier);
 	if (!fichier.is_open())
 	{
-		return;
+		return groupe;
 	}
 
 	while (!fichier.eof() && groupe.nImages < tailleMaxGroupeImages)
