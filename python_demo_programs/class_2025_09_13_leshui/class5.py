@@ -58,7 +58,8 @@ exercise: create a function called merge, which takes 2 list as input, combine t
 # print(merge([2, 3], [2, 4]))
 
 '''
-create a function which takes a list of number as input, return a new list with only positive values
+create a function which takes a list of number as input, 
+return a new list with only positive values
 
 e.g.
 input
