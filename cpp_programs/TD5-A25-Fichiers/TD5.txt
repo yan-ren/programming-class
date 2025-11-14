@@ -1,0 +1,264 @@
+INF1005C – PROCEDURAL PROGRAMMING
+
+Directed Work No. 5
+
+Records and Binary Files
+
+Objective
+
+Allow the student to manipulate binary files and records, as well as master the concepts of direct and sequential access.
+
+Duration
+
+Two laboratory sessions.
+
+Submission Deadline
+
+Before 11:30 PM on Sunday, November 16, 2025.
+
+Preparatory Work
+
+Reading the exercises and provided documentation, and writing the algorithms.
+
+Directives
+
+Do not forget file headers. You must also add a header for every function. When writing a function header, don't forget to describe each parameter as IN, OUT, or IN/OUT.
+It is forbidden to use global variables except read-only ones (constants).
+Also, you must use for with range or span (no traditional for). Always follow the coding guide.
+
+Documents to Submit
+
+On the Moodle practical work site, submit CodeDemande.cpp and CodeDemande.hpp, compressed into a .zip file, following the TD submission procedure.
+
+Context
+
+With the experience acquired in TD4 and your recent learning on binary files, you must complete a module of software used to make jigsaw puzzles.
+
+In this TD, we use Bitmap (BMP) images. BMP is a very simple image file format, usually without compression. A BMP is composed of a general header (structure EnteteBmp) followed by a specific header (EnteteDib), then the pixel array row by row.
+
+Many BMP sub-formats exist. The DIB header indicates which one is being used.
+In this TD, we use BITMAPINFOHEADER with RGB24 pixels, which is one of the simplest formats, almost identical to the format from TD4.
+
+Provided Material
+
+Inside CodeFourni.hpp you will find declarations of structures, constants, and variables that are provided to you; their implementation is in CodeFourni.cpp.
+You must fill in the functions in CodeDemande.cpp and place your prototypes in CodeDemande.hpp. Just follow the TODOs for each function.
+
+You are also given an image image.bmp. You may use any BMP image for testing.
+The dimensions of image.bmp are 3440 x 1440.
+
+There are several record structures you will work with:
+
+EnteteBmp and EnteteDib — headers in BMP files
+
+Pixel — an RGB24 pixel
+
+Image — a general image with width, height, and a pixel array
+
+ImageDecomposee — an image split into several pieces
+
+Important: Pixels are organized by rows.
+This means coordinates in the array are (Y, X), not (X, Y).
+
+Structures
+struct Pixel
+{
+    uint8_t b;
+    uint8_t g;
+    uint8_t r;
+};
+
+struct Image
+{
+    unsigned largeur;
+    unsigned hauteur;
+    Pixel**  pixels;
+};
+
+struct ImageDecomposee
+{
+    unsigned nMorceauxX;
+    unsigned nMorceauxY;
+    Image**  morceaux;
+};
+
+
+intN_t and uintN_t are signed/unsigned integers of exactly N bits, from <cstdint>.
+
+Work to Perform
+
+Study the provided functions carefully; you will need some of them.
+Important functions include:
+
+calculerTaillePadding()
+
+construireEnteteBmp()
+
+construireEnteteDib()
+
+There are 11 functions to implement. Skeletons are provided.
+
+Function Details
+1. lireEnteteFichier()
+
+Takes a valid binary-reading file and returns an EnteteDib.
+
+Reads the headers of a bitmap file and extracts the DIB header.
+
+You do not need to validate the format—assume all files are valid BMPs.
+
+A BMP file contains:
+
+BMP header (EnteteBmp)
+
+DIB header (EnteteDib)
+
+Pixel array
+
+Pixel rows include padding to reach multiples of 4 bytes.
+
+2. lireDonneesImage()
+
+Reads pixel data from a file into an already allocated Image.
+
+Important BMP details:
+
+Pixels stored bottom to top
+
+Each row goes left to right
+
+Origin (0,0) is bottom-left
+
+Array uses pixels[y][x]
+
+Each row in the file must be padded to a multiple of 4 bytes → use calculerTaillePadding()
+
+For each row:
+
+Read pixels
+
+Skip the padding bytes
+
+3. ecrireDonneesImage()
+
+Writes the pixel array of an Image into a file that already contains headers.
+
+For each row:
+
+Write pixels
+
+Write padding bytes of value 0
+
+4. ecrireImage()
+
+Creates a BMP file from an Image.
+
+Steps:
+
+Open file in binary write mode
+
+If successful, set output boolean to true
+
+Write BMP header (construireEnteteBmp)
+
+Write DIB header (construireEnteteDib)
+
+Write pixel data
+
+5. allouerImage()
+
+Allocates an image of the given width/height.
+
+If width or height = 0 → return an empty image.
+
+Allocate:
+
+Array of row pointers
+
+For each row, allocate width pixels
+
+6. desallouerImage()
+
+Deallocates all memory used by an Image.
+
+Delete each row
+
+Delete row pointer array
+
+Set pixels to null
+
+7. lireImage()
+
+Reads a BMP file and returns an Image.
+
+Steps:
+
+Open file
+
+Read headers
+
+Allocate the image
+
+Read pixels
+
+Set success boolean
+
+8. extraireMorceau()
+
+Extracts a rectangular region from an image and returns a new smaller image.
+
+9. decomposerImage()
+
+Cuts an image into multiple equally sized pieces (ImageDecomposee).
+
+Use extraireMorceau() for each piece.
+
+Example:
+
+A B C D
+E F G H
+I J K L
+M N O P
+
+10. melangerImage()
+
+Shuffles the pieces randomly by swapping each with a random piece.
+
+11. recomposerImage()
+
+Reassembles an ImageDecomposee into a full Image.
+
+Pieces must remain in their original order.
+
+main() Example
+
+Original vs decomposed/mixed image:
+
+A B C D     →     N J H C
+E F G H           A D P L
+I J K L           F O M K
+M N O P           G E I B
+
+Annex 1 — Required Coding Guide Rules
+
+(Same as TD4)
+
+Includes:
+
+Type names UpperCamelCase
+
+Variable names lowerCamelCase
+
+Arrays use plural names
+
+n prefix for counts
+
+Iteration variables i, j, k (never l)
+
+No abbreviations
+
+Avoid negation in names
+
+Formatting, indentation, no magic numbers
+
+Proper function headers with clear [out] and [in,out]

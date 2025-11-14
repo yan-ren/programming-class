@@ -53,3 +53,15 @@ for _ in range(N):
     pepper = input()
     if pepper == 'Poblano':
         shu += 1500
+    elif pepper == 'Mirasol':
+        shu += 6000
+    elif pepper == 'Serrano':
+        shu += 15500
+    elif pepper == 'Cayenne':
+        shu += 40000
+    elif pepper == 'Thai':
+        shu += 75000
+    else:
+        shu += 125000
+
+print(shu)

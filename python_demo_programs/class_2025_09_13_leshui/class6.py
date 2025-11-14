@@ -15,10 +15,10 @@ print(d['name'])
 # print(d['Alice'])
 d['name'] = 'Bob'
 
-if 'name' in d:
-
-
-del d['name']
+# if 'name' in d:
+#
+#
+# del d['name']
 
 # loop by key
 for k in d:
