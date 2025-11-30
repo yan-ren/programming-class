@@ -42,3 +42,31 @@ Find all users living in Toronto.
 expect: ["user1", "user3"]
 
 '''
+# grades = {
+#     "Tom": "A",
+#     "Ann": "B",
+#     "Bob": "A",
+#     "Lucy": "C",
+#     "Jerry": "B"
+# }
+#
+# winner = []
+# for key, value in grades.items():
+#     if value == 'A':
+#         winner.append(key)
+#
+# print(winner)
+#
+# database = {
+#     "user1": {"age": 20, "city": "Toronto"},
+#     "user2": {"age": 25, "city": "Vancouver"},
+#     "user3": {"age": 22, "city": "Toronto"}
+# }
+#
+# people = []
+#
+# for key, value in database.items():
+#     if value['city'] == 'Toronto':
+#         people.append(key)
+#
+# print(people)

@@ -1,14 +1,28 @@
-D = int(input())
+# D = int(input())
+#
+# E = int(input())
+#
+# for _ in range(E):
+#     sign = input()
+#     amount = int(input())
+#
+#     if sign == '+':
+#         D += amount
+#     else:
+#         D -= amount
+#
+# print(D)
 
-E = int(input())
+total = int(input())
 
-for _ in range(E):
-    sign = input()
-    amount = int(input())
+start = int(input())
+current = start
+multiplier = int(input())
 
-    if sign == '+':
-        D += amount
-    else:
-        D -= amount
+day = 0
+while start < total:
+    current = current * 5
+    start += current
+    day += 1
 
-print(D)
+print(day)

@@ -5,6 +5,8 @@ control flow
     - while loop
     - for loop
 '''
+import time
+
 i = 0
 while i < 10: # loop header
     print('Hello')
@@ -40,3 +42,23 @@ import turtle
 
 wn = turtle.Screen()
 wn.setup(600, 600)
+
+writer = turtle.Turtle()
+writer.hideturtle()
+writer.penup()
+
+start = int(wn.numinput('Countdown', 'Enter a starting number:', minval=0))
+
+while start >= 0:
+    j = 0
+    while j < 10:
+        writer.clear()
+        writer.goto(0, 0)
+        writer.write(start, align='center', font=('Arial', 48, 'bold'))
+        time.sleep(0.1)
+        j += 1
+    start -= 1
+
+writer.clear()
+writer.write("Done!", align="center", font=("Arial", 48, "bold"))
+wn.mainloop()
