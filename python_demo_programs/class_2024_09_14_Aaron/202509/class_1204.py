@@ -11,6 +11,8 @@
 # s.isdigit()
 # '0' <= s <= '9'
 
+# 2025 J3
+
 N = int(input())
 
 def convert(s):
