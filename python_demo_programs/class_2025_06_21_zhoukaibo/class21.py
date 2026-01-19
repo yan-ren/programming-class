@@ -1,4 +1,3 @@
-from pandas.core.algorithms import nunique_ints
 
 numbers = [1, 2, 1, 4, 3]
 
