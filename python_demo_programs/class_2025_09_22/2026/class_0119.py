@@ -56,5 +56,5 @@ turtle.done()
 
 '''
 homework:
-use double loops, if statement to make drawing of your choice
+use double loops, if statement, to make drawing of your choice
 '''
