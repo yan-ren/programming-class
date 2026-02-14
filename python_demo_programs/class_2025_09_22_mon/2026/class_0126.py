@@ -68,3 +68,11 @@ while index < len(numbers):
 print(largest)
 
 # homework: find the smallest number from the list
+index = 0
+smallest = numbers[0]
+while index < len(numbers):
+    if numbers[index] < smallest:
+        smallest = numbers[index]
+    index += 1
+
+print(smallest)

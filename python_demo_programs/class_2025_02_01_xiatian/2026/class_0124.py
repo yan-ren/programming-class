@@ -46,23 +46,32 @@ matrix = [
     [4, 2, 2, 1, 2]
 ]
 '''
-
-sum = 0
-for v in matrix:
-    for num in v:
-        sum += num
-
-print(sum)
-
-# result = [3, 4, 4]
-
 result = []
-for numbers in matrix:
-    max = numbers[0]
-    for num in numbers:
-        if num > max:
-            max = num
 
-    result.append(max)
-
+for sub in matrix:
+    new_sub = []
+    for value in sub:
+        new_sub.insert(0, value)
+    result.append(new_sub)
 print(result)
+
+
+# sum = 0
+# for v in matrix:
+#     for num in v:
+#         sum += num
+#
+# print(sum)
+#
+# # result = [3, 4, 4]
+#
+# result = []
+# for numbers in matrix:
+#     max = numbers[0]
+#     for num in numbers:
+#         if num > max:
+#             max = num
+#
+#     result.append(max)
+#
+# print(result)

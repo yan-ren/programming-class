@@ -1,17 +1,4 @@
 '''
-2017 J3
-'''
-
-# text = input()
-# i = 0
-# while i < len(text):
-#     j = i + 1
-#     while j < len(text) + 1:
-#         s = text[i:j]
-#         j += 1
-#     i += 1
-
-'''
 2015 J3
 '''
 
@@ -37,6 +24,7 @@ def next_consonant(c):
 
     return 'z'
 
+
 text = input()
 new_text = ''
 for ch in text:
@@ -47,4 +35,33 @@ for ch in text:
         new_text += nearest_vowel(ch)
         new_text += next_consonant(ch)
 
-print(new_text)
+# i = 0
+# while i < len(text):
+#     if text[i] in vowels:
+#         new_text += text[i]
+#     else:
+#         new_text += text[i]
+#         new_text += nearest_vowel(text[i])
+#         new_text += next_consonant(text[i])
+#
+#     i += 1
+
+
+# print(new_text)
+#
+# s = '5 6'
+# s = list(map(int, s.split())) # ['5', '6'] -> [5, 6]
+
+n = int(input())
+antonia = 100
+david = 100
+
+for _ in range(n):
+    line = list(map(int, input().split()))
+    if line[0] > line[1]:
+        david -= line[1]
+    elif line[0] < line[1]:
+        antonia -= line[0]
+
+print(antonia)
+print(david)
