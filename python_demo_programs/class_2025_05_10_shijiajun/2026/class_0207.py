@@ -37,5 +37,12 @@ grades = {'Tom': 90, 'Jerry': 29, 'Bob': 89, 'Kim': 30}
 
 keep all grades that is bigger than 60
 grades = {'Tom': 90, 'Bob': 89}
-
 '''
+grades = {'Tom': 90, 'Jerry': 29, 'Bob': 89, 'Kim': 30}
+new_grades = {}
+
+for name, mark in grades.items():
+    if mark > 60:
+        new_grades[name] = mark
+
+print(new_grades)

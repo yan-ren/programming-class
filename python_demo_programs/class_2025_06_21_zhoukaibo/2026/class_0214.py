@@ -5,10 +5,10 @@ dictionary
 set
 '''
 
-t = (2, 3, 4)
-print(t)
-t[0] = 20
-print(t)
+# t = (2, 3, 4)
+# print(t)
+# t[0] = 20
+# print(t)
 
 # d = {'age': 21, 'name': 'Tom'}
 # print(d['age'])
@@ -33,6 +33,8 @@ for ch in text:
         count[ch] = 1
     else:
         count[ch] += 1
+
+print(count)
 
 max_value = 0
 for value in count.values():

@@ -32,4 +32,15 @@ def find_duplicate(s):
 #     else:
 #         start += 1
 
-print('*' * 3)
+line1 = '*x*'
+line2 = ' xx'
+line3 = '* *'
+
+k = int(input())
+
+new_line1 = ''
+for ch in line1:
+    new_line1 += ch * k
+
+for _ in range(k):
+    print(new_line1)
