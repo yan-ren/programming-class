@@ -98,7 +98,6 @@ while True:
     if ball.xcor() < -390:
         # winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
         ball.goto(0, 0)
-
         ball.dx *= -1
         score_b += 1
         pen.clear()

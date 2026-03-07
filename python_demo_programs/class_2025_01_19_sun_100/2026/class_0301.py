@@ -8,18 +8,18 @@ wn.setup(800, 600)
 wn.tracer(0)
 
 turtle_properties = {
-    "turtle1": {'color': 'red', 'shape': 'turtle', 'speed': 1},
-    "turtle2": {"color": "green", "shape": "turtle", "speed": 2},
-    "turtle3": {"color": "blue", "shape": "turtle", "speed": 3},
-    "turtle4": {"color": "yellow", "shape": "turtle", "speed": 4},
-    "turtle5": {"color": "purple", "shape": "turtle", "speed": 5}
+    "turtle1": {'color': 'red', 'speed': 1},
+    "turtle2": {'color': 'green', 'speed': 2},
+    "turtle3": {'color': 'blue', 'speed': 3},
+    "turtle4": {'color': 'yellow', 'speed': 4},
+    "turtle5": {'color': 'purple', 'speed': 5}
 }
 
 turtles = {}
 for name, props in turtle_properties.items():
     t = turtle.Turtle()
     t.color(props['color'])
-    t.shape(props['shape'])
+    t.shape('turtle')
     t.penup()
     t.speed(0)
     t.goto(random.randint(-380, 380), random.randint(-280, 280))
@@ -28,10 +28,8 @@ for name, props in turtle_properties.items():
 def move_turtles():
     for name, t in turtles.items():
         t.forward(turtle_properties[name]['speed'])
-        # challenge: how to make selection to left turn or right turn
-        # t.left(random.randint(0, 10))
         turn_angle = random.randint(0, 10)
-        if random.choice([True, False]):
+        if random.choice(['left', 'right']) == 'left':
             t.left(turn_angle)
         else:
             t.right(turn_angle)
