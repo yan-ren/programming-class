@@ -57,6 +57,29 @@ update_score()
 def move_players():
     for name, t in players.items():
         t.forward(player_data[name]['speed'])
-        t.right(random.randint(0, 20))
-        
 
+        turn = random.randint(0, 20)
+        if random.choice(['left', 'right']) == 'left':
+            t.left(turn)
+        else:
+            t.right(turn)
+
+        if t.xcor() > 390 or t.xcor() < -390:
+            t.right(180)
+        if t.ycor() > 290 or t.ycor() < -290:
+            t.right(180)
+
+        if t.distance(treasure) < 20:
+            player_data[name]['score'] += treasure_data['gold']['points']
+            treasure.goto(random.randint(-350, 350), random.randint(-250, 250))
+            update_score()
+            if player_data[name]['score'] > 100:
+                score_writer.goto(0, 0)
+                score_writer.write(name + " wins", align='center', font=('Arial', 24, 'bold'))
+                return
+
+    wn.update()
+    wn.ontimer(move_players, 30)
+
+move_players()
+wn.mainloop()
