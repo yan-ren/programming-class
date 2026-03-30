@@ -31,10 +31,41 @@ class Player:
         if keys[pygame.K_DOWN]:
             self.y += self.speed
 
+    def shoot(self):
+        bullet_x = self.x + (self.size//2)
+        bullet_y = self.y
+        return Bullet(bullet_x, bullet_y)
+
+    def get_rect(self):
+        return pygame.Rect(self.x, self.y, self.size, self.size)
+
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size))
 
+class Bullet:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.width = 8
+        self.height = 20
+        self.color = (255, 255, 0)
+        self.speed = 10
+
+    def move(self):
+        self.y -= self.speed
+
+    def is_off_screen(self):
+        return self.y < 0
+
+    def get_rect(self):
+        return pygame.Rect(self.x, self.y, self.width, self.height)
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
+
+
 player = Player(200, 150)
+bullets = []
 
 running = True
 
@@ -43,10 +74,21 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                bullets.append(player.shoot())
+
     keys = pygame.key.get_pressed()
     player.move(keys)
+
+    for bullet in bullets:
+        bullet.move()
+    bullets = [b for b in bullets if not b.is_off_screen()]
+
     screen.fill((30, 30, 30))
     player.draw(screen)
+    for bullet in bullets:
+        bullet.draw(screen)
     pygame.display.update()
     clock.tick(60)
 

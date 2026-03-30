@@ -112,6 +112,23 @@ def setup_targets():
     bind_click_event(t)
 
 def countdown():
+    global time_left, game_over
+    if time_left > 0:
+        time_left -= 1
+        update_timer()
+        wn.ontimer(countdown, 1000)
+    else:
+        game_over = True
+        for t in targets:
+            t.hideturtle()
+        show_game_over()
 
+    wn.update()
+
+update_score()
+update_timer()
+draw_legend()
 setup_targets()
+countdown()
+
 wn.mainloop()

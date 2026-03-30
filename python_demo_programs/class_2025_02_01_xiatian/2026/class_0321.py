@@ -90,7 +90,7 @@ You are given two lists of strings list1 and list2.
 Return a list of all words that appear in one list but not the other (in any order).
 
 example1
-Input:  list1 = ["apple", "banana", "cherry"]
+Input:  list1 = ["apple", "banana", "cherry", 'apple']
          list2 = ["banana", "cherry", "date"]
 Output: ["apple", "date"]
 Explanation: "apple" is only in list1, "date" is only in list2
@@ -102,3 +102,7 @@ Output: []
 Explanation: All words appear in both lists
 
 '''
+# covert list to set to remove duplicates
+# set1, set2
+# loop each value in set1 if not in set2, add it to result
+# loop each value in set2 if not in set2, add it to result
