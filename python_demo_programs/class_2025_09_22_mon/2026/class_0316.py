@@ -57,7 +57,15 @@ while not game_over:
                 draw = False
 
     # end game or switch player
-
+    if winner:
+        game_over = True
+    elif draw:
+        game_over = True
+    else:
+        if current_player == 'X':
+            current_player = 'O'
+        else:
+            current_player = 'X'
 
 print('\n  0   1   2')
 for i, row in enumerate(board):

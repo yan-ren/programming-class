@@ -33,4 +33,16 @@ numbers = [(i,j) for i in range(5) for j in range(i)]
 exercise:
 [0, 1, 2, 3] -> [1, 3, 5, 7]
 [3, 8, 9, 5] -> [True, False, True, False]
+
+['apple', 'orange', 'pear'] -> ['A', 'O', 'P']
+['apple', 'orange', 'pear'] -> [('apple', 5), ('orange', 6), ('pear', 4)]
+
+[1, 2, 3, 4] -> [‘odd’, ‘even’, ‘odd’, ‘even’]
+[1, -2, -3, 4] -> [‘positive’, ‘negative’, ‘negative’, ‘positive’]
+
 '''
+numbers = [0, 1, 2, 3]
+new_numbers = [num * 2 + 1 for num in numbers]
+
+numbers = [3, 8, 9, 5]
+result = [True if num % 3 == 0 else False for num in numbers]

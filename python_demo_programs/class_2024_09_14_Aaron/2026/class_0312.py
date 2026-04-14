@@ -5,8 +5,8 @@ import sys
 
 pygame.init()
 
-WIDTH = 600
-HEIGHT = 400
+WIDTH = 1200
+HEIGHT = 1200
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Move the Player")
 
