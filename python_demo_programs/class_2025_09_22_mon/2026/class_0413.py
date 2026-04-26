@@ -77,3 +77,34 @@ def move_down():
     if y > BOTTOM_WALL:
         player.goto(player.xcor(), y)
         player.setheading(270)
+
+screen.listen()
+screen.onkeypress(move_left, 'Left')
+screen.onkeypress(move_right, 'Right')
+screen.onkeypress(move_up, 'Up')
+screen.onkeypress(move_down, 'Down')
+
+coins = []
+
+for i in range(4):
+    coin = turtle.Turtle()
+    coin.shape('square')
+    coin.color('lime')
+    coin.penup()
+    coin.goto(random.randint(LEFT_WALL, RIGHT_WALL), random.randint(BOTTOM_WALL, TOP_WALL))
+    coins.append(coin)
+
+
+game_running = True
+
+while game_running:
+    screen.update()
+    time.sleep(0.02)
+
+    scoreboard.clear()
+    scoreboard.write(f'Score: {score}', align='center', font=('Courier', 16, 'bold'))
+
+
+'''
+think about what's the remaining logic needs to be added?
+'''
