@@ -89,8 +89,19 @@ class Enemy:
         self.x = random.randint(0, WIDTH - self.size)
         self.y = random.randint(-200, -self.size)
 
-    def move(self):
+    def move(self, player):
+        # dx = player.x - self.x
+        # dy = player.y - self.y
+        # distance = (dx ** 2 + dy ** 2) ** 0.5
+        # if distance > 0:
+        #     self.x += (dx / distance) * self.speed
+        #     self.y += (dy / distance) * self.speed
+
         self.y += self.speed
+        if player.x > self.x:
+            self.x += 1
+        elif player.x < self.x:
+            self.x -= 1
 
     def is_off_screen(self):
         return self.y > HEIGHT
@@ -111,6 +122,9 @@ spawn_timer = 0
 
 running = True
 color_index = 0
+
+score = 0
+start_time = pygame.time.get_ticks()
 
 while running:
     for event in pygame.event.get():
@@ -135,7 +149,7 @@ while running:
     bullets = [b for b in bullets if not b.is_off_screen()]
 
     for enemy in enemies:
-        enemy.move()
+        enemy.move(player)
     enemies = [e for e in enemies if not e.is_off_screen()]
 
     spawn_timer += 1
@@ -148,6 +162,7 @@ while running:
             if bullet.get_rect().colliderect(enemy.get_rect()):
                 bullets.remove(bullet)
                 enemies.remove(enemy)
+                score += 1
                 break
 
     for enemy in enemies[:]:
@@ -157,13 +172,24 @@ while running:
             if player.lives <= 0:
                 running = False
 
+    elapsed_seconds = (pygame.time.get_ticks() - start_time) / 1000
     # -- draw ---
     screen.fill((30, 30, 30))
+
     player.draw(screen)
     for bullet in bullets:
         bullet.draw(screen)
     for enemy in enemies:
         enemy.draw(screen)
+
+    score_text = font.render(f'Score: {score}', True, (255, 255, 255))
+    lives_text = font.render(f'Lives: {player.lives}', True, (255, 255, 255))
+    timer_text = font.render(f'Time: {elapsed_seconds}', True, (255, 255, 255))
+
+    screen.blit(score_text, (10, 10))
+    screen.blit(lives_text, (10, 60))
+    screen.blit(timer_text, (WIDTH - timer_text.get_width() - 10, 10))
+
     pygame.display.update()
     clock.tick(60)
 
@@ -176,3 +202,14 @@ pygame.time.wait(5000)
 
 pygame.quit()
 sys.exit()
+
+'''
+plan:
+- show score and lives on screen
+- show a timer on screen
+- make enemy move towards player, instead of falling down vertically
+- add another character as coin, when player gets the coin, lives + 1
+- add another character as weapon, when player gets the weapon, the bullet is enhanced
+- double player game
+- add different weapon/bullet, and a button to switch it
+'''
