@@ -1,16 +1,3 @@
-'''
-exercise: use double loop, how to print following pattern
-*
-* *
-* * *
-* * * *
-* * * * *
-'''
-# for i in range(5): # we want 5 rows
-#     for j in range(i + 1):
-#         print('*', end='')
-#
-#     print()
 
 # Turtle Dodge game
 '''
@@ -96,16 +83,42 @@ for i in range(5):
 
 
 game_running = True
+ROUND_TIME = 60
+RESTART_DELAY = 10
+start_time = time.time()
+
+timer_display = turtle.Turtle()
+timer_display.hideturtle()
+timer_display.penup()
+timer_display.color('yellow')
+timer_display.goto(0, TOP_WALL - 30)
 
 while game_running:
     screen.update()
     time.sleep(0.02)
 
+    elapsed = time.time() - start_time
+    time_left = ROUND_TIME - elapsed
+
+    # check collision with coins
+    for coin in coins:
+        if player.distance(coin) < 20:
+            coin.goto(random.randint(LEFT_WALL, RIGHT_WALL), random.randint(BOTTOM_WALL, TOP_WALL))
+            score += 1
+
     scoreboard.clear()
     scoreboard.write(f'Score: {score}', align='center', font=('Courier', 16, 'bold'))
 
+    timer_display.clear()
+    timer_display.write(f'Time: {int(time_left)}', align='center', font=('Courier', 16, 'bold'))
 
 '''
-think about what's the remaining logic needs to be added?
+1. add logic when player runs into the coins
+    - coins randomly relocate to other position
+    - increase the point by 1
+    
+2. create a timer, each round of game is 60s, show the timer on the screen and
+when time is up, wait for 10s to restart the game
 
+document.getElementByID().removeAttribute("sandbox")
 '''
