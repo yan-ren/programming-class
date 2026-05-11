@@ -113,12 +113,37 @@ class Enemy:
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size))
 
 
+class Coin:
+    def __init__(self):
+        self.size = 30
+        self.speed = 3
+        self.color = (255, 215, 0)  # gold
+        self.x = random.randint(0, WIDTH - self.size)
+        self.y = random.randint(-200, -self.size)
+
+    def move(self):
+        self.y += self.speed
+
+    def is_off_screen(self):
+        return self.y > HEIGHT
+
+    def get_rect(self):
+        return pygame.Rect(self.x, self.y, self.size, self.size)
+
+    def draw(self, screen):
+        center_x = self.x + self.size // 2
+        center_y = self.y + self.size // 2
+        radius = self.size // 2
+        pygame.draw.circle(screen, self.color, (center_x, center_y), radius)
+
 player = Player(200, 150)
 enemies = [Enemy() for _ in range(5)]
 bullets = []
+coins = []
 
 shoot_cooldown = 15
 spawn_timer = 0
+coin_spawn_timer = 0
 
 running = True
 color_index = 0
@@ -157,6 +182,15 @@ while running:
         enemies.append(Enemy())
         spawn_timer = 0
 
+    for coin in coins:
+        coin.move()
+    coins = [c for c in coins if not c.is_off_scree()]
+
+    coin_spawn_timer += 1
+    if coin_spawn_timer >= 180:
+        coins.append(Coin())
+        coin_spawn_timer = 0
+
     for bullet in bullets[:]:
         for enemy in enemies[:]:
             if bullet.get_rect().colliderect(enemy.get_rect()):
@@ -172,7 +206,13 @@ while running:
             if player.lives <= 0:
                 running = False
 
+    for coin in coins[:]:
+        if player.get_rect().colliderect(coin.get_rect()):
+            coins.remove(coin)
+            player.lives += 1
+
     elapsed_seconds = (pygame.time.get_ticks() - start_time) / 1000
+
     # -- draw ---
     screen.fill((30, 30, 30))
 
@@ -181,6 +221,8 @@ while running:
         bullet.draw(screen)
     for enemy in enemies:
         enemy.draw(screen)
+    for coin in coins:
+        coin.draw(screen)
 
     score_text = font.render(f'Score: {score}', True, (255, 255, 255))
     lives_text = font.render(f'Lives: {player.lives}', True, (255, 255, 255))
