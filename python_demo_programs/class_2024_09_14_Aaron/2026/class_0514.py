@@ -2,6 +2,8 @@ import random
 import pygame
 import sys
 
+from summer_camp_2023.turtle_examples.dino.dino import dx
+
 pygame.init()
 
 WIDTH = 1200
@@ -54,19 +56,22 @@ class Player:
 
 
 class Bullet:
-    def __init__(self, x, y):
+    def __init__(self, x, y, dx=0, dy=-10, color=(255, 255, 0), damage=1, width=8):
         self.x = x
         self.y = y
-        self.width = 8
+        self.dx = dx
+        self.dy = dy
+        self.width = width
         self.height = 20
-        self.color = (255, 255, 0)
-        self.speed = 10
+        self.color = color
+        self.damage = damage
 
     def move(self):
-        self.y -= self.speed
+        self.x += self.dx
+        self.y += self.dy
 
     def is_off_screen(self):
-        return self.y < 0
+        return self.y < 0 or self.y > HEIGHT or self.x < 0 or self.x > WIDTH
 
     def get_rect(self):
         return pygame.Rect(self.x, self.y, self.width, self.height)
@@ -80,9 +85,16 @@ class Enemy:
         self.size = 50
         self.x = random.randint(0, WIDTH - self.size)
         self.y = random.randint(-200, -self.size)
-        self.color = (220, 50, 50)
         self.speed = random.randint(2, 5)
         self.horizontal_speed = random.randint(1, 5)
+        self.lives = random.choice([1, 2, 3])
+        if self.lives == 1:
+            self.color = (220, 50, 50)
+        elif self.lives == 2:
+            self.color = (150, 0, 150)
+        else:
+            self.color = (220, 50, 50)
+
 
     def move(self, player_x):
         self.y += self.speed
@@ -100,6 +112,10 @@ class Enemy:
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size))
 
+    def hit(self):
+        self.lives -= 1
+        if self.lives == 1:
+            self.color = (220, 50, 50)
 
 class Coin:
     def __init__(self):
@@ -183,8 +199,10 @@ while running:
         for enemy in enemies[:]:
             if bullet.get_rect().colliderect(enemy.get_rect()):
                 bullets.remove(bullet)
-                enemies.remove(enemy)
-                score += 1
+                enemy.hit()
+                if enemy.lives <= 0:
+                    enemies.remove(enemy)
+                    score += 1
                 break
 
     # player vs enemy collision
@@ -235,6 +253,8 @@ done
 5. add coin object, when player gets it, lives + 1
 
 today:
-1. 
+1. different type of enemy, some enemy can have more lives, e.g. need to be shoot by 2 bullet to disappear
+2. different type of weapons, create special coin representing weapon, when player gets it, player have a new weapon,
+and can use key to switch between the weapon, different weapon can be shown on the screen
 
 '''

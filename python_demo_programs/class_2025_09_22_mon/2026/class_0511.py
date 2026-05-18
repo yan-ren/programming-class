@@ -36,7 +36,7 @@ scoreboard = turtle.Turtle()
 scoreboard.hideturtle()
 scoreboard.penup()
 scoreboard.color('white')
-scoreboard.goto(0, TOP_WALL + 5)
+scoreboard.goto(0, TOP_WALL)
 
 score = 0
 lives = 5
@@ -106,6 +106,24 @@ while game_running:
             coin.goto(random.randint(LEFT_WALL, RIGHT_WALL), random.randint(BOTTOM_WALL, TOP_WALL))
             score += 1
 
+    # when time runs out, pause and restart
+    if time_left <= 0:
+        # countdown before restarting (uses a loop - same concept students just learned)
+        for remaining in range(RESTART_DELAY, 0, -1):
+            timer_display.clear()
+            timer_display.write(
+                f"Time's up! Restart in {remaining}s",
+                align='center', font=('Courier', 16, 'bold')
+            )
+            screen.update()
+            time.sleep(1)
+
+        score = 0
+        start_time = time.time()
+        player.goto(0, BOTTOM_WALL + 30)
+        for coin in coins:
+            coin.goto(random.randint(LEFT_WALL, RIGHT_WALL), random.randint(BOTTOM_WALL, TOP_WALL))
+
     scoreboard.clear()
     scoreboard.write(f'Score: {score}', align='center', font=('Courier', 16, 'bold'))
 
@@ -120,4 +138,5 @@ while game_running:
 2. create a timer, each round of game is 60s, show the timer on the screen and
 when time is up, wait for 10s to restart the game
 
+3. for each object, auto change its location every 3s, if not being caught
 '''
