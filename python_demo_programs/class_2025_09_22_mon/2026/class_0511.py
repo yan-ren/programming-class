@@ -82,6 +82,7 @@ for i in range(5):
     coins.append(coin)
 
 
+last_relocate = time.time()
 game_running = True
 ROUND_TIME = 60
 RESTART_DELAY = 10
@@ -100,11 +101,17 @@ while game_running:
     elapsed = time.time() - start_time
     time_left = ROUND_TIME - elapsed
 
+    if time.time() - last_relocate >= 3:
+        for coin in coins:
+            coin.goto(random.randint(LEFT_WALL, RIGHT_WALL), random.randint(BOTTOM_WALL, TOP_WALL))
+        last_relocate = time.time()
+
     # check collision with coins
     for coin in coins:
         if player.distance(coin) < 20:
             coin.goto(random.randint(LEFT_WALL, RIGHT_WALL), random.randint(BOTTOM_WALL, TOP_WALL))
-            score += 1
+            if coin.pencolor() == 'lime':
+                score += 1
 
     # when time runs out, pause and restart
     if time_left <= 0:
@@ -139,4 +146,7 @@ while game_running:
 when time is up, wait for 10s to restart the game
 
 3. for each object, auto change its location every 3s, if not being caught
+
+Homework/exercise:
+implement the coin with different color, also when player catches the coin, add different score based on color
 '''

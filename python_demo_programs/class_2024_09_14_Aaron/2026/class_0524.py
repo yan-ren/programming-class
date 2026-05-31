@@ -7,11 +7,40 @@ pygame.init()
 
 WIDTH = 1200
 HEIGHT = 1200
+
+WEAPON_NAMES = {1: 'Normal', 2: 'Double', 3: 'Spread'}
+MAX_WEAPON = 3
+
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Move the Player")
+font = pygame.font.SysFont(None, 48)
 
 clock = pygame.time.Clock()
-font = pygame.font.SysFont(None, 48)
+
+class Weapon:
+    def __init__(self):
+        self.size = 35
+        self.speed = 3
+        self.color = (0, 255, 255)
+        self.x = random.randint(0, WIDTH - self.size)
+        self.y = random.randint(-200, -self.size)
+
+    def move(self):
+        self.y += self.speed
+
+    def is_off_screen(self):
+        return self.y > HEIGHT
+
+    def get_rect(self):
+        return pygame.Rect(self.x, self.y, self.size, self.size)
+
+    def draw(self, screen):
+        points = [
+            (self.x + self.size // 2, self.y),
+            (self.x, self.y + self.size),
+            (self.x + self.size, self.y + self.size)
+        ]
+        pygame.draw.polygon(screen, self.color, points)
 
 class Player:
     def __init__(self, x, y):
@@ -21,6 +50,8 @@ class Player:
         self.color = (0, 128, 255)
         self.speed = 5
         self.lives = 3
+        self.weapon = 1
+        self.max_weapon = 1
 
     def move(self, keys):
         if keys[pygame.K_LEFT]:
@@ -43,9 +74,27 @@ class Player:
             self.y = 0
 
     def shoot(self):
-        bullet_x = self.x + self.size // 2
-        bullet_y = self.y
-        return Bullet(bullet_x, bullet_y)
+        center_x = self.x + self.size // 2
+        bullets = []
+        if self.weapon == 1:
+            bullets.append(Bullet(center_x, self.y))
+        elif self.weapon == 2:
+            bullets.append(Bullet(center_x - 12, self.y))
+            bullets.append(Bullet(center_x + 4, self.y))
+        elif self.weapon == 3:
+            bullets.append(Bullet(center_x, self.y, dx=0))
+            bullets.append(Bullet(center_x, self.y, dx=-3))
+            bullets.append(Bullet(center_x, self.y, dx=3))
+        return bullets
+
+    def pickup_weapon(self):
+        if self.max_weapon < MAX_WEAPON:
+            self.max_weapon += 1
+            self.weapon = self.max_weapon
+
+    def switch_weapon(self, n):
+        if 1 <= n <= self.max_weapon:
+            self.weapon = n
 
     def get_rect(self):
         return pygame.Rect(self.x, self.y, self.size, self.size)
@@ -70,7 +119,7 @@ class Bullet:
         self.y += self.dy
 
     def is_off_screen(self):
-        return self.y < 0 or self.y > HEIGHT or self.x < 0 or self.x > WIDTH
+        return self.y < 0 or self.x < -self.width or self.x > WIDTH
 
     def get_rect(self):
         return pygame.Rect(self.x, self.y, self.width, self.height)
@@ -147,7 +196,9 @@ new_enemy_timer = 0
 score = 0
 start_time = pygame.time.get_ticks()
 coins = []
+weapon_pickups = []
 new_coin_timer = 0
+weapon_spawn_timer = 0
 
 while running:
     for event in pygame.event.get():
@@ -157,12 +208,21 @@ while running:
     keys = pygame.key.get_pressed()
     player.move(keys)
 
+    # switch weapon with number keys (only if unlocked)
+    if keys[pygame.K_1]:
+        player.switch_weapon(1)
+    if keys[pygame.K_2]:
+        player.switch_weapon(2)
+    if keys[pygame.K_3]:
+        player.switch_weapon(3)
+
     if shoot_cooldown > 0:
         shoot_cooldown -= 1
 
     if keys[pygame.K_SPACE] and shoot_cooldown == 0:
-        bullets.append(player.shoot())
-        shoot_cooldown = 5
+        new_bullets = player.shoot()
+        bullets.extend(new_bullets)
+        shoot_cooldown = 15
 
     for bullet in bullets:
         bullet.move()
@@ -193,6 +253,20 @@ while running:
             coins.remove(coin)
             player.lives += 1
 
+    for wp in weapon_pickups:
+        wp.move()
+    weapon_pickups = [w for w in weapon_pickups if not w.is_off_screen()]
+
+    weapon_spawn_timer += 1
+    if weapon_spawn_timer >= 360:  # rarer than coins
+        weapon_pickups.append(Weapon())
+        weapon_spawn_timer = 0
+
+    for wp in weapon_pickups[:]:
+        if player.get_rect().colliderect(wp.get_rect()):
+            weapon_pickups.remove(wp)
+            player.pickup_weapon()
+
     # bullet vs enemy collision
     for bullet in bullets[:]:
         for enemy in enemies[:]:
@@ -216,6 +290,8 @@ while running:
     timer_text = font.render(f'Time: {elapsed_seconds}', True, (255, 255, 255))
     score_text = font.render(f'Score: {score}', True, (255, 255, 255))
     lives_text = font.render(f'Lives: {player.lives}', True, (255, 255, 255))
+    weapon_label = f'Weapon: {WEAPON_NAMES[player.weapon]} ({player.weapon} / {player.max_weapon})'
+    weapon_text = font.render(weapon_label, True, (0, 255, 255))
 
     # drawing
     screen.fill((30, 30, 30))
@@ -226,9 +302,13 @@ while running:
         enemy.draw(screen)
     for coin in coins:
         coin.draw(screen)
+    for wp in weapon_pickups:
+        wp.draw(screen)
+
     screen.blit(timer_text, (10, 10))
     screen.blit(score_text, (10, 50))
     screen.blit(lives_text, (10, 90))
+    screen.blit(weapon_text, (10, 110))
 
     pygame.display.update()
     clock.tick(60)
@@ -250,10 +330,14 @@ done
 3. add timer that starts from zero, show timer on the screen
 4. showing score and lives on the screen
 5. add coin object, when player gets it, lives + 1
+6. different type of enemy, some enemy can have more lives, e.g. need to be shoot by 2 bullet to disappear
 
 today:
-1. different type of enemy, some enemy can have more lives, e.g. need to be shoot by 2 bullet to disappear
-2. different type of weapons, create special coin representing weapon, when player gets it, player have a new weapon,
+1. different type of weapons, create special coin representing weapon, when player gets it, player have a new weapon,
 and can use key to switch between the weapon, different weapon can be shown on the screen
 
+- Weapon class
+- Player class adds two attributes, and two method (pickup_weapon(), switch_weapon(n))
+- Player.shoot()
+- Bullet uses dx, updates is_off_screen
 '''
