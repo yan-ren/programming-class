@@ -66,6 +66,7 @@ class Player:
             bullets.append(Bullet(center_x, self.y, dx = 0))
             bullets.append(Bullet(center_x, self.y, dx = -3))
             bullets.append(Bullet(center_x, self.y, dx = 3))
+        return bullets
 
     def pickup_weapon(self):
         if self.max_weapon < MAX_WEAPON:
@@ -190,10 +191,12 @@ player = Player(200, 150)
 enemies = [Enemy() for _ in range(5)]
 bullets = []
 coins = []
+weapon_pickup = []
 
 shoot_cooldown = 15
 spawn_timer = 0
 coin_spawn_timer = 0
+weapon_spawn_timer = 0
 
 running = True
 color_index = 0
@@ -209,15 +212,21 @@ while running:
     keys = pygame.key.get_pressed()
     player.move(keys)
 
+    # switch weapon with number keys
+    if keys[pygame.K_1]:
+        player.switch_weapon(1)
+    if keys[pygame.K_2]:
+        player.switch_weapon(2)
+    if keys[pygame.K_3]:
+        player.switch_weapon(3)
+
     if shoot_cooldown > 0:
         shoot_cooldown -= 1
 
     if keys[pygame.K_SPACE] and shoot_cooldown == 0:
-        bullet = player.shoot()
-        bullet.color = BULLET_COLORS[color_index % len(BULLET_COLORS)]
-        color_index += 1
+        new_bullets = player.shoot()
+        bullets.extend(new_bullets)
         shoot_cooldown = 15
-        bullets.append(bullet)
 
     for bullet in bullets:
         bullet.move()
@@ -261,6 +270,20 @@ while running:
             coins.remove(coin)
             player.lives += 1
 
+    for wp in weapon_pickup:
+        wp.move()
+    weapon_pickup = [w for w in weapon_pickup if not w.is_off_screen()]
+
+    weapon_spawn_timer += 1
+    if weapon_spawn_timer >= 360:
+        weapon_pickup.append(Weapon())
+        weapon_spawn_timer = 0
+
+    for wp in weapon_pickup[:]:
+        if player.get_rect().colliderect(wp.get_rect()):
+            weapon_pickup.remove(wp)
+            player.pickup_weapon()
+
     elapsed_seconds = (pygame.time.get_ticks() - start_time) / 1000
 
     # -- draw ---
@@ -273,14 +296,19 @@ while running:
         enemy.draw(screen)
     for coin in coins:
         coin.draw(screen)
+    for wp in weapon_pickup:
+        wp.draw(screen)
 
     score_text = font.render(f'Score: {score}', True, (255, 255, 255))
     lives_text = font.render(f'Lives: {player.lives}', True, (255, 255, 255))
     timer_text = font.render(f'Time: {elapsed_seconds}', True, (255, 255, 255))
+    weapon_label = f'Weapon: {WEAPON_NAMES[player.weapon]} ({player.weapon} / {player.max_weapon})'
+    weapon_text = font.render(weapon_label, True, (0, 255, 255))
 
     screen.blit(score_text, (10, 10))
     screen.blit(lives_text, (10, 60))
     screen.blit(timer_text, (WIDTH - timer_text.get_width() - 10, 10))
+    screen.blit(weapon_text, (10, 110))
 
     pygame.display.update()
     clock.tick(60)

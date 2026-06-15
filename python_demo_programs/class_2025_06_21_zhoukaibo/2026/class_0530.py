@@ -10,5 +10,4 @@ for num in numbers:
     else:
         result.append('odd')
 
-result = \
-    ['even' if num % 2 == 0 else 'odd' for num in numbers]
+result = ['even' if num % 2 == 0 else 'odd' for num in numbers]
