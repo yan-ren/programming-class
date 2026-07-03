@@ -12,6 +12,7 @@ HEIGHT = 1500
 # screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+font = pygame.font.SysFont(None, 48)
 
 class Player:
     def __init__(self, x, y):
@@ -20,6 +21,7 @@ class Player:
         self.size = 50
         self.color = (0, 128, 255)
         self.speed = 5
+        self.lives = 3
 
     def move(self, keys):
         if keys[pygame.K_LEFT]:
@@ -96,6 +98,29 @@ class Enemy:
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size))
 
+class Coin:
+    def __init__(self):
+        self.size = 30
+        self.speed = 3
+        self.color = (255, 215, 0)  # gold
+        self.x = random.randint(0, WIDTH - self.size)
+        self.y = random.randint(-200, -self.size)
+
+    def move(self):
+        self.y += self.speed
+
+    def is_off_screen(self):
+        return self.y > HEIGHT
+
+    def get_rect(self):
+        return pygame.Rect(self.x, self.y, self.size, self.size)
+
+    def draw(self, screen):
+        center_x = self.x + self.size // 2
+        center_y = self.y + self.size // 2
+        radius = self.size // 2
+        pygame.draw.circle(screen, self.color, (center_x, center_y), radius)
+        
 '''
 1. key.get_pressed
 2. move based on key
@@ -108,6 +133,8 @@ bullets = []
 enemies = []
 shoot_cooldown = 15
 spawn_enemy = 0
+score = 0
+start_time = pygame.time.get_ticks()
 
 while running:
     for event in pygame.event.get():
@@ -144,7 +171,21 @@ while running:
             if bullet.get_rect().colliderect(enemy.get_rect()):
                 bullets.remove(bullet)
                 enemies.remove(enemy)
+                score += 1
                 break
+
+    for enemy in enemies[:]:
+        if player.get_rect().colliderect(enemy.get_rect()):
+            enemies.remove(enemy)
+            player.lives -= 1
+            if player.lives <= 0:
+                running = False
+
+    elapsed_seconds = (pygame.time.get_ticks() - start_time) / 1000
+
+    score_text = font.render(f'Score: {score}', True, (255, 255, 255))
+    lives_text = font.render(f'Lives: {player.lives}', True, (255, 255, 255))
+    timer_text = font.render(f'Time: {elapsed_seconds}', True, (255, 255, 255))
 
     screen.fill((30, 30, 30))
     player.draw(screen)
@@ -152,6 +193,11 @@ while running:
         bullet.draw(screen)
     for enemy in enemies:
         enemy.draw(screen)
+
+    screen.blit(score_text, (10, 10))
+    screen.blit(lives_text, (10, 60))
+    screen.blit(timer_text, (WIDTH - timer_text.get_width() - 10, 10))
+
     pygame.display.update()
     clock.tick(60)
 

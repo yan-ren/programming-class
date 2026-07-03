@@ -2,7 +2,6 @@ import pygame
 import random
 import sys
 
-
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 800
 
@@ -16,6 +15,7 @@ GREEN      = (0, 200, 0)
 DARK_GREEN = (0, 150, 0)
 RED        = (220, 40, 40)
 GRAY       = (40, 40, 40)
+STEEL_BLUE = (70, 130, 180)
 
 UP    = (0, -1)
 DOWN  = (0, 1)
@@ -23,6 +23,14 @@ LEFT  = (-1, 0)
 RIGHT = (1, 0)
 
 FPS = 15
+
+# wall barrier settings
+WALL_SEGMENTS = 6
+WALL_MIN_LEN = 3
+WALL_MAX_LEN = 6
+WALL_SAFE_RADIUS = 4
+WALL_CHANGE_INTERVAL = 10000
+
 
 def draw_cell(surface, position, color):
     col, row = position
@@ -68,7 +76,7 @@ class Snake:
         return not (0 <= x < GRID_WIDTH and 0 <= y < GRID_HEIGHT)
 
     def hit_self(self):
-        return self.head in self.body[1:]
+        return self.head() in self.body[1:]
 
     def draw(self, surface):
         for i, cell in enumerate(self.body):
@@ -92,6 +100,37 @@ class Food:
     def draw(self, surface):
         draw_cell(surface, self.position, RED)
 
+class Wall:
+    def __init__(self, blocked):
+        self.cells = set()
+        self.respawn(blocked)
+
+    def respawn(self, blocked):
+        self.cells = set()
+        for _ in range(WALL_SEGMENTS):
+            self.cells |= self._random_segment(blocked | self.cells)
+
+    def _random_segment(self, blocked):
+        """A straight horizontal or vertical run of cells that avoids blocked"""
+        for _ in range(100): # repeat until a free spot is found
+            length = random.randint(WALL_MIN_LEN, WALL_MAX_LEN)
+            if random.random() < 0.5: # horizontal
+                col = random.randint(0, GRID_WIDTH - length)
+                row = random.randint(0, GRID_HEIGHT - 1)
+                segment = {(col + i, row) for i in range(length)}
+            else: # vertical
+                col = random.randint(0, GRID_WIDTH - 1)
+                row = random.randint(0, GRID_HEIGHT - length)
+                segment = {(col, row + i) for i in range(length)}
+
+            if not (segment & blocked):
+                return segment
+        return set()
+
+    def draw(self, surface):
+        for cell in self.cells:
+            draw_cell(surface, cell, STEEL_BLUE)
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -105,9 +144,16 @@ class Game:
     def reset(self):
         start = (GRID_WIDTH // 2, GRID_HEIGHT // 2)
         self.snake = Snake(start)
+        self.walls = Wall(set(self.snake.body) | self._head_safety_zone())
         self.food = Food(self.snake.body)
         self.score = 0
         self.game_over = False
+        self.last_wall_change = pygame.time.get_ticks()
+
+    def _head_safety_zone(self):
+        cx, cy = self.snake.head()
+        r = WALL_SAFE_RADIUS
+        return {(cx + dx, cy + dy) for dx in range(-r, r + 1) for dy in range(-r, r + 1) if abs(dx) + abs(dy) <= r}
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -132,6 +178,7 @@ class Game:
         draw_grid(self.screen)
         self.food.draw(self.screen)
         self.snake.draw(self.screen)
+        self.walls.draw(self.screen)
 
         score_text = self.font.render(f"Score: {self.score}", True, WHITE)
         self.screen.blit(score_text, (10, 10))
@@ -147,6 +194,12 @@ class Game:
     def update(self):
         if self.game_over:
             return
+
+        now = pygame.time.get_ticks()
+        if now - self.last_wall_change >= WALL_CHANGE_INTERVAL:
+            blocked = (set(self.snake.body) | self._head_safety_zone() | {self.food.position})
+            self.walls.respawn(blocked)
+            self.last_wall_change = now
 
         will_eat = self.snake.upcoming_head() == self.food.position
         self.snake.move(grow=will_eat)

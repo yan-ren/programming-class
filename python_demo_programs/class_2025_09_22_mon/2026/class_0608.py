@@ -44,6 +44,11 @@ screen = turtle.Screen()
 screen.setup(width=700, height=450)
 screen.bgcolor('honeydew')
 
+text = turtle.Turtle()
+text.hideturtle()
+text.penup()
+text.goto(0, 0)
+
 colors = ["red", "blue", "green", "orange", "purple"]
 
 START_X = -300
@@ -58,4 +63,32 @@ for i in range(len(colors)):
     racer.goto(START_X, 150 - i * 60)
     racers.append(racer)
 
+# FOR LOOP 2: run the race
+finished = False
+while not finished:
+    for racer in racers:
+        racer.forward(random.randint(1, 20))
+        if racer.xcor() >= FINISH_X:
+            finished = True
+            break
+
+# FOR LOOP 3: find and announce the winner
+winner = None
+for racer in racers:
+    if racer.xcor() >= FINISH_X:
+        winner = racer
+        break
+
+# print(f'The winner is {winner.pencolor()}')
+# show the winner on the screen
+text.write(
+    f'{winner.pencolor()} wins!',
+    align='center',
+    font=('Arial', 36, 'bold')
+)
+
 screen.exitonclick()
+
+'''
+add a countdown ('3...2...1...GO!) before the race starts using time.sleep()
+'''
