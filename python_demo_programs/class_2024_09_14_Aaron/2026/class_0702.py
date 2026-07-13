@@ -25,11 +25,11 @@ RIGHT = (1, 0)
 FPS = 15
 
 # wall barrier settings
-WALL_SEGMENTS = 6
-WALL_MIN_LEN = 3
-WALL_MAX_LEN = 6
+WALL_SEGMENTS = 3
+WALL_MIN_LEN = 5
+WALL_MAX_LEN = 7
 WALL_SAFE_RADIUS = 4
-WALL_CHANGE_INTERVAL = 10000
+WALL_CHANGE_INTERVAL = 10000 # ms
 
 
 def draw_cell(surface, position, color):
@@ -78,6 +78,9 @@ class Snake:
     def hit_self(self):
         return self.head() in self.body[1:]
 
+    def hit_barrier(self, wall_cells):
+        return self.head() in wall_cells
+
     def draw(self, surface):
         for i, cell in enumerate(self.body):
             color = GREEN if i == 0 else DARK_GREEN
@@ -122,9 +125,9 @@ class Wall:
                 col = random.randint(0, GRID_WIDTH - 1)
                 row = random.randint(0, GRID_HEIGHT - length)
                 segment = {(col, row + i) for i in range(length)}
-
             if not (segment & blocked):
                 return segment
+
         return set()
 
     def draw(self, surface):
@@ -139,6 +142,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont('consolas', 24)
         self.running = True
+        self.high_score = 0
         self.reset()
 
     def reset(self):
@@ -149,6 +153,8 @@ class Game:
         self.score = 0
         self.game_over = False
         self.last_wall_change = pygame.time.get_ticks()
+        self.run_start = pygame.time.get_ticks()
+        self.elapsed_ms = 0
 
     def _head_safety_zone(self):
         cx, cy = self.snake.head()
@@ -183,6 +189,13 @@ class Game:
         score_text = self.font.render(f"Score: {self.score}", True, WHITE)
         self.screen.blit(score_text, (10, 10))
 
+        best_text = self.font.render(f"Best: {self.high_score}", True, WHITE)
+        self.screen.blit(best_text, (WINDOW_WIDTH - best_text.get_width() - 10, 10))
+
+        seconds = self.elapsed_ms // 1000
+        time_text = self.font.render(f'Time: {seconds // 60:02d}:{seconds % 60:02d}', True, WHITE)
+        self.screen.blit(time_text, (WINDOW_WIDTH // 2 - time_text.get_width() // 2, 10))
+
         if self.game_over:
             line1 = self.font.render('Game Over!', True, WHITE)
             line2 = self.font.render('Press SPACE to play again', True, WHITE)
@@ -196,6 +209,8 @@ class Game:
             return
 
         now = pygame.time.get_ticks()
+        self.elapsed_ms = now - self.run_start
+
         if now - self.last_wall_change >= WALL_CHANGE_INTERVAL:
             blocked = (set(self.snake.body) | self._head_safety_zone() | {self.food.position})
             self.walls.respawn(blocked)
@@ -206,10 +221,10 @@ class Game:
 
         if will_eat:
             self.score += 1
+            self.high_score = max(self.high_score, self.score)
             self.food.respawn(self.snake.body)
-        if self.snake.hit_walls() or self.snake.hit_self():
+        if self.snake.hit_walls() or self.snake.hit_self() or self.snake.hit_barrier(self.walls.cells):
             self.game_over = True
-
 
     def run(self):
         while self.running:
@@ -223,5 +238,10 @@ class Game:
 Game().run()
 
 '''
-create some random wall as barrier, that could change every 10s, if snake runs into the wall, game over
+complete snake game
+- wall
+- snake runs into itself
+- barrier
+- high score
+- timer
 '''

@@ -10,6 +10,9 @@ LINE_W = 19
 MARK_W = 14
 PADDING = 45
 
+HUMAN, COMPUTER = "X", "O"
+MAX_MARKS = 3
+
 BG_COLOR = (28, 170, 156)
 LINE_COLOR = (23, 145, 135)
 BAR_COLOR = (18, 122, 111)
@@ -23,9 +26,53 @@ pygame.display.set_caption("Tic Tac Toe")
 font = pygame.font.Font(None, 52)
 clock = pygame.time.Clock()
 
-def new_board():
-    return [[None] * 3 for _ in range(3)]
+WIN_LINES = [
+    # ROWS
+    [(0, 0), (0, 1), (0, 2)], [(1, 0), (1, 1), (1, 2)], [(2, 0), (2, 1), (2, 2)],
+    # COLUMNS
+    [(0, 0), (1, 0), (2, 0)], [(0, 1), (1, 1), (2, 1)], [(0, 2), (1, 2), (2, 2)],
+    # DIAGONALS
+    [(0, 0), (1, 1), (2, 2)], [(0, 2), (1, 1), (2, 0)],
+]
 
+def empty_cells(board):
+    result = []
+    for c in range(3):
+        for r in range(3):
+            if board[r][c] is None:
+               result.append((r, c))
+
+    return result
+
+
+def winner(board):
+    for line in WIN_LINES:
+        values = []
+        for r, c in line:
+            values.append(board[r][c])
+        if values[0] is not None and values[0] == values[1] == values[2]:
+            return values[0]
+    return None
+
+
+def place_mark(board, moves, mark, cell):
+    if len(moves) == MAX_MARKS:
+        old_r, old_c = moves.pop(0)
+        board[old_r][old_c] = None
+    moves.append(cell)
+    board[cell[0]][cell[1]] = mark
+
+
+def find_winning_move(board, moves, mark):
+    for r, c in empty_cells(board):
+        test = [row[:] for row in board]
+        if len(moves) == MAX_MARKS:
+            old_r, old_c = moves[0]
+            test[old_r][old_c] = None
+        test[r][c] = mark
+        if winner(test) == mark:
+            return (r, c)
+    return None
 
 def draw_grid():
     screen.fill(BG_COLOR)
