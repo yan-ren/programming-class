@@ -1,3 +1,4 @@
+import random
 import sys
 
 import pygame
@@ -74,12 +75,41 @@ def find_winning_move(board, moves, mark):
             return (r, c)
     return None
 
-def draw_grid():
+
+def computer_move(board, computer_moves, human_moves):
+    # win
+    move = find_winning_move(board, computer_moves, COMPUTER)
+    if move:
+        return move
+    move = find_winning_move(board, human_moves, HUMAN)
+    if move:
+        return move
+    return random.choice(empty_cells(board))
+
+
+def draw_screen(board, status):
     screen.fill(BG_COLOR)
-    pygame.draw.rect(screen, BAR_COLOR, (0, BOARD_SIZE, WIDTH, BAR_HEIGHT))
+    pygame.draw.rect(screen, BAR_COLOR, (0, BOARD_SIZE, BOARD_SIZE, BAR_HEIGHT))
+    # four grid lines
     for i in (1, 2):
-        pygame.draw.line(screen, LINE_COLOR, (0, i * CELL), (BOARD_SIZE, i * CELL), LINE_W)
-        pygame.draw.line(screen, LINE_COLOR, (i * CELL, 0), (i * CELL, BOARD_SIZE), LINE_W)
+        pygame.draw.line(screen, LINE_COLOR, (0, i * CELL), (BOARD_SIZE, i * CELL), 10)
+        pygame.draw.line(screen, LINE_COLOR, (i * CELL, 0), (i * CELL, BOARD_SIZE), 10)
+
+    for r in range(3):
+        for c in range(3):
+            if board[r][c] == 'X':
+                x1, y1 = c * CELL + PADDING, r * CELL + PADDING
+                x2, y2 = (c + 1) * CELL - PADDING, (r + 1) * CELL - PADDING
+                pygame.draw.line(screen, X_COLOR, (x1, y1), (x2, y2), 14)
+                pygame.draw.line(screen, X_COLOR, (x1, y2), (x2, y1), 14)
+            elif board[r][c] == 'O':
+                center = (c * CELL + CELL // 2, r * CELL + CELL // 2)
+                pygame.draw.circle(screen, O_COLOR, center, CELL // 2 - PADDING, 14)
+    label = font.render(status, True, TEXT_COLOR)
+    rect = label.get_rect(center=(BOARD_SIZE // 2, BOARD_SIZE + BAR_HEIGHT // 2))
+    screen.blit(label, rect)
+    pygame.display.flip()
+
 
 def main():
     board = new_board()
