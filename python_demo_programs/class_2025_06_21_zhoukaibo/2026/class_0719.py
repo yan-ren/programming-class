@@ -61,4 +61,99 @@ class Snake:
         self.body.insert(0, (col + dx, row + dy))
         if not grow:
             self.body.pop()
-            
+
+    def hit_walls(self):
+        x, y = self.head()
+        return not (0 <= x < GRID_WIDTH and 0 <= y < GRID_HEIGHT)
+
+    def hit_self(self):
+        return self.head() in self.body[1:]
+
+    def draw(self, surface):
+        for i, cell in enumerate(self.body):
+            color = GREEN if i == 0 else DARK_GREEN
+            draw_cell(surface, cell, color)
+
+class Food:
+    def __init__(self, snake_body):
+        self.position = (0, 0)
+        self.respawn(snake_body)
+
+    def respawn(self, snake_body):
+        while True:
+            position = (random.randint(0, GRID_WIDTH - 1),
+                        random.randint(0, GRID_HEIGHT - 1))
+
+            if position not in snake_body:
+                self.position = position
+                return
+
+    def draw(self, surface):
+        draw_cell(surface, self.position, RED)
+
+class Game:
+    def __init__(self):
+        pygame.init()
+        self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        pygame.display.set_caption('Snake')
+        self.clock = pygame.time.Clock()
+        self.font = pygame.font.SysFont('consolas', 24)
+        self.running = True
+        self.reset()
+
+    def reset(self):
+        start = (GRID_WIDTH // 2, GRID_HEIGHT // 2)
+        self.snake = Snake(start)
+        self.food = Food(self.snake.body)
+        self.score = 0
+        self.game_over = False
+        self.run_start = pygame.time.get_ticks()
+        self.elapsed_ms = 0
+
+    def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+            elif event.type == pygame.KEYDOWN:
+                if self.game_over:
+                    if event.key == pygame.K_SPACE:
+                        self.reset()
+                else:
+                    if event.key == pygame.K_UP:
+                        self.snake.change_direction(UP)
+                    elif event.key == pygame.K_DOWN:
+                        self.snake.change_direction(DOWN)
+                    elif event.key == pygame.K_LEFT:
+                        self.snake.change_direction(LEFT)
+                    elif event.key == pygame.K_RIGHT:
+                        self.snake.change_direction(RIGHT)
+
+    def draw(self):
+        self.screen.fill(BLACK)
+        draw_grid(self.screen)
+        self.food.draw(self.screen)
+        self.snake.draw(self.screen)
+        pygame.display.flip()
+
+    def update(self):
+        if self.game_over:
+            return
+
+        will_eat = self.snake.upcoming_head() == self.food.position
+        self.snake.move(grow=will_eat)
+
+        if will_eat:
+            self.food.respawn(self.snake.body)
+        if self.snake.hit_walls() or self.snake.hit_self():
+            self.game_over = True
+
+    def run(self):
+        while self.running:
+            self.handle_events()
+            self.update()
+            self.draw()
+            self.clock.tick(FPS)
+        pygame.quit()
+        sys.exit()
+
+Game().run()

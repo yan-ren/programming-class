@@ -78,12 +78,12 @@ def find_winning_move(board, moves, mark):
 
 def computer_move(board, computer_moves, human_moves):
     # win
-    move = find_winning_move(board, computer_moves, COMPUTER)
-    if move:
-        return move
-    move = find_winning_move(board, human_moves, HUMAN)
-    if move:
-        return move
+    # move = find_winning_move(board, computer_moves, COMPUTER)
+    # if move:
+    #     return move
+    # move = find_winning_move(board, human_moves, HUMAN)
+    # if move:
+    #     return move
     return random.choice(empty_cells(board))
 
 
@@ -112,10 +112,12 @@ def draw_screen(board, status):
 
 
 def main():
-    board = new_board()
-    player = 'X'
+    # 3x3 grid
+    board = [[None] * 3 for _ in range(3)]
+    human_moves = []
+    computer_moves = []
     game_over = False
-    status = "X's turn"
+    status = "Your turn (you are X)"
 
     while True:
         for event in pygame.event.get():
@@ -123,13 +125,31 @@ def main():
                 pygame.quit()
                 sys.exit()
 
+            # restart
             if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
-                board, turn = new_board(), 'X'
-                game_over, ai_move_at = False, None
+                board = [[None] * 3 for _ in range(3)]
+                human_moves = []
+                computer_moves = []
+                game_over = False
                 status = "Your turn (you are X)"
-                
-        draw_grid()
-        pygame.display.flip()
+
+            if (event.type == pygame.MOUSEBUTTONDOWN and not game_over and event.pos[1] < BOARD_SIZE):
+                row, col = event.pos[1] // CELL, event.pos[0] // CELL
+                if board[row][col] is None:
+                    place_mark(board, human_moves, HUMAN, (row, col))
+                    if winner(board) == HUMAN:
+                        status = "You win! Press R to play again"
+                        game_over = True
+                    else:
+                        draw_screen(board, 'Computer is thinking...')
+                        pygame.time.wait(400)
+                        cell = computer_move(board, computer_moves, human_moves)
+                        place_mark(board, computer_moves, COMPUTER, cell)
+                        if winner(board) == COMPUTER:
+                            status = 'Computer wins. Press R to play again'
+                            game_over = True
+
+        draw_screen(board, status)
         clock.tick(60)
 
 main()
