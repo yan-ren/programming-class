@@ -11,14 +11,12 @@ pygame.display.set_caption('Flappy Bird')
 clock = pygame.time.Clock()
 font = pygame.font.Font(None, 50)
 
-
 def load_image(name):
-    for ext in ('.png', '.gif', '.jpg', '.jpeg', '.bmp'):
+    for ext in ('.png', '.jpg'):
         path = os.path.join('images', name + ext)
         if os.path.exists(path):
             return pygame.image.load(path).convert_alpha()
-    raise FileNotFoundError('images/ 文件夹中找不到图片: ' + name)
-
+    return FileNotFoundError('File not found')
 
 class Actor:
     def __init__(self, image_name):
@@ -38,7 +36,6 @@ class Actor:
 
     def colliderect(self, other):
         return self.rect.colliderect(other.rect)
-
 
 background = Actor('background')
 bird = Actor('bird')
@@ -61,7 +58,6 @@ bird_velocity = 0
 gravity = 0.5
 jump_strength = -8
 
-
 def draw():
     background.draw()
     bar_up.draw()
@@ -70,7 +66,6 @@ def draw():
 
     score_text = font.render(str(score), True, pygame.Color('green'))
     screen.blit(score_text, (30, 30))
-
 
 def update():
     global score, speed, bird_velocity
@@ -84,12 +79,9 @@ def update():
     if bar_up.x < 0:
         bar_up.x = WIDTH
         bar_down.x = WIDTH
-
         bar_up.y = random.randint(-200, 200)
         bar_down.y = HEIGHT + bar_up.y
-
         score += 1
-
         if score % 5 == 0:
             speed += 1
 
@@ -99,16 +91,12 @@ def update():
         score = 0
         speed = 1
         bird_velocity = 0
-
         bird.x = 50
         bird.y = HEIGHT / 2
-
         bar_up.x = WIDTH
         bar_up.y = 0
-
         bar_down.x = WIDTH
         bar_down.y = HEIGHT
-
 
 def on_mouse_down():
     global bird_velocity
@@ -116,7 +104,6 @@ def on_mouse_down():
 
 
 running = True
-
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -132,4 +119,3 @@ while running:
     clock.tick(60)
 
 pygame.quit()
-

@@ -69,6 +69,9 @@ class Snake:
     def hit_self(self):
         return self.head() in self.body[1:]
 
+    def hit_barrier(self, wall_cells):
+        return self.head() in wall_cells
+
     def draw(self, surface):
         for i, cell in enumerate(self.body):
             color = GREEN if i == 0 else DARK_GREEN
@@ -212,7 +215,7 @@ class Game:
         if will_eat:
             self.score += 1
             self.food.respawn(self.snake.body)
-        if self.snake.hit_walls() or self.snake.hit_self():
+        if self.snake.hit_walls() or self.snake.hit_self() or self.snake.hit_barrier(self.walls.cells):
             self.game_over = True
 
     def run(self):
