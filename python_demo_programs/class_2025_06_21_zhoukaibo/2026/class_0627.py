@@ -1,6 +1,6 @@
 '''class & object
 
-object oriented programming
+object-oriented programming
 
 In computer science, OOP is a popular programming style that organizes code around 'objects' rather that logic or functions
 '''
