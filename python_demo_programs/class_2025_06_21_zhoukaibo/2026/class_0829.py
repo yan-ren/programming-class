@@ -61,7 +61,7 @@ class Bullet:
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
 
-        
+
 player= Player(200, 150)
 running = True
 while running:
