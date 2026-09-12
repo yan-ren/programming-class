@@ -38,6 +38,13 @@ class Player:
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size))
 
+    def shoot(self):
+        center_x = self.x + self.size // 2
+        bullets = []
+
+        bullets.append(Bullet(center_x, self.y))
+        return bullets
+
 class Bullet:
     def __init__(self, x, y, dx = 0):
         self.x = x
@@ -63,6 +70,9 @@ class Bullet:
 
 
 player= Player(200, 150)
+bullets = []
+shoot_cooldown = 15
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -72,9 +82,23 @@ while running:
     keys = pygame.key.get_pressed()
     player.move(keys)
 
+    if shoot_cooldown > 0:
+        shoot_cooldown -= 1
+
+    if keys[pygame.K_SPACE] and shoot_cooldown == 0:
+        new_bullets = player.shoot()
+        bullets.extend(new_bullets)
+        shoot_cooldown = 15
+
+    for bullet in bullets:
+        bullet.move()
+    bullets = [b for b in bullets if not b.is_off_screen()]
+
     # draw
     screen.fill((30, 30, 30))
     player.draw(screen)
+    for bullet in bullets:
+        bullet.draw(screen)
 
     pygame.display.update()
     clock.tick(60)
