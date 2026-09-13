@@ -6,8 +6,6 @@ blit multiple images onto the screen
 pygame draws images in order.
 Images drawn later appear on top of images drawn earlier.
 '''
-from python_demo_programs.class_2025_07_05.class2_1 import col
-
 '''
 example 3
 
