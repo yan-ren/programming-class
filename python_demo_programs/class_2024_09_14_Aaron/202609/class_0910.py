@@ -1,3 +1,4 @@
+import random
 import pygame
 import sys
 
@@ -38,6 +39,19 @@ while running:
     if keys[pygame.K_DOWN]:
         player_rect.y += 5
 
+    if player_rect.left <  0:
+        player_rect.left = 0
+    if player_rect.right > SCREEN_WIDTH:
+        player_rect.right = SCREEN_WIDTH
+    if player_rect.top < 0:
+        player_rect.top = 0
+    if player_rect.bottom > SCREEN_HEIGHT:
+        player_rect.bottom = SCREEN_HEIGHT
+
+    if player_rect.colliderect(coin_rect):
+        coin_rect.x = random.randint(0, SCREEN_WIDTH)
+        coin_rect.y = random.randint(0, SCREEN_HEIGHT)
+
     screen.blit(background, (0, 0))
     screen.blit(player_image, player_rect)
     screen.blit(coin_image, coin_rect)
@@ -46,3 +60,5 @@ while running:
 
 pygame.quit()
 sys.exit()
+
+# task: how to limit the player inside the screen

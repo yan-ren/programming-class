@@ -11,14 +11,12 @@ pygame.display.set_caption('Flappy Bird')
 clock = pygame.time.Clock()
 font = pygame.font.Font(None, 50)
 
-
 def load_image(name):
-    for ext in ('.png', '.gif', '.jpg', '.jpeg', '.bmp'):
+    for ext in ['.png', '.jpg']:
         path = os.path.join('images', name + ext)
         if os.path.exists(path):
             return pygame.image.load(path).convert_alpha()
-    raise FileNotFoundError('images/ 文件夹中找不到图片: ' + name)
-
+    raise ValueError('{} not found.'.format(name))
 
 class Actor:
     def __init__(self, image_name):
@@ -61,7 +59,6 @@ bird_velocity = 0
 gravity = 0.2
 jump_strength = -5
 
-
 def draw():
     background.draw()
     bar_up.draw()
@@ -70,7 +67,6 @@ def draw():
 
     score_text = font.render(str(score), True, pygame.Color('green'))
     screen.blit(score_text, (30, 30))
-
 
 def update():
     global score, speed, bird_velocity
@@ -85,39 +81,30 @@ def update():
         bar_up.x = WIDTH
         bar_down.x = WIDTH
 
-        bar_up.y = random.randint(-200, 200)
+        bar_up.y = random.randint(-150, 150)
         bar_down.y = HEIGHT + bar_up.y
-
         score += 1
 
-        if score % 5 == 0:
-            speed += 1
-
-    if bird.colliderect(bar_up) or bird.colliderect(bar_down) or bird.y < 0 or bird.y > HEIGHT:
-        print('游戏失败')
+    if bird.colliderect(bar_up) or bird.colliderect(bar_down):
         score = 0
         speed = 3
         bird_velocity = 0
         bird.x = 50
-        bird.y = HEIGHT / 2
+        bird.y = HEIGHT / 5
         bar_up.x = WIDTH
         bar_up.y = 0
         bar_down.x = WIDTH
         bar_down.y = HEIGHT
 
-
 def on_mouse_down():
     global bird_velocity
     bird_velocity = jump_strength
 
-
 running = True
-
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
         elif event.type == pygame.MOUSEBUTTONDOWN:
             on_mouse_down()
 
@@ -129,3 +116,7 @@ while running:
 
 pygame.quit()
 
+'''
+additional exercise:
+increase speed when the score is higher
+'''
