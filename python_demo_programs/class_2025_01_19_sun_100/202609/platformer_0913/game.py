@@ -27,7 +27,7 @@ class Player:
         self.on_ground = False
         self.score = 0
 
-    def update(self):
+    def update(self, platforms):
         dx = 0
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
@@ -58,7 +58,7 @@ class Player:
         self.on_ground = False
 
         for platform in platforms:
-            if self.rect.move(0, dy).collidedict(platform.rect):
+            if self.rect.move(0, dy).colliderect(platform.rect):
                 if self.vel_y > 0:
                     self.rect.bottom = platform.rect.top
                     self.vel_y = 0
@@ -144,7 +144,46 @@ while running:
                 coin.collected = True
                 player.score += 1
 
+        # goal
+        if player.rect.colliderect(goal):
+            won = True
 
+        # falling off the map
+        if player.rect.top > HEIGHT:
+            game_over = True
+
+    # Draw
+    screen.blit(background, (0, 0))
+
+    for platform in platforms:
+        platform.draw()
+
+    for coin in coins:
+        coin.draw()
+
+    screen.blit(flag_img, goal)
+    player.draw()
+
+    score_text = font.render(f'Coins: {player.score}/{len(coins)}', True, (20, 20, 20))
+    screen.blit(score_text, (20, 20))
+
+    help_text = font.render("Move: A/D or arrows   Jump: SPACE   Restart: R", True, (20, 20, 20))
+    screen.blit(help_text, (20, 55))
+
+    if won:
+        text = big_font.render('You win!', True, (20, 100, 20))
+        screen.blit(text, text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 30)))
+        sub = font.render('Press R to restart', True, (20, 20, 20))
+        screen.blit(sub, sub.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 30)))
+
+    if game_over:
+        text = big_font.render("Game Over", True, (180, 30, 30))
+        screen.blit(text, text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 30)))
+
+        sub = font.render("Press R to restart", True, (20, 20, 20))
+        screen.blit(sub, sub.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 30)))
+        
+    pygame.display.flip()
 
 pygame.quit()
 sys.exit()

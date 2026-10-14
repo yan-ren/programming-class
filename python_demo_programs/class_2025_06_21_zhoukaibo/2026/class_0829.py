@@ -7,10 +7,13 @@ pygame.init()
 # constant
 WIDTH = 1200
 HEIGHT = 1200
+WEAPON_NAMES = {1: 'Normal', 2: 'Double', 3: 'Spread'}
 MAX_WEAPON = 3
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 font = pygame.font.SysFont(None, 48)
+
+start_time = pygame.time.get_ticks()
 
 clock = pygame.time.Clock()
 
@@ -63,7 +66,16 @@ class Player:
         center_x = self.x + self.size // 2
         bullets = []
 
-        bullets.append(Bullet(center_x, self.y))
+        if self.weapon == 1:
+            bullets.append(Bullet(center_x, self.y))
+        elif self.weapon == 2:
+            bullets.append(Bullet(center_x - 12, self.y))
+            bullets.append(Bullet(center_x + 4, self.y))
+        elif self.weapon == 3:
+            bullets.append(Bullet(center_x, self.y, dx=0))
+            bullets.append(Bullet(center_x, self.y, dx=-3))
+            bullets.append(Bullet(center_x, self.y, dx=3))
+
         return bullets
 
 class Bullet:
@@ -156,6 +168,14 @@ while running:
     keys = pygame.key.get_pressed()
     player.move(keys)
 
+    # switch weapon with number keys
+    if keys[pygame.K_1]:
+        player.switch_weapon(1)
+    if keys[pygame.K_2]:
+        player.switch_weapon(2)
+    if keys[pygame.K_3]:
+        player.switch_weapon(3)
+
     if shoot_cooldown > 0:
         shoot_cooldown -= 1
 
@@ -201,6 +221,13 @@ while running:
             if player.lives <= 0:
                 running = False
 
+    for coin in coins[:]:
+        if player.get_rect().colliderect(coin.get_rect()):
+            coins.remove(coin)
+            player.pickup_weapon()
+
+    elapsed_seconds = (pygame.time.get_ticks() - start_time) / 1000
+
     # draw
     screen.fill((30, 30, 30))
     player.draw(screen)
@@ -213,9 +240,14 @@ while running:
 
     score_text = font.render(f'Score: {score}', True, (255, 255, 255))
     lives_text = font.render(f'Lives: {player.lives}', True, (255, 255, 255))
+    timer_text = font.render(f'Time: {elapsed_seconds}', True, (255, 255, 255))
+    weapon_label = f'Weapon: {WEAPON_NAMES[player.weapon]} ({player.weapon} / {player.max_weapon})'
+    weapon_text = font.render(weapon_label, True, (0, 255, 255))
 
     screen.blit(score_text, (10, 10))
     screen.blit(lives_text, (10, 60))
+    screen.blit(timer_text, (WIDTH - timer_text.get_width() - 10, 10))
+    screen.blit(weapon_text, (10, 110))
 
     pygame.display.update()
     clock.tick(60)
