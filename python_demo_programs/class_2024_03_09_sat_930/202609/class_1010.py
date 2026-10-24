@@ -30,3 +30,23 @@ def power(a, b):
 
     return a * power(a, b - 1)
 
+'''
+example 2: write a function that calculate the factorial of a
+5! = 5 * 4 * 3 * 2 * 1
+'''
+# def factorial(n):
+#     result = 1
+#     for i in range(1, n + 1):
+#         result *= i
+#
+#     return result
+
+# def factorial(n):
+#     if n == 1:
+#         return 1
+#
+#     return n * factorial(n-1)
+
+'''
+example 3: write a function that calculates the nth fibonacci number
+'''

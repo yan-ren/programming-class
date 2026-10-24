@@ -46,3 +46,10 @@ nums = [1, 2, 2, 3, 2, 4]
 for x in nums:
     print(x, nums.count(x))
 
+# 2d list
+numbers = [[2, 3, 1],
+           [3, 2, 1]]
+
+for sublist in numbers:
+    for num in sublist:
+        print(num)

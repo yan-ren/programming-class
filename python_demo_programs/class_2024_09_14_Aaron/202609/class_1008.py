@@ -66,3 +66,12 @@ def fibonacci(n):
     return third
 
 print(fibonacci(5))
+
+# recursion
+def fibonacci(n):
+    if n == 1:
+        return 0
+    elif n == 2:
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
