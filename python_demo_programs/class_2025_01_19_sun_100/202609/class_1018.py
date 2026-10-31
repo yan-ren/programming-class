@@ -41,3 +41,34 @@ def main():
     clear_color = (165, 65, 75)
     white = (245, 247, 250)
 
+    buttons = []
+    for row in range(4):
+        for column in range(4):
+            x = 20 + column * 82
+            y = 150 + row * 78
+            rect = pygame.Rect(x, y, 74, 68)
+            buttons.append((layout[row][column], rect))
+
+    running = True
+    while running:
+        # 4. Handle events. Mouse and keyboard produce the same button label.
+        for event in pygame.event.get():
+            pressed = ""
+            if event.type == pygame.QUIT:
+                running = False
+
+        screen.fill(background)
+        for label, rect in buttons:
+            color = number_color
+            if label in ('+', '-', '*', '/', '='):
+                color = operator_color
+            elif label == 'C':
+                color = clear_color
+            pygame.draw.rect(screen, color, rect, border_radius=8)
+            text = font.render(label, True, color)
+            screen.blit(text, text.get_rect(center=rect.center))
+
+        pygame.display.flip()
+        clock.tick(60)
+
+main()
