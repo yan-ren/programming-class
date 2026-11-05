@@ -49,6 +49,11 @@ def main():
             rect = pygame.Rect(x, y, 74, 68)
             buttons.append((layout[row][column], rect))
 
+    display = '0'
+    first_number = None
+    operator = ''
+    new_number = True
+
     running = True
     while running:
         # 4. Handle events. Mouse and keyboard produce the same button label.
@@ -56,6 +61,46 @@ def main():
             pressed = ""
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                for label, rect in buttons:
+                    if rect.collidepoint(event.pos):
+                        pressed = label
+                        break
+            elif event.type == pygame.KEYDOWN:
+                if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+                    pressed = '='
+                elif event.key == pygame.K_ESCAPE:
+                    pressed = 'C'
+                elif event.unicode in "0123456789+-*/=cC":
+                    pressed = event.unicode.upper()
+            # update the calculator state
+            if pressed.isdigit():
+                if new_number or display == '0':
+                    display = pressed
+                    new_number = False
+                elif len(display) < 12:
+                    display += pressed
+            elif pressed == 'C':
+                display = '0'
+                first_number = None
+                operator = ''
+                new_number = True
+            elif pressed in ('+', '-', '*', '/'):
+                if display != 'Error':
+                    if operator == '' or new_number:
+                        first_number = float(display)
+                        operator = pressed
+                        new_number = True
+            elif pressed == '=':
+                if operator != '' and not new_number:
+                    result = calculate(first_number, float(display), operator)
+                    if result == 'Error':
+                        display = 'Error'
+                    else:
+                        display = format(float(display), '.2f')
+                    first_number = None
+                    operator = ''
+                    new_number = True
 
         screen.fill(background)
         for label, rect in buttons:
@@ -64,8 +109,10 @@ def main():
                 color = operator_color
             elif label == 'C':
                 color = clear_color
-            pygame.draw.rect(screen, color, rect, border_radius=8)
             text = font.render(label, True, color)
+            screen.blit(text, rect)
+            pygame.draw.rect(screen, color, rect, border_radius=8)
+            text = font.render(label, True, white)
             screen.blit(text, text.get_rect(center=rect.center))
 
         pygame.display.flip()

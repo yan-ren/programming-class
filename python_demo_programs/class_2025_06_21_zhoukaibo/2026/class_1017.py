@@ -56,7 +56,45 @@ def main():
                     if rect.collidepoint(event.pos):
                         pressed = label
                         break
-            
+            elif event.type == pygame.KEYDOWN:
+                if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+                    pressed = "="
+                elif event.key == pygame.K_ESCAPE:
+                    pressed = "C"
+                elif event.unicode in "0123456789+-*/=cC":
+                    pressed = event.unicode.upper()
+
+            # update the calculator state
+            if pressed.isdigit():
+                if new_number or display == "0":
+                    display = pressed
+                    new_number = False
+                elif len(display) < 12:
+                    display += pressed
+            elif pressed == 'C':
+                display = "0"
+                first_number = None
+                operator = ""
+                new_number = True
+            elif pressed in ("+", "-", "*", "/"):
+                if display != "Error":
+                    # Before the second number, another operator replaces it.
+                    # After the second number, press = before a new operation.
+                    if operator == "" or new_number:
+                        first_number = float(display)
+                        operator = pressed
+                        new_number = True
+            elif pressed == "=":
+                if operator != "" and not new_number:
+                    result = calculate(first_number, float(display), operator)
+                    if result == "Error":
+                        display = "Error"
+                    else:
+                        display = format(result, ".10g")
+                    first_number = None
+                    operator = ""
+                    new_number = True
+                    
         for label, rect in buttons:
             color = number_color
             if label in ("+", "-", "*", "/", "="):
