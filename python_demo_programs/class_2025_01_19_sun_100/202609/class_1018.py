@@ -21,15 +21,18 @@ def calculate(first, second, operator):
         if second == 0:
             return 'Error'
         return first / second
+    elif operator == '^':
+        return first ** second
 
 layout = [ ['7', '8', '9', '/'],
            ['4', '5', '6', '*'],
            ['1', '2', '3', '-'],
-           ['C', '0', '=', '+']]
+           ['C', '0', '=', '+'],
+           [' ', ' ', ' ', '^']]
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((360, 490))
+    screen = pygame.display.set_mode((360, 590))
     pygame.display.set_caption('Calculator')
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 36)
@@ -71,7 +74,7 @@ def main():
                     pressed = '='
                 elif event.key == pygame.K_ESCAPE:
                     pressed = 'C'
-                elif event.unicode in "0123456789+-*/=cC":
+                elif event.unicode in "0123456789+-*^/=cC":
                     pressed = event.unicode.upper()
             # update the calculator state
             if pressed.isdigit():
@@ -85,7 +88,7 @@ def main():
                 first_number = None
                 operator = ''
                 new_number = True
-            elif pressed in ('+', '-', '*', '/'):
+            elif pressed in ('+', '-', '*', '/', '^'):
                 if display != 'Error':
                     if operator == '' or new_number:
                         first_number = float(display)
@@ -97,24 +100,35 @@ def main():
                     if result == 'Error':
                         display = 'Error'
                     else:
-                        display = format(float(display), '.2f')
+                        display = format(result, '.10g')
                     first_number = None
                     operator = ''
                     new_number = True
 
         screen.fill(background)
+        title = small_font.render('Calculator', True, white)
+        screen.blit(title, (20, 15))
+
+        pygame.draw.rect(screen, (235, 240, 245), (20, 45, 320, 90))
+        if operator != '':
+            pending = format(first_number, '.10g') + ' ' + operator
+            text = small_font.render(pending, True, number_color)
+            screen.blit(text, (30, 53))
+        text = font.render(display, True, background)
+        screen.blit(text, text.get_rect(midright=(330, 104)))
+
         for label, rect in buttons:
             color = number_color
-            if label in ('+', '-', '*', '/', '='):
+            if label in ('+', '-', '*', '/', '=', '^'):
                 color = operator_color
             elif label == 'C':
                 color = clear_color
-            text = font.render(label, True, color)
-            screen.blit(text, rect)
             pygame.draw.rect(screen, color, rect, border_radius=8)
             text = font.render(label, True, white)
             screen.blit(text, text.get_rect(center=rect.center))
 
+        hint = small_font.render('Enter = result   Esc = clear', True, white)
+        screen.blit(hint, (20, 466))
         pygame.display.flip()
         clock.tick(60)
 

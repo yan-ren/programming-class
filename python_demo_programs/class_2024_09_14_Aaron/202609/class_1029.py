@@ -21,7 +21,7 @@ def calculate(first, second, operator):
         return first / second
 
 pygame.init()
-screen = pygame.display.set_mode((360, 400))
+screen = pygame.display.set_mode((360, 500))
 pygame.display.set_caption('Calculator')
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 36)
@@ -59,7 +59,39 @@ while running:
         pressed = ''
         if event.type == pygame.QUIT:
             running = False
-    
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            for label, rect in buttons:
+                if rect.collidepoint(event.pos):
+                    pressed = label
+                    break
+        elif event.type == pygame.KEYDOWN:
+            if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+                pressed = '='
+            elif event.key == pygame.K_ESCAPE:
+                pressed = 'C'
+            elif event.unicode in "0123456789+-*/=cC":
+                pressed = event.unicode.upper()
+
+        # update the calculator's state
+        if pressed.isdigit():
+            if new_number or display == '0':
+                display = pressed
+                new_number = False
+            elif len(display) < 12:
+                display += pressed
+
+
+    for label, rect in buttons:
+        color = number_color
+        if label in ("+", "-", "*", "/", "="):
+            color = operator_color
+        elif label == 'C':
+            color = clear_color
+        pygame.draw.rect(screen, color, rect, border_radius=8)
+        text = font.render(label, True, white)
+        screen.blit(text, text.get_rect(center=rect.center))
+
+    pygame.display.flip()
     clock.tick(60)
 
 pygame.quit()
